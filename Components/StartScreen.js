@@ -1,46 +1,57 @@
 import React from "react";
-import { View, Text, StyleSheet, Button } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Button,
+  TouchableOpacity,
+  headerStyle,
+} from "react-native";
+import { navigation, navigate } from "react-native";
+import "react-native-gesture-handler";
 
 const StartScreen = (props) => {
   return (
     <View>
-      <View style={styles.Header}>
-        <Text>Cargo Shipping System</Text>
-      </View>
+      <Button
+        title="Sign Up"
+        onPress={() => {
+          props.navigation.navigate({ routeName: "SignupScreen" });
+        }}
+      />
 
-      <Button title="Sign Up" onPress={() => {}} />
-
-      <View style={styles.Text}>
+      <View style={styles.text}>
         <Text>Already Have An Account?</Text>
       </View>
 
-      <Button title="Sign In" onPress={() => {}} />
-      <View style={styles.GuestButton}>
-        <Button title="Continue as Guest " onPress={() => {}} />
+      <Button
+        title="Sign In"
+        onPress={() => {
+          props.navigation.navigate({ routeName: "SignInScreen" });
+        }}
+      />
+      <View>
+        <Button
+          title="Continue as Guest "
+          onPress={() => {
+            props.navigation.navigate({ routeName: "HomePageScreen" });
+          }}
+        />
       </View>
     </View>
   );
 };
+StartScreen.navigationOptions = {
+  headerTitle: "SHIP IT",
+  alignItems: "center",
+  fontSize: "40px",
+};
 
 const styles = StyleSheet.create({
-  Header: {
-    fontSize: 20,
-    fontWeight: "bold",
-    height: 20,
-    width: "100%",
-    height: 90,
-    paddingTop: 36,
-    backgroundColor: "#5f9ea0",
-    alignItems: "center",
+  text: {
     justifyContent: "center",
-  },
-  Text: {
     alignItems: "center",
-    paddingTop: 20,
-    justifyContent: "space-between",
-  },
-  GuestButton: {
-    alignItems: "center",
+    fontSize: 40,
   },
 });
 
