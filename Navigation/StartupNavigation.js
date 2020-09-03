@@ -1,6 +1,8 @@
 import React from "react";
 import { createStackNavigator } from "react-navigation-stack";
 import { createAppContainer } from "react-navigation";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import { NavigationContainer } from "@react-navigation/native";
 
 import Signup from "../CustomerScreens/Signup.js";
 import SignIn from "../Components/SignIn.js";

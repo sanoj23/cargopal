@@ -1,14 +1,22 @@
 import React from "react";
-import { View, Text, StyleSheet, Button } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 
 const History = (props) => {
   return (
     <View>
-      <Text>History page</Text>
+      <Text style={styles.title}>Order History</Text>
     </View>
   );
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  title: {
+    fontSize: 20,
+    textAlign: "center",
+    fontWeight: "bold",
+    paddingBottom: 20,
+    paddingTop: 20,
+  },
+});
 
 export default History;
