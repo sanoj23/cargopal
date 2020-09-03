@@ -6,14 +6,16 @@ import {
   Button,
   TouchableOpacity,
   headerStyle,
+  ImageBackground,
 } from "react-native";
 import { navigation, navigate } from "react-native";
 import "react-native-gesture-handler";
 
 const StartScreen = (props) => {
   return (
-    <View>
+    <View style={styles.container}>
       <Button
+        style={styles.button}
         title="Sign Up"
         onPress={() => {
           props.navigation.navigate({ routeName: "SignupScreen" });
@@ -41,6 +43,7 @@ const StartScreen = (props) => {
     </View>
   );
 };
+
 StartScreen.navigationOptions = {
   headerTitle: "SHIP IT",
   alignItems: "center",
@@ -52,6 +55,22 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     fontSize: 40,
+  },
+  image: {
+    flex: 1,
+    resizeMode: "cover",
+    justifyContent: "center",
+    paddingTop: "600px",
+  },
+  container: {
+    flex: 1,
+    flexDirection: "column",
+  },
+  button: {
+    flex: 2,
+    width: 10,
+    height: 10,
+    alignItems: "center",
   },
 });
 

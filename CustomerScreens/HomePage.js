@@ -62,6 +62,7 @@ const styles = StyleSheet.create({
   button: {
     paddingHorizontal: 15,
     borderBottomColor: "black",
+    backgroundColor: "#fff",
   },
   card: {
     shadowColor: "black",
