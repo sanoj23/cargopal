@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet, Button, TextInput } from "react-native";
 
-const Book = (props) => {
+const Book = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.inputBox}>
@@ -25,9 +25,7 @@ const Book = (props) => {
         <Button
           style={styles.button}
           title="Book"
-          onPress={() => {
-            props.navigation.navigate({ routeName: "HistoryScreen" });
-          }}
+          onPress={() => navigation.navigate("")}
         />
       </View>
     </View>

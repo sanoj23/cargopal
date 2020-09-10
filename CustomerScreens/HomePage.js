@@ -7,7 +7,7 @@ import {
   TouchableNativeFeedback,
 } from "react-native";
 
-const HomePage = (props) => {
+const HomePage = ({ navigation }) => {
   return (
     <View style={styles.buttonsContainer}>
       <View style={styles.card}>
@@ -15,9 +15,7 @@ const HomePage = (props) => {
           <Button
             style={styles.button}
             title="History"
-            onPress={() => {
-              props.navigation.navigate({ routeName: "HistoryScreen" });
-            }}
+            onPress={() => navigation.navigate("History")}
           />
         </View>
       </View>
@@ -27,9 +25,7 @@ const HomePage = (props) => {
           <Button
             style={styles.button}
             title="Schedule"
-            onPress={() => {
-              props.navigation.navigate({ routeName: "ScheduleScreen" });
-            }}
+            onPress={() => navigation.navigate("Schedule")}
           />
         </View>
       </View>
@@ -39,9 +35,7 @@ const HomePage = (props) => {
           <Button
             style={styles.button}
             title="Book"
-            onPress={() => {
-              props.navigation.navigate({ routeName: "BookScreen" });
-            }}
+            onPress={() => navigation.navigate("Book")}
           />
         </View>
       </View>
@@ -50,9 +44,7 @@ const HomePage = (props) => {
         <Button
           style={styles.button}
           title="Track"
-          onPress={() => {
-            props.navigation.navigate({ routeName: "TrackScreen" });
-          }}
+          onPress={() => navigation.navigate("Track")}
         />
       </View>
     </View>

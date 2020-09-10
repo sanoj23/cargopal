@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet, Button } from "react-native";
 
-const Settings = (props) => {
+const Settings = ({ navigation }) => {
   return (
     <View>
       <Text>this is the setings page</Text>

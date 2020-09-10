@@ -2,6 +2,10 @@ import React from "react";
 import { createStackNavigator } from "react-navigation-stack";
 import { createAppContainer } from "react-navigation";
 
-//onst ShipNavigation = createStackNavigator({});
+import AgentHomePage from "../ShipOwnerScreens/AgentHomePage";
 
-//export default ShipNavigation;
+const ShipNavigation = createStackNavigator({
+  Ship_HomePage: AgentHomePage,
+});
+
+export default ShipNavigation;

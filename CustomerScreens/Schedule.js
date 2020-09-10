@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet, Button, TextInput } from "react-native";
 
-const Schedule = (props) => {
+const Schedule = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.inputBox}>

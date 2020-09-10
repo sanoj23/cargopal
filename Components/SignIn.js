@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet, Button, TextInput } from "react-native";
 
-const SignIn = (props) => {
+const SignIn = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <TextInput
@@ -20,12 +20,7 @@ const SignIn = (props) => {
         onChangeText={(val) => this.onChangeText("password", val)}
       />
 
-      <Button
-        title="Sign In"
-        onPress={() => {
-          props.navigation.navigate({ routeName: "HomePageScreen" });
-        }}
-      />
+      <Button title="Sign In" onPress={() => navigation.navigate("Home")} />
     </View>
   );
 };

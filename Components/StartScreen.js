@@ -11,33 +11,24 @@ import {
 import { navigation, navigate } from "react-native";
 import "react-native-gesture-handler";
 
-const StartScreen = (props) => {
+const StartScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Button
         style={styles.button}
         title="Sign Up"
-        onPress={() => {
-          props.navigation.navigate({ routeName: "SignupScreen" });
-        }}
+        onPress={() => navigation.navigate("SignUp")}
       />
 
       <View style={styles.text}>
         <Text>Already Have An Account?</Text>
       </View>
 
-      <Button
-        title="Sign In"
-        onPress={() => {
-          props.navigation.navigate({ routeName: "SignInScreen" });
-        }}
-      />
+      <Button title="Sign In" onPress={() => navigation.navigate("SignIn")} />
       <View>
         <Button
           title="Continue as Guest "
-          onPress={() => {
-            props.navigation.navigate({ routeName: "HomePageScreen" });
-          }}
+          onPress={() => navigation.navigate("Home")}
         />
       </View>
     </View>

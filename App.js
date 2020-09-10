@@ -1,22 +1,31 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet, Text, View, Button } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import Icon from "react-native-vector-icons/Ionicons";
 
 import StartupNavigation from "./Navigation/StartupNavigation";
-//import AdminNavigation from "./Navigation/AdminNavigation";
-//import ShipNavigation from "./Navigation/ShipNavigation";
-import StartScreen from "./Components/StartScreen";
+import AdminNavigation from "./Navigation/AdminNavigation";
+import ShipNavigation from "./Navigation/ShipNavigation";
 
-export default function App() {
+const App = () => {
   let user = "customer";
-
   if (user === "customer") {
     return <StartupNavigation />;
-  } //else if (user === "Admin") {
-  //return <AdminNavigation />;
-  // } else if (user === "ShipOwner") {
-  // return;
-  // }
-}
-
-const styles = StyleSheet.create({});
+  } else if (user === "Admin") {
+    return (
+      <NavigationContainer>
+        <AdminNavigation />;
+      </NavigationContainer>
+    );
+  } else if (user === "ShipOwner") {
+    return (
+      <NavigationContainer>
+        <ShipNavigation />;
+      </NavigationContainer>
+    );
+  }
+};
+export default App;

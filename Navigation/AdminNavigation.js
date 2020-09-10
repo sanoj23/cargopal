@@ -2,6 +2,10 @@ import React from "react";
 import { createStackNavigator } from "react-navigation-stack";
 import { createAppContainer } from "react-navigation";
 
-//const AdminNavigation = createStackNavigator({});
+import AdminHomePage from "../AdminScreens/AdminHomePage";
 
-//export default AdminNavigation;
+const AdminNavigation = createStackNavigator({
+  Admin_Home: AdminHomePage,
+});
+
+export default AdminNavigation;
