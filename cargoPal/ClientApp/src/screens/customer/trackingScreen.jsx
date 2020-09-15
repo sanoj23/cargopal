@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Screen from '../components/screen';
-import Tracking from '../components/tracking';
+import Screen from '../../components/screen';
+import Tracking from '../../components/tracking';
 
 export default function TrackingScreen(props) {
   return (
