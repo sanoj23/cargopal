@@ -6,6 +6,7 @@ import './App.css';
 import LandingScreen from './screens/landingScreen';
 import LoginScreen from './screens/loginScreen';
 import { RegisterScreen as RegisterClient } from './screens/customer/registerScreen';
+import BookingScreen from './screens/customer/bookingScreen';
 import { RegisterScreen as RegisterAgent } from './screens/agent/registerScreen';
 import TrackingScreen from './screens/customer/trackingScreen';
 
@@ -18,6 +19,7 @@ function App() {
         <Route exact path="/register/client" component={RegisterClient} />
         <Route exact path="/register/agent" component={RegisterAgent} />
         <Route exact path="/tracking" component={TrackingScreen} />
+        <Route exact path="/booking" component={BookingScreen} />
       </Switch>
     </BrowserRouter>
   );
