@@ -7,6 +7,8 @@ import LoginScreen from './screens/loginScreen';
 import RegisterScreen from './screens/registerScreen';
 import LandingScreen from './screens/landingScreen';
 
+import TrackingScreen from './screens/trackingScreen';
+
 function App() {
   return (
     <BrowserRouter>
@@ -14,6 +16,7 @@ function App() {
         <Route exact path="/" component={LandingScreen} />
         <Route exact path="/login" component={LoginScreen} />
         <Route exact path="/register" component={RegisterScreen} />
+        <Route exact path="/tracking" component={TrackingScreen} />
       </Switch>
     </BrowserRouter>
   );

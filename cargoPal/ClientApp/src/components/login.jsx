@@ -6,7 +6,6 @@ import * as Yup from 'yup';
 import FormInput from './form/formInput';
 
 const validationSchema = Yup.object().shape({
-  userType: Yup.string(),
   email: Yup.string().required().email().label('Email'),
   password: Yup.string().required().min(4).label('Password'),
 });
@@ -17,11 +16,10 @@ const requestLogin = (values) => {
 };
 
 export default function Login() {
-  const userType = ['admin', 'client', 'agent'];
   return (
     <>
       <Formik
-        initialValues={{ email: '', password: '', userType: '' }}
+        initialValues={{ email: '', password: '' }}
         onSubmit={(values) => requestLogin(values)}
         validationSchema={validationSchema}
       >
@@ -35,19 +33,6 @@ export default function Login() {
           >
             <h1>Log In</h1>
             <hr style={{ marginBottom: 25 }} />
-
-            <FormInput
-              autoFocus
-              id="userType"
-              name="userType"
-              as="select"
-              options={userType}
-              label="User Type"
-              onBlur={() => setFieldTouched('userType')}
-              onChange={handleChange('userType')}
-              errors={errors.userType}
-              touched={touched.userType}
-            />
 
             <FormInput
               id="email"
@@ -87,8 +72,6 @@ export default function Login() {
             <div style={{ marginTop: 50 }}>
               <p style={{ display: 'inline' }}>Dont have an account? {'  '}</p>
               <a href="/register">Sign Up</a>
-              <br />
-              <a href="/resetPassword">Forgot my password?</a>
             </div>
           </Form>
         )}
