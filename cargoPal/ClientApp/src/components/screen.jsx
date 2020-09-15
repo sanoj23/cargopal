@@ -38,7 +38,17 @@ export default function Screen({ children, title, button, buttonClick }) {
             </>
           )}
         </div>
-        <div>{children}</div>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            // height: windowHeight,
+            backgroundColor: 'inherit',
+          }}
+        >
+          {children}
+        </div>
       </Container>
     </div>
   );

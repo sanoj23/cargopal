@@ -3,11 +3,11 @@ import { Route, BrowserRouter, Switch } from 'react-router-dom';
 
 import './App.css';
 
-import LoginScreen from './screens/loginScreen';
-import RegisterScreen from './screens/registerScreen';
 import LandingScreen from './screens/landingScreen';
-
-import TrackingScreen from './screens/trackingScreen';
+import LoginScreen from './screens/loginScreen';
+import { RegisterScreen as RegisterClient } from './screens/customer/registerScreen';
+import { RegisterScreen as RegisterAgent } from './screens/agent/registerScreen';
+import TrackingScreen from './screens/customer/trackingScreen';
 
 function App() {
   return (
@@ -15,7 +15,8 @@ function App() {
       <Switch>
         <Route exact path="/" component={LandingScreen} />
         <Route exact path="/login" component={LoginScreen} />
-        <Route exact path="/register" component={RegisterScreen} />
+        <Route exact path="/register/client" component={RegisterClient} />
+        <Route exact path="/register/agent" component={RegisterAgent} />
         <Route exact path="/tracking" component={TrackingScreen} />
       </Switch>
     </BrowserRouter>

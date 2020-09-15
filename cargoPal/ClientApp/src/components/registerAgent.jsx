@@ -7,8 +7,8 @@ import FormInput from './form/formInput';
 
 const phoneRegex = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 const validationSchema = Yup.object().shape({
-  firstName: Yup.string().required().label('First Name'),
-  lastName: Yup.string().required().label('Last Name'),
+  name: Yup.string().required().label('Company Name'),
+  address: Yup.string().required().label('Company Address'),
   email: Yup.string().required().email().label('Email'),
   phone: Yup.string()
     .required()
@@ -28,13 +28,13 @@ const requestRegister = (values) => {
   // Make API call from here on
 };
 
-export default function Register() {
+export default function RegisterAgent() {
   return (
     <>
       <Formik
         initialValues={{
-          firstName: '',
-          lastName: '',
+          name: '',
+          address: '',
           email: '',
           phone: '',
           password: '',
@@ -51,28 +51,32 @@ export default function Register() {
               <Col>
                 <FormInput
                   autoFocus
-                  id="firstName"
-                  name="firstName"
+                  id="name"
+                  name="name"
                   type="text"
-                  label="First Name"
-                  placeholder="Enter first name"
-                  onBlur={() => setFieldTouched('firstName')}
-                  onChange={handleChange('firstName')}
-                  errors={errors.firstName}
-                  touched={touched.firstName}
+                  label="Company Name"
+                  placeholder="Enter company name"
+                  onBlur={() => setFieldTouched('name')}
+                  onChange={handleChange('name')}
+                  errors={errors.name}
+                  touched={touched.name}
                 />
               </Col>
+            </Row>
+
+            <Row>
               <Col>
                 <FormInput
-                  id="lastName"
-                  name="lastName"
+                  autoFocus
+                  id="address"
+                  name="address"
                   type="text"
-                  label="Last Name"
-                  placeholder="Enter last name"
-                  onBlur={() => setFieldTouched('lastName')}
-                  onChange={handleChange('lastName')}
-                  errors={errors.lastName}
-                  touched={touched.lastName}
+                  label="Company Address"
+                  placeholder="Enter company address"
+                  onBlur={() => setFieldTouched('address')}
+                  onChange={handleChange('address')}
+                  errors={errors.address}
+                  touched={touched.address}
                 />
               </Col>
             </Row>
