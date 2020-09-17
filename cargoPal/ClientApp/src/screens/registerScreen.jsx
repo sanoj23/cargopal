@@ -10,10 +10,11 @@ export default function RegisterScreen(props) {
   const userType = props.location.state.user;
   const windowHeight = window.innerHeight;
 
+  let backgroundImage;
   if (userType === 'customer') {
-    const backgroundImage = RegisterAgentImage;
+    backgroundImage = RegisterAgentImage;
   }
-  const backgroundImage = RegisterClientImage;
+  backgroundImage = RegisterClientImage;
 
   return (
     <div
