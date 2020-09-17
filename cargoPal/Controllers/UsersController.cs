@@ -12,17 +12,20 @@ namespace Users.Controllers
             this._service = service;
         }
 
-        [HttpPost("addUsers")]
+        [HttpPost("[action]")]
         public IActionResult AddUser([FromBody] User user)
         {
             if (user != null) { _service.AddUser(user); }
             return Ok();
         }
+        
         [HttpGet("[action]")]
         public IActionResult GetUsers()
         {
             var allUsers = _service.GetUsers();
             return Ok(allUsers);
         }
+
+
     }
 }
