@@ -9,6 +9,7 @@ import RegisterClientImage from "../assets/commons/clientRegister.jpg";
 export default function RegisterScreen(props) {
   const userType = props.location.state.user;
   const windowHeight = window.innerHeight;
+
   let backgroundImage;
   if (userType === "customer") {
     backgroundImage = RegisterClientImage;
