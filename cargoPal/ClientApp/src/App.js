@@ -12,6 +12,7 @@ import TrackingScreen from "./screens/customer/trackingScreen";
 import ScheduleScreen from "./screens/agent/scheduleScreen";
 import OrdersScreen from "./screens/customer/OrdersScreen";
 import RequestsScreen from "./screens/agent/requestsScreen";
+import NotFound from "./components/notFound";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route exact path="/schedule" component={ScheduleScreen} />
         <Route exact path="/orders" component={OrdersScreen} />
         <Route exact path="/requests" component={RequestsScreen} />
+        <Route path="" component={NotFound} />
       </Switch>
     </BrowserRouter>
   );
