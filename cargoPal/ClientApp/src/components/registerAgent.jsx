@@ -45,7 +45,7 @@ export default function RegisterAgent() {
         validationSchema={validationSchema}
       >
         {({ handleChange, handleSubmit, errors, setFieldTouched, touched }) => (
-          <Form style={{ backgroundColor: 'white', padding: 50, width: 600 }}>
+          <Form style={{ backgroundColor: 'inherit', padding: 50, width: 600 }}>
             <Row>
               <Col>
                 <FormInput

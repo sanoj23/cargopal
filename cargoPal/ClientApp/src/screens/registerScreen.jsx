@@ -3,16 +3,46 @@ import RegisterClient from '../components/registerClient';
 import RegisterAgent from '../components/registerAgent';
 import Screen from '../components/screen';
 
+import RegisterAgentImage from '../assets/commons/background.jpeg';
+import RegisterClientImage from '../assets/commons/background.jpeg';
+
 export default function RegisterScreen(props) {
   const userType = props.location.state.user;
+  const windowHeight = window.innerHeight;
+
+  if (userType === 'customer') {
+    const backgroundImage = RegisterAgentImage;
+  }
+  const backgroundImage = RegisterClientImage;
 
   return (
-    <Screen title="Register" subtitle={`Register ${userType}`}>
-      {userType && userType === 'customer' ? (
-        <RegisterClient />
-      ) : (
-        <RegisterAgent />
-      )}
-    </Screen>
+    <div
+      style={{
+        backgroundImage: `url(${backgroundImage})`,
+        display: 'table-cell',
+        height: windowHeight,
+        width: window.innerWidth,
+        verticalAlign: 'middle',
+        textAlign: 'center',
+        backgroundSize: 'cover',
+        color: 'white',
+      }}
+    >
+      <div
+        style={{
+          display: 'inline-block',
+          textAlign: 'initial',
+          padding: 20,
+        }}
+      >
+        <h1>Resgister</h1>
+        <hr style={{ backgroundColor: 'white' }} />
+        {userType && userType === 'customer' ? (
+          <RegisterClient />
+        ) : (
+          <RegisterAgent />
+        )}
+      </div>
+    </div>
   );
 }
