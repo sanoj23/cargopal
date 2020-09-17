@@ -1,13 +1,13 @@
-import React from 'react';
-import { Form, Button } from 'react-bootstrap';
-import { Formik } from 'formik';
-import * as Yup from 'yup';
+import React from "react";
+import { Form, Button } from "react-bootstrap";
+import { Formik } from "formik";
+import * as Yup from "yup";
 
-import FormInput from './form/formInput';
+import FormInput from "./form/formInput";
 
 const validationSchema = Yup.object().shape({
-  email: Yup.string().required().email().label('Email'),
-  password: Yup.string().required().min(4).label('Password'),
+  email: Yup.string().required().email().label("Email"),
+  password: Yup.string().required().min(4).label("Password"),
 });
 
 const requestLogin = (values) => {
@@ -19,7 +19,7 @@ export default function Login() {
   return (
     <>
       <Formik
-        initialValues={{ email: '', password: '' }}
+        initialValues={{ email: "", password: "" }}
         onSubmit={(values) => requestLogin(values)}
         validationSchema={validationSchema}
       >
@@ -28,11 +28,11 @@ export default function Login() {
             style={{
               width: 600,
               padding: 50,
-              backgroundColor: 'inherit',
+              backgroundColor: "inherit",
             }}
           >
             <h1>Sign In</h1>
-            <hr style={{ marginBottom: 25, backgroundColor: 'white' }} />
+            <hr style={{ marginBottom: 25, backgroundColor: "white" }} />
 
             <FormInput
               id="email"
@@ -40,8 +40,8 @@ export default function Login() {
               type="email"
               label="Email"
               placeholder="Enter email"
-              onBlur={() => setFieldTouched('email')}
-              onChange={handleChange('email')}
+              onBlur={() => setFieldTouched("email")}
+              onChange={handleChange("email")}
               errors={errors.email}
               touched={touched.email}
             />
@@ -52,8 +52,8 @@ export default function Login() {
               type="password"
               label="Password"
               placeholder="Enter password"
-              onBlur={() => setFieldTouched('password')}
-              onChange={handleChange('password')}
+              onBlur={() => setFieldTouched("password")}
+              onChange={handleChange("password")}
               errors={errors.password}
               touched={touched.password}
             />
@@ -65,7 +65,7 @@ export default function Login() {
               label="Remeber me"
             />
 
-            <Button variant="secondary" onClick={handleSubmit}>
+            <Button variant="dark" onClick={handleSubmit}>
               Sign In
             </Button>
           </Form>

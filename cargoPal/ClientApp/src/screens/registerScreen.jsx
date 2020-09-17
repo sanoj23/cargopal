@@ -1,43 +1,44 @@
-import React from 'react';
-import RegisterClient from '../components/registerClient';
-import RegisterAgent from '../components/registerAgent';
-import Screen from '../components/screen';
+import React from "react";
+import RegisterClient from "../components/registerClient";
+import RegisterAgent from "../components/registerAgent";
+import Screen from "../components/screen";
 
-import RegisterAgentImage from '../assets/commons/background.jpeg';
-import RegisterClientImage from '../assets/commons/background.jpeg';
+import RegisterAgentImage from "../assets/commons/agentRegister.jpg";
+import RegisterClientImage from "../assets/commons/clientRegister.jpg";
 
 export default function RegisterScreen(props) {
   const userType = props.location.state.user;
   const windowHeight = window.innerHeight;
-
-  if (userType === 'customer') {
-    const backgroundImage = RegisterAgentImage;
+  let backgroundImage;
+  if (userType === "customer") {
+    backgroundImage = RegisterClientImage;
+  } else {
+    backgroundImage = RegisterAgentImage;
   }
-  const backgroundImage = RegisterClientImage;
 
   return (
     <div
       style={{
         backgroundImage: `url(${backgroundImage})`,
-        display: 'table-cell',
+        display: "table-cell",
         height: windowHeight,
         width: window.innerWidth,
-        verticalAlign: 'middle',
-        textAlign: 'center',
-        backgroundSize: 'cover',
-        color: 'white',
+        verticalAlign: "middle",
+        textAlign: "center",
+        backgroundSize: "cover",
+        color: "white",
       }}
     >
       <div
         style={{
-          display: 'inline-block',
-          textAlign: 'initial',
+          display: "inline-block",
+          textAlign: "initial",
           padding: 20,
         }}
       >
         <h1>Resgister</h1>
-        <hr style={{ backgroundColor: 'white' }} />
-        {userType && userType === 'customer' ? (
+        <hr style={{ backgroundColor: "white" }} />
+        {userType && userType === "customer" ? (
           <RegisterClient />
         ) : (
           <RegisterAgent />
