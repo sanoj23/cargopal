@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Button,
   Nav,
@@ -6,7 +6,7 @@ import {
   Form,
   FormControl,
   NavDropdown,
-} from 'react-bootstrap';
+} from "react-bootstrap";
 
 export default function Navigationbar(props) {
   return (
@@ -31,11 +31,6 @@ export default function Navigationbar(props) {
             <NavDropdown.Item href="/logout">Logout</NavDropdown.Item>
           </NavDropdown>
         </Nav>
-
-        <Form inline>
-          <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-          <Button variant="outline-primary">Search</Button>
-        </Form>
       </Navbar.Collapse>
     </Navbar>
   );
