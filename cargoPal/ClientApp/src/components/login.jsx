@@ -28,11 +28,11 @@ export default function Login() {
             style={{
               width: 600,
               padding: 50,
-              backgroundColor: 'white',
+              backgroundColor: 'inherit',
             }}
           >
-            <h1>Log In</h1>
-            <hr style={{ marginBottom: 25 }} />
+            <h1>Sign In</h1>
+            <hr style={{ marginBottom: 25, backgroundColor: 'white' }} />
 
             <FormInput
               id="email"
@@ -65,14 +65,9 @@ export default function Login() {
               label="Remeber me"
             />
 
-            <Button variant="primary" onClick={handleSubmit}>
+            <Button variant="secondary" onClick={handleSubmit}>
               Sign In
             </Button>
-
-            <div style={{ marginTop: 50 }}>
-              <p style={{ display: 'inline' }}>Dont have an account? {'  '}</p>
-              <a href="/register">Sign Up</a>
-            </div>
           </Form>
         )}
       </Formik>

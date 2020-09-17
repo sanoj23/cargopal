@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Col, Form, Nav, Row } from 'react-bootstrap';
+import { Button, Col, Form, Row } from 'react-bootstrap';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
@@ -39,14 +39,13 @@ export default function RegisterClient() {
           phone: '',
           password: '',
           confirmPassword: '',
+          userType: 'customer',
         }}
         onSubmit={(values) => requestRegister(values)}
         validationSchema={validationSchema}
       >
         {({ handleChange, handleSubmit, errors, setFieldTouched, touched }) => (
           <Form style={{ backgroundColor: 'white', padding: 50, width: 600 }}>
-            <h1>Regsiter</h1>
-            <hr />
             <Row>
               <Col>
                 <FormInput
@@ -135,7 +134,7 @@ export default function RegisterClient() {
               Register
             </Button>
 
-            <a href="/login" style={{ float: 'right', marginTop: 10 }}>
+            <a href="/" style={{ float: 'right', marginTop: 10 }}>
               I have an account already
             </a>
           </Form>

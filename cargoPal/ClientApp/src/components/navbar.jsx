@@ -19,10 +19,11 @@ export default function Navigationbar(props) {
           <Nav.Link href="/home">Home</Nav.Link>
           <Nav.Link href="/tracking">Tracking</Nav.Link>
           <Nav.Link href="/booking">Booking</Nav.Link>
-          <Nav.Link href="/shipment">Shipment</Nav.Link>
-          <Nav.Link href="/history">History</Nav.Link>
-          <Nav.Link href="/login">Login</Nav.Link>
-          <Nav.Link href="/register">Register</Nav.Link>
+          <Nav.Link href="/shipments">Shipments</Nav.Link>
+          <Nav.Link href="/orders">Orders</Nav.Link>
+          <Nav.Link href="/schedule">Schedule</Nav.Link>
+          <Nav.Link href="/requests">Requests</Nav.Link>
+
           <NavDropdown title="Account" id="basic-nav-dropdown">
             <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
             <NavDropdown.Item href="/settings">Settings</NavDropdown.Item>

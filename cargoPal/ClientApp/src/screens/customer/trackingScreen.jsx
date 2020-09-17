@@ -5,7 +5,7 @@ import Tracking from '../../components/tracking';
 
 export default function TrackingScreen(props) {
   return (
-    <Screen>
+    <Screen title="Tracking">
       <div
         style={{ borderStyle: 'solid', padding: 20, width: 'auto', left: 10 }}
       >

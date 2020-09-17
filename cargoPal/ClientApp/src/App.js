@@ -3,23 +3,24 @@ import { Route, BrowserRouter, Switch } from 'react-router-dom';
 
 import './App.css';
 
-import LandingScreen from './screens/landingScreen';
-import LoginScreen from './screens/loginScreen';
-import { RegisterScreen as RegisterClient } from './screens/customer/registerScreen';
 import BookingScreen from './screens/customer/bookingScreen';
-import { RegisterScreen as RegisterAgent } from './screens/agent/registerScreen';
+import HomeScreen from './screens/customer/homeScreen';
+
+import LandingScreen from './screens/landingScreen';
+import RegisterScreen from './screens/registerScreen';
 import TrackingScreen from './screens/customer/trackingScreen';
+import ScheduleScreen from './screens/agent/scheduleScreen';
 
 function App() {
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={LandingScreen} />
-        <Route exact path="/login" component={LoginScreen} />
-        <Route exact path="/register/client" component={RegisterClient} />
-        <Route exact path="/register/agent" component={RegisterAgent} />
+        <Route exact path="/register" component={RegisterScreen} />
+        <Route exact path="/home" component={HomeScreen} />
         <Route exact path="/tracking" component={TrackingScreen} />
         <Route exact path="/booking" component={BookingScreen} />
+        <Route exact path="/schedule" component={ScheduleScreen} />
       </Switch>
     </BrowserRouter>
   );
