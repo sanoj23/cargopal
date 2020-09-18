@@ -19,7 +19,7 @@ GO
 PRINT 'Creating a table for Users...';
 CREATE TABLE Users
 (
-    userId INT IDENTITY(1,1) PRIMARY KEY,
+    userId INT IDENTITY(10,1) PRIMARY KEY,
     firstName VARCHAR(100) NOT NULL,
     lastName VARCHAR(100) NOT NULL,
     companyName VARCHAR(100),
@@ -31,24 +31,26 @@ CREATE TABLE Users
     CONSTRAINT userType_check CHECK ([userType] IN ('Client', 'Agent'))
 );
 
+
 -- Populate table for User
 INSERT INTO Users
     (firstName, lastName, companyName, phone,email, [address],[password],userType )
 VALUES
-    ('Dua', 'Lipa', NULL, '0777345900', 'dualipa@gmail.com', '40.Little London Junction, London,UK', '123456', 'Client'),
+    ('Dua' , 'Lipa', NULL, '0777345900', 'dualipa@gmail.com', '40.Little London Junction, London,UK', '123456', 'Client'),
     ('John', 'smith', NULL, '079847900', 'johnsmith@gmail.com', '10.Barnes Place, colombo,SL', '123456', 'Client'),
     ('Alexander', 'Hamilton', NULL, '079843456', 'ahamiltion@gmail.com', '100. church road, wattala,SL', '123456', 'Client'),
 
 
     ('Drake', 'Graham', 'Ship It', '0773000108', 'shipit@hotmail.com', '12B.Marine Drive,Colombo 03', '567890', 'Agent'),
     ('John', 'Adams', 'Cargo', '0774567876', 'cargo@hotmail.com', 'Ist Flr,office No.9, 445/51, Kalbadevi Road, Mumbai, India', '567890', 'Agent'),
-    ('Jessica', 'Nortan', 'Evergreen', '0771234678', 'evergreen@hotmail.com', '116. Union Place,Colombo 07', '567890', 'Agent');
+    ('Jessica', 'Nortan', 'Evergreen', '0771234678', 'evergreen@hotmail.com', '116. Union Place,Colombo 07', '567890', 'Agent')
+;
 
 
 PRINT 'Creating a table for Shipments...';
 CREATE TABLE Shipments
 (
-    shipmentId INT IDENTITY(1,1) PRIMARY KEY,
+    shipmentId INT IDENTITY(20,1) PRIMARY KEY,
     userId INT FOREIGN KEY REFERENCES Users(userId),
     origin VARCHAR (100) NOT NULL,
     destination VARCHAR (100) NOT NULL,
@@ -61,18 +63,18 @@ CREATE TABLE Shipments
 );
 
 INSERT INTO Shipments
-    (origin, destination,startdate, enddate, capacity, [status] )
+    (userId, origin, destination,startdate, enddate, capacity, [status] )
 VALUES
-    ( 'colombo', 'chennai', '01/10/2020', '03/10/2020', 100, 'Approved' ),
-    ('colombo', 'singapore', '05/10/2020', '08/10/2020', 50, 'Approved' ),
-    ( 'colombo', 'male', '01/09/2020', '02/09/2020', 30, 'Approved' ),
-    ('colombo', 'malaysia', '05/11/2020', '08/11/2020', 300, 'Approved' );
+    (11, 'colombo', 'chennai', '01/10/2020', '03/10/2020', 100, 'Approved' ),
+    (12, 'colombo', 'singapore', '05/10/2020', '08/10/2020', 50, 'Approved' ),
+    (13, 'colombo', 'malaysia', '01/09/2020', '02/09/2020', 30, 'Approved' ),
+    (14, 'colombo', 'maldives', '05/11/2020', '08/11/2020', 300, 'Approved' );
 
 
 PRINT 'Creating a table for Bookings...';
 CREATE TABLE Bookings
 (
-    bookingId INT IDENTITY(1,1) PRIMARY KEY,
+    bookingId INT IDENTITY(30,1) PRIMARY KEY,
     userId INT FOREIGN KEY REFERENCES Users(userId),
     shipmentId INT FOREIGN KEY REFERENCES Shipments (shipmentId),
     receiverName VARCHAR (100) NOT NULL,
@@ -82,29 +84,29 @@ CREATE TABLE Bookings
     CONSTRAINT boxType_check CHECK ([status] IN ('Small','Medium','Large ')),
 );
 INSERT INTO Bookings
-    (receiverName, receiverPhone, receiverAdd, [status])
+    (userId,shipmentId, receiverName, receiverPhone, receiverAdd, [status])
 VALUES
-    ('Eliza Smith', '91-995-5513-746', ' 9/10 Krishna Chaya, Khar Muncipal Market 1 St Road, Khar, Mumbai', 'Medium'),
-    ('Lee Young', '6585557997', ' 590 Yio Chu Kang Road #03-01, Singapore', 'Large'),
-    ('Eliza Smith', '601355532', 'E913 2Nd Floor Jalan Bukit Ubi , Kuantan, Malaysia', 'Small'),
-    ('Eliza Smith', '22355555240', ' 901 Lorong 4 Kampung Bercham, Male main Island', 'Small');
+    (11, 21, 'Eliza Smith', '91-995-5513-746', ' 9/10 Krishna Chaya, Khar Muncipal Market 1 St Road, Khar, Mumbai', 'Medium'),
+    (12, 22, 'Lee Young', '6585557997', ' 590 Yio Chu Kang Road #03-01, Singapore', 'Large'),
+    (13, 23, 'Eliza Smith', '601355532', 'E913 2Nd Floor Jalan Bukit Ubi , Kuantan, Malaysia', 'Small'),
+    (14, 24, 'Eliza Smith', '22355555240', ' 901 Lorong 4 Kampung Bercham, Male main Island', 'Small');
 
 PRINT 'Creating a table for Orders...';
 CREATE TABLE Orders
 (
-    orderId INT IDENTITY(1,1) PRIMARY KEY,
+    orderId INT IDENTITY(40,1) PRIMARY KEY,
     shipmentId INT FOREIGN KEY REFERENCES Shipments(shipmentId),
     bookingId INT FOREIGN KEY REFERENCES Bookings(bookingId),
     [status] VARCHAR(100) NOT NULL,
     CONSTRAINT deliveryType_check CHECK ([status] IN ('Dropped off','On the way','Arrived ')),
 );
 INSERT INTO Orders
-    ([status])
+    (shipmentId, bookingId,[status])
 VALUES
-    ('Dropped off'),
-    ('On the way'),
-    ('Arrived'),
-    ('On the way');
+    (21, 31, 'Dropped off'),
+    (22, 32, 'On the way'),
+    (23, 33, 'Arrived'),
+    (24, 34, 'On the way');
 
 
 
