@@ -91,9 +91,9 @@ INSERT INTO Bookings
     (userId,shipmentId, receiverName, receiverPhone, receiverAddress, item, instructions,packaging , [status])
 VALUES
     (1, 1, 'Eliza Smith', '91-995-5513-746', ' 9/10 Krishna Chaya, Khar Muncipal Market 1 St Road, Khar, Mumbai', 'food', 'fragile', 'Medium', 'Approved'),
-    (2, 2, 'Lee Young', '6585557997', ' 590 Yio Chu Kang Road #03-01, Singapore', 'food', 'fragile','Large', 'Approved'),
-    (3, 3, 'Eliza Smith', '601355532', 'E913 2Nd Floor Jalan Bukit Ubi , Kuantan, Malaysia','food', 'fragile', 'Small', 'Approved'),
-    (4, 4, 'Eliza Smith', '22355555240', ' 901 Lorong 4 Kampung Bercham, Male main Island','food', 'fragile', 'Small', 'Rejected');
+    (2, 2, 'Lee Young', '6585557997', ' 590 Yio Chu Kang Road #03-01, Singapore', 'food', 'fragile', 'Large', 'Approved'),
+    (3, 3, 'Sarah Miller', '601355532', 'E913 2Nd Floor Jalan Bukit Ubi , Kuantan, Malaysia', 'food', 'fragile', 'Small', 'Approved'),
+    (4, 4, 'Lisa Brown', '22355555240', ' 901 Lorong 4 Kampung Bercham, Male main Island', 'food', 'fragile', 'Small', 'Rejected');
 
 PRINT 'Creating a table for Orders...';
 CREATE TABLE Orders
