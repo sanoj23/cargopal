@@ -1,25 +1,25 @@
 --Check if database exists
-IF DB_ID('CargoSystem') IS NOT NULL
+IF DB_ID('CargoPal') IS NOT NULL
 	BEGIN
     PRINT 'Database exists';
     USE master;
-    ALTER DATABASE CargoSystem SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
-    DROP DATABASE CargoSystem;
+    ALTER DATABASE CargoPal SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+    DROP DATABASE CargoPal;
 END
 
 -- Create Cargo Shipping System database 
 PRINT 'Creating Database...';
-CREATE DATABASE CargoSystem;
+CREATE DATABASE CargoPal;
 GO
 
-USE CargoSystem
+USE CargoPal
 GO
 
 -- Create a table for Users
 PRINT 'Creating a table for Users...';
 CREATE TABLE Users
 (
-    userId INT IDENTITY(10,1) PRIMARY KEY,
+    userId INT IDENTITY(1,1) PRIMARY KEY,
     firstName VARCHAR(100) NOT NULL,
     lastName VARCHAR(100) NOT NULL,
     companyName VARCHAR(100),
@@ -50,7 +50,7 @@ VALUES
 PRINT 'Creating a table for Shipments...';
 CREATE TABLE Shipments
 (
-    shipmentId INT IDENTITY(20,1) PRIMARY KEY,
+    shipmentId INT IDENTITY(1,1) PRIMARY KEY,
     userId INT FOREIGN KEY REFERENCES Users(userId),
     origin VARCHAR (100) NOT NULL,
     destination VARCHAR (100) NOT NULL,
@@ -58,55 +58,59 @@ CREATE TABLE Shipments
     enddate DATETIME NOT NULL,
     capacity FLOAT NOT NULL,
     [status] VARCHAR(100) NOT NULL,
-    [timeStamp] DATETIME DEFAULT GETDATE(),
-    CONSTRAINT paymentType_check CHECK ([status] IN ('Approved','Rejected ')),
+    CONSTRAINT status_check CHECK ([status] IN ('Shipped','In Transit', 'Arrived')),
 );
 
 INSERT INTO Shipments
     (userId, origin, destination,startdate, enddate, capacity, [status] )
 VALUES
-    (11, 'colombo', 'chennai', '01/10/2020', '03/10/2020', 100, 'Approved' ),
-    (12, 'colombo', 'singapore', '05/10/2020', '08/10/2020', 50, 'Approved' ),
-    (13, 'colombo', 'malaysia', '01/09/2020', '02/09/2020', 30, 'Approved' ),
-    (14, 'colombo', 'maldives', '05/11/2020', '08/11/2020', 300, 'Approved' );
+    (1, 'colombo', 'chennai', '01/10/2020', '03/10/2020', 100, 'Shipped' ),
+    (2, 'colombo', 'singapore', '05/10/2020', '08/10/2020', 50, 'In Transit' ),
+    (3, 'colombo', 'malaysia', '01/09/2020', '02/09/2020', 30, 'Arrived' ),
+    (4, 'colombo', 'maldives', '05/11/2020', '08/11/2020', 300, 'Arrived' );
 
 
 PRINT 'Creating a table for Bookings...';
 CREATE TABLE Bookings
 (
-    bookingId INT IDENTITY(30,1) PRIMARY KEY,
+    bookingId INT IDENTITY(1,1) PRIMARY KEY,
     userId INT FOREIGN KEY REFERENCES Users(userId),
     shipmentId INT FOREIGN KEY REFERENCES Shipments (shipmentId),
     receiverName VARCHAR (100) NOT NULL,
     receiverPhone VARCHAR (100) NOT NULL,
-    receiverAdd VARCHAR (100) NOT NULL,
+    receiverAddress VARCHAR (100) NOT NULL,
+    item VARCHAR (100) NOT NULL,
+    instructions VARCHAR (100) NOT NULL,
+
+    packaging VARCHAR(100) NOT NULL,
+    CONSTRAINT packaging_check CHECK (packaging IN ('Small','Medium','Large ')),
     [status] VARCHAR(100) NOT NULL,
-    CONSTRAINT boxType_check CHECK ([status] IN ('Small','Medium','Large ')),
+    CONSTRAINT paymentType_check CHECK ([status] IN ('Approved','Rejected')),
 );
 INSERT INTO Bookings
-    (userId,shipmentId, receiverName, receiverPhone, receiverAdd, [status])
+    (userId,shipmentId, receiverName, receiverPhone, receiverAddress, item, instructions,packaging , [status])
 VALUES
-    (11, 21, 'Eliza Smith', '91-995-5513-746', ' 9/10 Krishna Chaya, Khar Muncipal Market 1 St Road, Khar, Mumbai', 'Medium'),
-    (12, 22, 'Lee Young', '6585557997', ' 590 Yio Chu Kang Road #03-01, Singapore', 'Large'),
-    (13, 23, 'Eliza Smith', '601355532', 'E913 2Nd Floor Jalan Bukit Ubi , Kuantan, Malaysia', 'Small'),
-    (14, 24, 'Eliza Smith', '22355555240', ' 901 Lorong 4 Kampung Bercham, Male main Island', 'Small');
+    (1, 1, 'Eliza Smith', '91-995-5513-746', ' 9/10 Krishna Chaya, Khar Muncipal Market 1 St Road, Khar, Mumbai', 'food', 'fragile', 'Medium', 'Approved'),
+    (2, 2, 'Lee Young', '6585557997', ' 590 Yio Chu Kang Road #03-01, Singapore', 'food', 'fragile','Large', 'Approved'),
+    (3, 3, 'Eliza Smith', '601355532', 'E913 2Nd Floor Jalan Bukit Ubi , Kuantan, Malaysia','food', 'fragile', 'Small', 'Approved'),
+    (4, 4, 'Eliza Smith', '22355555240', ' 901 Lorong 4 Kampung Bercham, Male main Island','food', 'fragile', 'Small', 'Rejected');
 
 PRINT 'Creating a table for Orders...';
 CREATE TABLE Orders
 (
-    orderId INT IDENTITY(40,1) PRIMARY KEY,
+    orderId INT IDENTITY(1,1) PRIMARY KEY,
     shipmentId INT FOREIGN KEY REFERENCES Shipments(shipmentId),
     bookingId INT FOREIGN KEY REFERENCES Bookings(bookingId),
     [status] VARCHAR(100) NOT NULL,
-    CONSTRAINT deliveryType_check CHECK ([status] IN ('Dropped off','On the way','Arrived ')),
+    CONSTRAINT deliveryType_check CHECK ([status] IN ('Available','Dropped off','On the way','Arrived ')),
 );
 INSERT INTO Orders
     (shipmentId, bookingId,[status])
 VALUES
-    (21, 31, 'Dropped off'),
-    (22, 32, 'On the way'),
-    (23, 33, 'Arrived'),
-    (24, 34, 'On the way');
+    (1, 1, 'Dropped off'),
+    (2, 2, 'On the way'),
+    (3, 3, 'Arrived'),
+    (4, 4, 'On the way');
 
 
 
