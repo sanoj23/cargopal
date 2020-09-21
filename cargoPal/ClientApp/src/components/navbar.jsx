@@ -1,12 +1,9 @@
-import React from "react";
-import {
-  Button,
-  Nav,
-  Navbar,
-  Form,
-  FormControl,
-  NavDropdown,
-} from "react-bootstrap";
+import React from 'react';
+import { Nav, Navbar, NavDropdown } from 'react-bootstrap';
+
+// Get user type from local storage and if user is client,
+// print client navbar
+// else print agent navbar
 
 export default function Navigationbar(props) {
   return (
