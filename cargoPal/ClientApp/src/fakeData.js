@@ -1,7 +1,7 @@
 export const Shipments = [
   {
     shipmentId: 21,
-    userId: 11,
+    userId: 1,
     origin: 'colombo',
     destination: 'chennai',
     startdate: '01/10/2020',
@@ -12,7 +12,7 @@ export const Shipments = [
 
   {
     shipmentId: 22,
-    userId: 12,
+    userId: 1,
     origin: 'colombo',
     destination: 'singapore',
     startdate: '05/10/2020',
@@ -23,7 +23,7 @@ export const Shipments = [
 
   {
     shipmentId: 23,
-    userId: 13,
+    userId: 2,
     origin: 'colombo',
     destination: 'malaysia',
     startdate: '01/09/2020',
@@ -33,7 +33,17 @@ export const Shipments = [
   },
   {
     shipmentId: 24,
-    userId: 14,
+    userId: 2,
+    origin: 'colombo',
+    destination: 'maldives',
+    startdate: '05/11/2020',
+    enddate: '08/11/2020',
+    capacity: 300,
+    status: 'Approved',
+  },
+  {
+    shipmentId: 25,
+    userId: 2,
     origin: 'colombo',
     destination: 'maldives',
     startdate: '05/11/2020',

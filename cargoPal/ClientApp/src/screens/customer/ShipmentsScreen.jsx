@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
+import { Row, Col, Container } from 'react-bootstrap';
 import Screen from '../../components/screen';
+import Shipment from '../../components/shipment';
+
+import { Shipments } from '../../fakeData';
 
 class ShipmentsScreen extends Component {
   state = {
@@ -8,6 +12,7 @@ class ShipmentsScreen extends Component {
 
   componentDidMount() {
     // get all shipments from all agents where the status is available
+    this.setState({ shipments: Shipments });
   }
 
   componentDidUpdate() {
@@ -22,8 +27,15 @@ class ShipmentsScreen extends Component {
         title="View Availbale Shipments"
         subtitle="The user can select the shipment and agent here."
       >
-        {/* {Shipment compoenents will rendered here with their prices and all } */}
-        {shipments.map((shipment) => console.log(shipment))}
+        <Container>
+          <Row>
+            {shipments.map((shipment) => (
+              <Col sm={3}>
+                <Shipment key={shipment.shipmentId} shipment={shipment} />
+              </Col>
+            ))}
+          </Row>
+        </Container>
       </Screen>
     );
   }
