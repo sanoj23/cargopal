@@ -1,31 +1,206 @@
+using System;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using Users.Data;
+using Microsoft.Extensions.Options;
+using System.Text;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.IdentityModel.Tokens;
+using CargoPal.Data;
+using CargoPal.Helpers;
 
-namespace Users.Controllers
+namespace CargoPal.Controllers
 {
+    // [Authorize]
+    [ApiController]
     [Route("api/[controller]")]
-    public class UsersController : Controller
+    public class UserController : ControllerBase
     {
-        private IUserService _service;
-        public UsersController(IUserService service)
+        private readonly IUserService _service;
+        private readonly AppSettings _appSettings;
+
+        public UserController(IUserService service, IOptions<AppSettings> appSettings)
         {
             this._service = service;
+            this._appSettings = appSettings.Value;
         }
 
-        [HttpPost("[action]")]
-        public IActionResult AddUser([FromBody] User user)
+        [AllowAnonymous]
+        [HttpPost("authenticate")]
+        public IActionResult Authenticate([FromBody] AuthenticateModel model)
         {
-            if (user != null) { _service.AddUser(user); }
-            return Ok();
+            try
+            {
+                var user = _service.Authenticate(model);
+
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+                var tokenDescriptor = new SecurityTokenDescriptor
+                {
+                    Subject = new ClaimsIdentity(new Claim[]
+                    {
+                        new Claim(ClaimTypes.Name, user.UserId.ToString())
+                    }),
+                    Expires = DateTime.UtcNow.AddDays(7),
+                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                };
+
+                var token = tokenHandler.CreateToken(tokenDescriptor);
+                var tokenString = tokenHandler.WriteToken(token);
+
+                return Ok(new
+                {
+                    UserId = user.UserId,
+                    Email = user.Email,
+                    Token = tokenString
+                });
+            }
+            catch (Exception authException)
+            {
+                return Unauthorized(authException.Message);
+            }
+
         }
-        
-        [HttpGet("[action]")]
+
+        [AllowAnonymous]
+        [HttpGet("getusers")]
         public IActionResult GetUsers()
         {
-            var allUsers = _service.GetUsers();
-            return Ok(allUsers);
+            try
+            {
+                var allUsers = _service.GetUsers();
+                return Ok(allUsers);
+            }
+            catch (Exception error)
+            {
+                return BadRequest(error.Message);
+            }
         }
 
+        [HttpGet("GetUsers/{userId}")]
+        [AllowAnonymous]
+        public IActionResult GetUserById(int userId)
+        {
+            try
+            {
+                var user = _service.GetUserById(userId);
+                return Ok(user);
+            }
+            catch (Exception getUserError)
+            {
+                return NotFound(getUserError.Message);
+            }
+        }
+        
+        [HttpGet("GetUsers/type/{userType}")]
+        [AllowAnonymous]
+        public IActionResult GetUserByType(string userType)
+        {
+            try
+            {
+                var user = _service.GetUserByType(userType);
+                return Ok(user);
+            }
+            catch (Exception getUserError)
+            {
+                return NotFound(getUserError.Message);
+            }
+        }
 
+        [HttpPost("adduser")]
+        [AllowAnonymous]
+        public IActionResult AddUser([FromBody] Users user)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest("Please Enter Valid Data");
+                }
+
+                _service.AddUser(user);
+                return Ok(user);
+            }
+            catch (Exception resgisterError)
+            {
+                return BadRequest(resgisterError.Message);
+            }
+        }
+
+        // [HttpPut("UpdateUser/{userId}")]
+        // [AllowAnonymous]
+        // public IActionResult UpdateUser(int userId, [FromBody] UserUpdateModel user)
+        // {
+        //     try
+        //     {
+        //         if (!ModelState.IsValid)
+        //         {
+        //             return BadRequest("");
+        //         }
+
+        //         _service.UpdateUser(userId, user);
+        //         return Ok(_service.GetUserById(userId));
+        //     }
+        //     catch (Exception updateUserError)
+        //     {
+        //         return Conflict(updateUserError.Message);
+        //     }
+
+        // }
+
+        // [HttpPut("{userId}/ResetPassword")]
+        // [AllowAnonymous]
+        // public IActionResult ResetPassword(int userId, [FromBody] ResetPasswordModel password)
+        // {
+        //     try
+        //     {
+        //         if (!ModelState.IsValid)
+        //         {
+        //             return BadRequest("");
+        //         }
+
+        //         _service.ResetPassword(userId, password);
+        //         return Ok(_service.GetUserById(userId));
+        //     }
+        //     catch (Exception resetPasswordError)
+        //     {
+        //         return Conflict(resetPasswordError.Message);
+        //     }
+
+        // }
+
+
+        // [AllowAnonymous]
+        // [HttpPut("{userId}/DeactivateAccount")]
+        // public IActionResult DeactivateAccount(int userId)
+        // {
+        //     try
+        //     {
+        //         _service.DeactivateAccount(userId);
+        //         return Ok("Successfully Deactivated Account");
+        //     }
+        //     catch (Exception deactivateUserError)
+        //     {
+        //         return NotFound(deactivateUserError.Message);
+        //     }
+
+        // }
+
+        [AllowAnonymous]
+        [HttpDelete("DeleteUser/{userId}")]
+        public IActionResult DeleteUser(int userId)
+        {
+            try
+            {
+                _service.DeleteUser(userId);
+                return Ok("Successfully Deleted User");
+            }
+            catch (Exception deleteUserError)
+            {
+                return NotFound(deleteUserError.Message);
+            }
+
+        }
     }
-}
+};

@@ -9,7 +9,7 @@ const checkRoute = () => {
   return false;
 };
 
-export default function Screen({ children, title, subtitle, ...otherProps }) {
+export default function Screen({ children, title, subtitle }) {
   return (
     <div>
       {checkRoute() === true ? null : <Navigationbar />}

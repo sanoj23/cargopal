@@ -1,6 +1,6 @@
-// using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 
-namespace Users.Data
+namespace CargoPal.Data
 {
     public class AuthenticateModel
     {

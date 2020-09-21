@@ -1,15 +1,24 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
-namespace Users.Data
+namespace CargoPal.Data
 {
     public interface IUserService
     {
-        List<User> GetUsers();
-        User GetUserById(int userId);
-        void AddUser(User user);
-        void UpdateUser(int userId, User user);
+        Users Authenticate(AuthenticateModel user);
+        IEnumerable<Users> GetUsers();
+        Users GetUserById(int userId);
+        IEnumerable<Users> GetUserByType(string userType);
+        void AddUser(Users user);
+        void UpdateUser(int userId, Users user);
         void DeleteUser(int userId);
         void DeactivateUser(int userId);
 
     }
 }
+
+
+
+
+
+
