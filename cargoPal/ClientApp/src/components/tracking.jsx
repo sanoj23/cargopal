@@ -5,20 +5,15 @@ import * as Yup from 'yup';
 import FormInput from './form/formInput';
 
 const validationSchema = Yup.object().shape({
-  trackingNumber: Yup.string().required().min(7).max(7).label('Email'),
+  trackingNumber: Yup.string().required().min(1).max(7).label('Email'),
 });
 
-const requestTracking = (values) => {
-  console.log(values);
-  // Make API call from here on
-};
-
-export default function Tracking(props) {
+export default function Tracking({ track }) {
   return (
     <>
       <Formik
         initialValues={{ trackingNumber: '' }}
-        onSubmit={(values) => requestTracking(values)}
+        onSubmit={(values) => track(values)}
         validationSchema={validationSchema}
       >
         {({ handleChange, handleSubmit, errors, setFieldTouched, touched }) => (
