@@ -13,7 +13,6 @@ namespace CargoPal.Data
         void UpdateUser(int userId, Users user);
         void DeleteUser(int userId);
         void DeactivateUser(int userId);
-
     }
 }
 

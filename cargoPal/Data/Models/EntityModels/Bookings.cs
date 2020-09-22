@@ -14,7 +14,6 @@ namespace CargoPal.Data
         public int? UserId { get; set; }
         public int? ShipmentId { get; set; }
 
-        public double? BestPrice { get; set; }
         public string ReceiverName { get; set; }
         public string ReceiverPhone { get; set; }
         public string ReceiverAddress { get; set; }
