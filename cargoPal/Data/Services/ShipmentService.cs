@@ -43,25 +43,12 @@ namespace CargoPal.Data
             }
         }
 
-        // public IEnumerable<Shipments> GetshipmentNotByUserId(int userId)
-        // {
-        //     var UserExists = _CargoPalContext.Users.FirstOrDefault(u => u.UserId == userId);
-        //     if (UserExists == null)
-        //     {
-        //         throw new Exception("User does not exist");
-        //     }
-        //     else
-        //     {
-        //         return _CargoPalContext.Shipments.Where(n => n.UserId != userId).ToList();
-        //     }
-        // }
-
         public void AddShipment(Shipments shipment)
         {
 
             if (shipment == null)
             {
-                throw new Exception("Incomplete Fields");
+                throw new Exception("Incomplete Data");
             }
             else
             {
