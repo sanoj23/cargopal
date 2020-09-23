@@ -36,7 +36,7 @@ class Shipment extends Component {
     const { companyName } = this.state.user;
     return (
       <>
-        <Card style={{ marginTop: 10, borderRadius: 20, overflow: 'hidden' }}>
+        <Card style={{ marginTop: 10, borderRadius: 10, overflow: 'hidden' }}>
           <Card.Body>
             <Card.Title>{companyName}</Card.Title>
 
