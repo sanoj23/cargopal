@@ -51,7 +51,7 @@ namespace CargoPal.Data
             _CargoPalContext.Users.Add(user);
             _CargoPalContext.SaveChanges();
         }
-        
+
         public IEnumerable<Users> GetUsers()
         {
             return _CargoPalContext.Users.ToList();
@@ -59,7 +59,7 @@ namespace CargoPal.Data
 
         public Users GetUserById(int userId)
         {
-           var userExists = _CargoPalContext.Users.FirstOrDefault(u => u.UserId == userId);
+            var userExists = _CargoPalContext.Users.FirstOrDefault(u => u.UserId == userId);
             if (userExists == null)
             {
                 throw new Exception("User not Found");
@@ -69,47 +69,30 @@ namespace CargoPal.Data
                 return userExists;
             }
         }
-        
+
         public IEnumerable<Users> GetUserByType(string userType)
         {
-           var users = _CargoPalContext.Users.FirstOrDefault(u => u.UserType == userType);
+            var users = _CargoPalContext.Users.FirstOrDefault(u => u.UserType == userType);
             if (users == null)
             {
                 throw new Exception("No users Found");
             }
             else
             {
-               return _CargoPalContext.Users.Where(n => n.UserType == userType).ToList();
+                return _CargoPalContext.Users.Where(n => n.UserType == userType).ToList();
             }
         }
 
-        public void UpdateUser(int userId, Users user)
+        public void UpdateAgent(int userId, UpdateAgent agent)
         {
             var userToUpdate = _CargoPalContext.Users
                 .FirstOrDefault(u => u.UserId == userId);
-
-            // if (userToUpdate == null) { throw new Exception("Failed to Update"); }
-
-            // if (!string.IsNullOrWhiteSpace(user.FirstName)) { userToUpdate.FirstName = user.FirstName; }
-            // if (!string.IsNullOrWhiteSpace(user.LastName)) { userToUpdate.LastName = user.LastName; }
-            // if (!string.IsNullOrWhiteSpace(user.Phone)) { userToUpdate.Phone = user.Phone; }
-            // if (!string.IsNullOrWhiteSpace(user.Email) && user.Email != userToUpdate.Email)
-            // {
-            //     if (_CargoPalContext.Users.Any(u => u.Email == user.Email)) { throw new Exception("Email is already registered"); }
-            //     userToUpdate.Email = user.Email;
-            // }
-
-            // if (!string.IsNullOrWhiteSpace(user.BusinessName) && user.BusinessName != userToUpdate.BusinessName)
-            // {
-            //     if (_CargoPalContext.Users.Any(u => u.BusinessName == user.BusinessName)) { throw new Exception("Business Name is already registered"); }
-            //     userToUpdate.BusinessName = user.BusinessName;
-            // }
-
-            // if (!string.IsNullOrWhiteSpace(user.BusinessDescription)) { userToUpdate.BusinessDescription = user.BusinessDescription; }
-            // if (!string.IsNullOrWhiteSpace(user.BusinessPhone)) { userToUpdate.BusinessPhone = user.BusinessPhone; }
-            // if (!string.IsNullOrWhiteSpace(user.BusinessAddress)) { userToUpdate.BusinessAddress = user.BusinessAddress; }
-            // if (!string.IsNullOrWhiteSpace(user.BusinessType)) { userToUpdate.BusinessType = user.BusinessType; }
-
+            _CargoPalContext.SaveChanges();
+        }
+        public void UpdateClient(int userId, UpdateClient client)
+        {
+            var userToUpdate = _CargoPalContext.Users
+                .FirstOrDefault(u => u.UserId == userId);
             _CargoPalContext.SaveChanges();
         }
 

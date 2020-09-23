@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using System.Text;
@@ -9,6 +8,7 @@ using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
 using CargoPal.Data;
 using CargoPal.Helpers;
+
 
 namespace CargoPal.Controllers
 {
@@ -64,7 +64,7 @@ namespace CargoPal.Controllers
         }
 
         [AllowAnonymous]
-        [HttpGet("getusers")]
+        [HttpGet("")]
         public IActionResult GetUsers()
         {
             try
@@ -78,7 +78,7 @@ namespace CargoPal.Controllers
             }
         }
 
-        [HttpGet("GetUsers/{userId}")]
+        [HttpGet("{userId}")]
         [AllowAnonymous]
         public IActionResult GetUserById(int userId)
         {
@@ -92,8 +92,8 @@ namespace CargoPal.Controllers
                 return NotFound(getUserError.Message);
             }
         }
-        
-        [HttpGet("GetUsers/type/{userType}")]
+
+        [HttpGet("type/{userType}")]
         [AllowAnonymous]
         public IActionResult GetUserByType(string userType)
         {
@@ -108,7 +108,7 @@ namespace CargoPal.Controllers
             }
         }
 
-        [HttpPost("adduser")]
+        [HttpPost("")]
         [AllowAnonymous]
         public IActionResult AddUser([FromBody] Users user)
         {
@@ -128,26 +128,46 @@ namespace CargoPal.Controllers
             }
         }
 
-        // [HttpPut("UpdateUser/{userId}")]
-        // [AllowAnonymous]
-        // public IActionResult UpdateUser(int userId, [FromBody] UserUpdateModel user)
-        // {
-        //     try
-        //     {
-        //         if (!ModelState.IsValid)
-        //         {
-        //             return BadRequest("");
-        //         }
 
-        //         _service.UpdateUser(userId, user);
-        //         return Ok(_service.GetUserById(userId));
-        //     }
-        //     catch (Exception updateUserError)
-        //     {
-        //         return Conflict(updateUserError.Message);
-        //     }
+        [HttpPut("agent/{userId}")]
+        [AllowAnonymous]
+        public IActionResult UpdateAgent(int userId, [FromBody] UpdateAgent agent)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest("");
+                }
 
-        // }
+                _service.UpdateAgent(userId, agent);
+                return Ok(_service.GetUserById(userId));
+            }
+            catch (Exception updateUserError)
+            {
+                return Conflict(updateUserError.Message);
+            }
+        }
+
+        [HttpPut("client/{userId}")]
+        [AllowAnonymous]
+        public IActionResult UpdateClient(int userId, [FromBody] UpdateClient client)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest("");
+                }
+
+                _service.UpdateClient(userId, client);
+                return Ok(_service.GetUserById(userId));
+            }
+            catch (Exception updateUserError)
+            {
+                return Conflict(updateUserError.Message);
+            }
+        }
 
         // [HttpPut("{userId}/ResetPassword")]
         // [AllowAnonymous]
@@ -188,11 +208,12 @@ namespace CargoPal.Controllers
         // }
 
         [AllowAnonymous]
-        [HttpDelete("DeleteUser/{userId}")]
+        [HttpDelete("{userId}")]
         public IActionResult DeleteUser(int userId)
         {
             try
             {
+                // check if any pending orders
                 _service.DeleteUser(userId);
                 return Ok("Successfully Deleted User");
             }
