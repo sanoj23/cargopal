@@ -38,7 +38,7 @@ INSERT INTO Users
 VALUES
     ('Dua' , 'Lipa', NULL, '0777345900', 'dualipa@gmail.com', '40.Little London Junction, London,UK', '123456', 'Client'),
     ('John', 'smith', NULL, '079847900', 'johnsmith@gmail.com', '10.Barnes Place, colombo,SL', '123456', 'Client'),
-    ('Alexander', 'Hamilton', NULL, '079843456', 'ahamiltion@gmail.com', '100. church road, wattala,SL', '123456', 'Client'),
+    ('Alex', 'Hamilton', NULL, '079843456', 'ahamiltion@gmail.com', '100. church road, wattala,SL', '123456', 'Client'),
 
 
     ('Drake', 'Graham', 'Ship It', '0773000108', 'shipit@hotmail.com', '12B.Marine Drive,Colombo 03', '567890', 'Agent'),
@@ -57,17 +57,21 @@ CREATE TABLE Shipments
     startdate DATETIME NOT NULL,
     enddate DATETIME NOT NULL,
     capacity FLOAT NOT NULL,
-    [status] VARCHAR(100) NOT NULL,
-    CONSTRAINT status_check CHECK ([status] IN ('Shipped','In Transit', 'Arrived')),
+
 );
 
 INSERT INTO Shipments
-    (userId, origin, destination,startdate, enddate, capacity, [status] )
+    (userId, origin, destination,startdate, enddate, capacity )
 VALUES
-    (1, 'colombo', 'chennai', '01/10/2020', '03/10/2020', 100, 'Shipped' ),
-    (2, 'colombo', 'singapore', '05/10/2020', '08/10/2020', 50, 'In Transit' ),
-    (3, 'colombo', 'malaysia', '01/09/2020', '02/09/2020', 30, 'Arrived' ),
-    (4, 'colombo', 'maldives', '05/11/2020', '08/11/2020', 300, 'Arrived' );
+    (4, 'colombo', 'chennai', '01/10/2020', '03/10/2020', 2000 ),
+    (5, 'colombo', 'singapore', '05/10/2020', '08/10/2020', 2000 ),
+    (6, 'colombo', 'malaysia', '01/09/2020', '02/09/2020', 3000),
+    (4, 'colombo', 'maldives', '05/11/2020', '08/11/2020', 3000),
+
+    (5, 'colombo', 'myanmar', '01/11/2020', '04/11/2020', 1000 ),
+    (6, 'colombo', 'pakistan', '05/12/2020', '10/12/2020', 5000 ),
+    (4, 'colombo', 'china', '01/08/2020', '10/08/2020', 3000 ),
+    (5, 'colombo', 'maldives', '05/08/2020', '06/08/2020', 3000);
 
 
 PRINT 'Creating a table for Bookings...';
@@ -102,22 +106,12 @@ CREATE TABLE Orders
     shipmentId INT FOREIGN KEY REFERENCES Shipments(shipmentId),
     bookingId INT FOREIGN KEY REFERENCES Bookings(bookingId),
     [status] VARCHAR(100) NOT NULL,
-    CONSTRAINT deliveryType_check CHECK ([status] IN ('Available','Dropped off','On the way','Arrived ')),
+    CONSTRAINT deliveryType_check CHECK ([status] IN ('picked up', 'customs cleared', 'in transit','on the way', 'customs cleared on arrival', 'ready for pick up')),
 );
 INSERT INTO Orders
     (shipmentId, bookingId,[status])
 VALUES
-    (1, 1, 'Dropped off'),
-    (2, 2, 'On the way'),
-    (3, 3, 'Arrived'),
-    (4, 4, 'On the way');
-
-
-
-
-
-
-
-
-
-
+    (1, 1, 'picked up'),
+    (2, 2, 'customs cleared'),
+    (3, 3, 'in transit'),
+    (4, 4, 'ready for pick up');
