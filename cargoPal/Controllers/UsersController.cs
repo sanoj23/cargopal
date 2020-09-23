@@ -169,26 +169,27 @@ namespace CargoPal.Controllers
             }
         }
 
-        // [HttpPut("{userId}/ResetPassword")]
-        // [AllowAnonymous]
-        // public IActionResult ResetPassword(int userId, [FromBody] ResetPasswordModel password)
-        // {
-        //     try
-        //     {
-        //         if (!ModelState.IsValid)
-        //         {
-        //             return BadRequest("");
-        //         }
+        [HttpPut("{userId}/ResetPassword")]
+        [AllowAnonymous]
+        public IActionResult ResetPassword(int userId, [FromBody] ResetPassword password)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest("");
+                }
 
-        //         _service.ResetPassword(userId, password);
-        //         return Ok(_service.GetUserById(userId));
-        //     }
-        //     catch (Exception resetPasswordError)
-        //     {
-        //         return Conflict(resetPasswordError.Message);
-        //     }
+                _service.ResetPassword(userId, password);
+                return Ok(_service.GetUserById(userId));
 
-        // }
+            }
+            catch (Exception error)
+            {
+                return Conflict(error.Message);
+            }
+
+        }
 
 
         // [AllowAnonymous]

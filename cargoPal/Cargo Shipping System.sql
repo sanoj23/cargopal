@@ -36,9 +36,9 @@ CREATE TABLE Users
 INSERT INTO Users
     (firstName, lastName, companyName, phone,email, [address],[password],userType )
 VALUES
-    ('Dua' , 'Lipa', NULL, '0777345900', 'dualipa@gmail.com', '40.Little London Junction, London,UK', '123456', 'Client'),
-    ('John', 'smith', NULL, '079847900', 'johnsmith@gmail.com', '10.Barnes Place, colombo,SL', '123456', 'Client'),
-    ('Alexander', 'Hamilton', NULL, '079843456', 'ahamiltion@gmail.com', '100. church road, wattala,SL', '123456', 'Client'),
+    ('Dua' , 'Lipa', NULL, '0777345900', 'dualipa@gmail.com', '40.Little London Junction, London,UK', '3gx7Jwis0KOjebeiNO0HfA==|EvfwSx0VJSihCSkfNEIeBhHEu92rqVqEgviSCjD3zfI=', 'Client'),
+    ('John', 'smith', NULL, '079847900', 'johnsmith@gmail.com', '10.Barnes Place, colombo,SL', '3gx7Jwis0KOjebeiNO0HfA==|EvfwSx0VJSihCSkfNEIeBhHEu92rqVqEgviSCjD3zfI=', 'Client'),
+    ('Alexander', 'Hamilton', NULL, '079843456', 'ahamiltion@gmail.com', '100. church road, wattala,SL', '3gx7Jwis0KOjebeiNO0HfA==|EvfwSx0VJSihCSkfNEIeBhHEu92rqVqEgviSCjD3zfI=', 'Client'),
 
 
     ('Drake', 'Graham', 'Ship It', '0773000108', 'shipit@hotmail.com', '12B.Marine Drive,Colombo 03', '567890', 'Agent'),

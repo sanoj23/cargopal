@@ -9,8 +9,9 @@ namespace CargoPal.Data
         IEnumerable<Users> GetUsers();
         Users GetUserById(int userId);
         IEnumerable<Users> GetUserByType(string userType);
-        void AddUser(Users user);
 
+        void ResetPassword(int userId, ResetPassword password);
+        void AddUser(Users user);
         void UpdateAgent(int userId, UpdateAgent agent);
         void UpdateClient(int userId, UpdateClient client);
         void DeleteUser(int userId);

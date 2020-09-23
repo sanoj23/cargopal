@@ -38,6 +38,42 @@ namespace CargoPal.Data
             return userExists;
         }
 
+        public void ResetPassword(int userId, ResetPassword password)
+        {
+            var userToUpdate = _CargoPalContext.Users
+            .FirstOrDefault(u => u.UserId == userId);
+
+            if (userToUpdate == null)
+            {
+                throw new Exception("Failed to Update");
+            }
+
+            if (string.IsNullOrWhiteSpace(password.CurrentPassword) || string.IsNullOrWhiteSpace(password.NewPassword) || string.IsNullOrWhiteSpace(password.ConfirmNewPassword))
+            {
+                throw new Exception("All fields required");
+            }
+
+            // if (!VerifyPassword(userToUpdate.Password, password.CurrentPassword))
+            // {
+            //     throw new Exception("Current password is incorrect");
+            // }
+
+            if (password.CurrentPassword == password.NewPassword)
+            {
+                throw new Exception("Your new password cannot be the same as your current password");
+            }
+
+            if (password.NewPassword != password.ConfirmNewPassword)
+            {
+                throw new Exception("New password and its confirmation do not match");
+            }
+
+            var passwordHash = HashPassword(password.NewPassword);
+            userToUpdate.Password = passwordHash;
+
+            _CargoPalContext.SaveChanges();
+        }
+
         public void AddUser(Users user)
         {
             string passwordPattern = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&]{8,}$";
