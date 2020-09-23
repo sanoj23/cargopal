@@ -1,47 +1,74 @@
-import React from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { Card, Button } from 'react-bootstrap';
+import { getUserByUserId } from '../actions/userAction';
 
-export default function Shipment({ shipment }) {
-  const { origin, destination, startdate, enddate, capacity } = shipment;
-  const history = useHistory();
+class Shipment extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      shipment: {},
+      user: {},
+    };
+  }
 
-  const getAgent = () => {
-    const users = [
-      { id: 1, name: 'Agent 01' },
-      { id: 2, name: 'Agent 02' },
-    ];
+  componentDidMount() {
+    this.setState({ shipment: this.props.shipment });
+    this.props.getUserByUserId(this.props.shipment.userId);
+  }
 
-    const track = users.find((i) => i.id === parseInt(shipment.userId));
-    return track.name;
-  };
+  componentDidUpdate(prevProps) {
+    if (prevProps.users.data !== this.props.users.data) {
+      this.setState({ user: this.props.users.data });
+    }
+  }
 
-  return (
-    <>
-      <Card style={{ marginTop: 10, borderRadius: 20, overflow: 'hidden' }}>
-        <Card.Body>
-          <Card.Title>{getAgent()}</Card.Title>
+  render() {
+    const {
+      origin,
+      destination,
+      endDate,
+      startDate,
+      capacity,
+    } = this.state.shipment;
 
-          <Card.Text>
-            To: <br />
-            <b>{destination}</b> - <b>{enddate}</b>
-          </Card.Text>
-          <Card.Text>
-            From: <br />
-            <b>{origin}</b> - <b>{startdate}</b>
-          </Card.Text>
-          <Card.Text>
-            Availability: <b>{capacity} </b>kg
-          </Card.Text>
+    const { companyName } = this.state.user;
+    return (
+      <>
+        <Card style={{ marginTop: 10, borderRadius: 20, overflow: 'hidden' }}>
+          <Card.Body>
+            <Card.Title>{companyName}</Card.Title>
 
-          <Button
-            variant="outline-success"
-            onClick={() => history.push('/booking')}
-          >
-            Book Shipment
-          </Button>
-        </Card.Body>
-      </Card>
-    </>
-  );
+            <Card.Text>
+              To: <br />
+              <b>{destination}</b> -{' '}
+              <b>{new Date(endDate).toLocaleDateString()}</b>
+            </Card.Text>
+            <Card.Text>
+              From: <br />
+              <b>{origin}</b> -{' '}
+              <b>{new Date(startDate).toLocaleDateString()}</b>
+            </Card.Text>
+            <Card.Text>
+              Availability: <b>{capacity} </b>kg
+            </Card.Text>
+
+            <Button
+              variant="outline-success"
+              onClick={() => this.props.history.push('/booking')}
+            >
+              Book Shipment
+            </Button>
+          </Card.Body>
+        </Card>
+      </>
+    );
+  }
 }
+
+const mapStateToProps = ({ users }) => ({ users });
+
+export default withRouter(
+  connect(mapStateToProps, { getUserByUserId })(Shipment)
+);

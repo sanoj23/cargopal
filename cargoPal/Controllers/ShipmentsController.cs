@@ -93,7 +93,7 @@ namespace CargoPal.Controllers
         }
 
         [HttpDelete("{shipmentId}")]
-        public IActionResult DeleteBooking(int shipmentId)
+        public IActionResult DeleteShipment(int shipmentId)
         {
             try
             {
