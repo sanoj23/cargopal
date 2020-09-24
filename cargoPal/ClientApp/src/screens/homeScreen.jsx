@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Carousel, Jumbotron } from 'react-bootstrap';
-import Screen from '../../components/screen';
+import Screen from '../components/screen';
 
 export default function HomeScreen(props) {
   return (
@@ -9,7 +9,7 @@ export default function HomeScreen(props) {
         <Carousel.Item>
           <img
             className="d-block w-100"
-            src={require('../../assets/commons/LandingImage.jpg')}
+            src={require('../assets/commons/LandingImage.jpg')}
             alt="First slide"
             height={500}
           />
@@ -21,7 +21,7 @@ export default function HomeScreen(props) {
         <Carousel.Item>
           <img
             className="d-block w-100"
-            src={require('../../assets/commons/background.jpeg')}
+            src={require('../assets/commons/background.jpeg')}
             alt="Third slide"
             height={500}
           />

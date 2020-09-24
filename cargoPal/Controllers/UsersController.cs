@@ -53,6 +53,7 @@ namespace CargoPal.Controllers
                 {
                     UserId = user.UserId,
                     Email = user.Email,
+                    Type = user.UserType,
                     Token = tokenString
                 });
             }

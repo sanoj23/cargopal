@@ -41,7 +41,7 @@ VALUES
     ('Alexander', 'Hamilton', NULL, '079843456', 'ahamiltion@gmail.com', '100. church road, wattala,SL', '3gx7Jwis0KOjebeiNO0HfA==|EvfwSx0VJSihCSkfNEIeBhHEu92rqVqEgviSCjD3zfI=', 'Client'),
 
 
-    ('Drake', 'Graham', 'Ship It', '0773000108', 'shipit@hotmail.com', '12B.Marine Drive,Colombo 03', '567890', 'Agent'),
+    ('Drake', 'Graham', 'Ship It', '0773000108', 'asd@asd.com', '12B.Marine Drive,Colombo 03', '3gx7Jwis0KOjebeiNO0HfA==|EvfwSx0VJSihCSkfNEIeBhHEu92rqVqEgviSCjD3zfI=', 'Agent'),
     ('John', 'Adams', 'Cargo', '0774567876', 'cargo@hotmail.com', 'Ist Flr,office No.9, 445/51, Kalbadevi Road, Mumbai, India', '567890', 'Agent'),
     ('Jessica', 'Nortan', 'Evergreen', '0771234678', 'evergreen@hotmail.com', '116. Union Place,Colombo 07', '567890', 'Agent')
 ;

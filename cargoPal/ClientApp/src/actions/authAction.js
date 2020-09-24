@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { userConstants } from '../constants/userConstants';
-
+// import { history } from '../App';
 // Derive Constants
 // const history = useHistory();
 
@@ -10,7 +10,7 @@ export const getUserId = () => {
   if (localStorage.getItem('user') == null) {
     // history.push('/');
   } else {
-    return user.userId;
+    return user;
   }
 };
 
@@ -25,32 +25,28 @@ const loginFailure = (payload) => ({
 });
 export const loginUser = (user) => (dispatch) => {
   dispatch({ type: userConstants.LOGIN_REQUEST });
-  console.log(user);
+
   return axios
     .post('api/user/authenticate', user)
     .then((res) => {
       dispatch(loginSuccess(res.data));
-
-      if (localStorage.getItem('user') === null) {
+      if (!localStorage.getItem('user')) {
         localStorage.setItem('user', JSON.stringify(res.data)); // Set up local storage
       } else {
         localStorage.clear();
         localStorage.setItem('user', JSON.stringify(res.data));
       }
-      // history.push('/home');
-      // window.location.reload();
     })
     .catch((error) => {
       dispatch(loginFailure(error));
     });
 };
 
-// // Logout User
-// export const logoutUser = () => (dispatch) => {
-//   console.log('logged out');
-//   dispatch({ type: LOGOUT_USER });
-//   localStorage.clear();
-// };
+// Logout User
+export const logoutUser = () => (dispatch) => {
+  dispatch({ type: userConstants.LOGOUT_USER });
+  localStorage.clear();
+};
 
 // //Regsiter User
 // const RegisterSuccess = (payload) => ({
@@ -72,26 +68,26 @@ export const loginUser = (user) => (dispatch) => {
 //     .catch((err) => dispatch(RegisterFailure(err)));
 // };
 
-// // Get user by Id
-// const getUserByIdSuccess = (payload) => ({
-//   type: USER_BY_ID_SUCCESS,
-//   payload,
-// });
-// const getUserByIdFailure = (payload) => ({
-//   type: USER_BY_ID_FAILURE,
-//   payload,
-// });
-// export const GetAuthUser = () => (dispatch) => {
-//   dispatch({ type: USER_BY_ID_REQUEST });
-//   const userId = getUserId();
-//   return axios
-//     .get(`/api/user/${userId}`)
-//     .then((res) => {
-//       dispatch(getUserByIdSuccess(res.data));
-//     })
-//     .catch((err) => {
-//       dispatch(getUserByIdFailure(err.data));
-//     });
-// };
+// Get user by Id
+const getUserByIdSuccess = (payload) => ({
+  type: userConstants.USER_BY_ID_SUCCESS,
+  payload,
+});
+const getUserByIdFailure = (payload) => ({
+  type: userConstants.USER_BY_ID_FAILURE,
+  payload,
+});
+export const GetAuthUser = () => (dispatch) => {
+  dispatch({ type: userConstants.USER_BY_ID_REQUEST });
+  const userId = getUserId();
+  return axios
+    .get(`/api/user/${userId}`)
+    .then((res) => {
+      dispatch(getUserByIdSuccess(res.data));
+    })
+    .catch((err) => {
+      dispatch(getUserByIdFailure(err.data));
+    });
+};
 
 // Update User Info

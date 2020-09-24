@@ -1,10 +1,10 @@
 import React from 'react';
 import { Route, BrowserRouter, Switch } from 'react-router-dom';
-
+import { createBrowserHistory } from 'history';
 import './App.css';
 
 import BookingScreen from './screens/customer/bookingScreen';
-import HomeScreen from './screens/customer/homeScreen';
+import HomeScreen from './screens/homeScreen';
 
 import LandingScreen from './screens/landingScreen';
 import RegisterScreen from './screens/registerScreen';
@@ -15,13 +15,19 @@ import RequestsScreen from './screens/agent/requestsScreen';
 import NotFound from './components/notFound';
 import ShipmentsScreen from './screens/customer/ShipmentsScreen';
 
+export const history = createBrowserHistory();
+
 function App() {
   return (
     <BrowserRouter>
+      <Route exact path="/" component={LandingScreen} />
       <Switch>
-        <Route exact path="/" component={LandingScreen} />
         <Route exact path="/register" component={RegisterScreen} />
-        <Route exact path="/home" component={HomeScreen} />
+        <Route
+          exact
+          path="/home"
+          render={(props) => <HomeScreen {...props} />}
+        />
         <Route exact path="/tracking" component={TrackingScreen} />
 
         <Route exact path="/shipments" component={ShipmentsScreen} />
