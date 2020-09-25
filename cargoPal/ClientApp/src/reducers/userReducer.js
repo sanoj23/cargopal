@@ -8,14 +8,14 @@ const INITIAL_STATE = {
 
 const userReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case userConstants.GET_ALL_USERS_REQUEST: // Get All Users
+    case userConstants.GET_USERS_REQUEST:
       return { ...state, loading: true };
-    case userConstants.GET_ALL_USERS_SUCCESS:
+    case userConstants.GET_USERS_SUCCESS:
       return { ...state, loading: false, data: action.payload };
-    case userConstants.GET_ALL_USERS_FAILURE:
+    case userConstants.GET_USERS_FAILURE:
       return { ...state, loading: false, error: action.payload };
 
-    case userConstants.GET_USER_BY_ID_REQUEST: // Get User by Id
+    case userConstants.GET_USER_BY_ID_REQUEST:
       return { ...state, loading: true };
     case userConstants.GET_USER_BY_ID_SUCCESS:
       return { ...state, loading: false, data: action.payload };

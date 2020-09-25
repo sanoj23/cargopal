@@ -44,26 +44,6 @@ export const logoutUser = () => (dispatch) => {
   localStorage.clear();
 };
 
-// //Regsiter User
-// const RegisterSuccess = (payload) => ({
-//   type: REGISTER_USER_SUCCESS,
-//   payload,
-// });
-// const RegisterFailure = (payload) => ({
-//   type: REGISTER_USER_FAILURE,
-//   payload,
-// });
-// export const ResgisterUser = (user) => (dispatch) => {
-//   dispatch({ type: REGISTER_USER_REQUEST });
-//   return axios
-//     .post('api/user', user)
-//     .then((res) => {
-//       dispatch(RegisterSuccess(res.data));
-//       //   history.push('/');
-//     })
-//     .catch((err) => dispatch(RegisterFailure(err)));
-// };
-
 // Get user by Id - authenticated
 const getUserByIdSuccess = (payload) => ({
   type: userConstants.USER_BY_ID_SUCCESS,
@@ -88,3 +68,25 @@ export const getAuthUser = () => (dispatch) => {
 };
 
 // Update User Info
+
+// Reset Password
+
+// //Regsiter User
+// const RegisterSuccess = (payload) => ({
+//   type: REGISTER_USER_SUCCESS,
+//   payload,
+// });
+// const RegisterFailure = (payload) => ({
+//   type: REGISTER_USER_FAILURE,
+//   payload,
+// });
+// export const ResgisterUser = (user) => (dispatch) => {
+//   dispatch({ type: REGISTER_USER_REQUEST });
+//   return axios
+//     .post('api/user', user)
+//     .then((res) => {
+//       dispatch(RegisterSuccess(res.data));
+//       //   history.push('/');
+//     })
+//     .catch((err) => dispatch(RegisterFailure(err)));
+// };

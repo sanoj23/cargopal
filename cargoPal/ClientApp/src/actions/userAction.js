@@ -1,6 +1,27 @@
 import axios from 'axios';
 import { userConstants } from '../constants/userConstants';
 
+// Get all users
+const GetUsersSuccess = (payload) => ({
+  type: userConstants.GET_USERS_SUCCESS,
+  payload,
+});
+const GetUsersFailure = (payload) => ({
+  type: userConstants.GET_USERS_FAILURE,
+  payload,
+});
+export const GetUsers = () => (dispatch) => {
+  dispatch({ type: userConstants.GET_USERS_REQUEST });
+  return axios
+    .get(`api/user/`)
+    .then((res) => {
+      dispatch(GetUsersSuccess(res.data));
+    })
+    .catch((error) => {
+      dispatch(GetUsersFailure(error));
+    });
+};
+
 // Get user by userId
 const getUserByIdSuccess = (payload) => ({
   type: userConstants.GET_USER_BY_ID_SUCCESS,
