@@ -14,6 +14,7 @@ class Login extends Component {
     super(props);
     this.requestChange = this.requestChange.bind(this);
     this.requestLogin = this.requestLogin.bind(this);
+
     this.state = {
       email: '',
       password: '',
@@ -41,7 +42,6 @@ class Login extends Component {
     if (prevProps.auth.data !== this.props.auth.data) {
       this.setState({ status: this.props.auth.data });
     }
-    console.log(this.state.status.token);
 
     if (this.state.status.token) {
       this.props.history.push('/home');

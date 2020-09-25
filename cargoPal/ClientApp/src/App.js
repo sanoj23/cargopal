@@ -5,6 +5,7 @@ import './App.css';
 
 import BookingScreen from './screens/customer/bookingScreen';
 import HomeScreen from './screens/homeScreen';
+import ProfileScreen from './screens/profileScreen';
 
 import LandingScreen from './screens/landingScreen';
 import RegisterScreen from './screens/registerScreen';
@@ -31,10 +32,18 @@ function App() {
         <Route exact path="/tracking" component={TrackingScreen} />
 
         <Route exact path="/shipments" component={ShipmentsScreen} />
-        <Route exact path="/booking" component={BookingScreen} />
+
+        <Route
+          exact
+          path="/booking"
+          // component={BookingScreen}
+          render={(props) => <BookingScreen {...props} />}
+        />
         <Route exact path="/schedule" component={ScheduleScreen} />
         <Route exact path="/orders" component={OrdersScreen} />
         <Route exact path="/requests" component={RequestsScreen} />
+        <Route exact path="/profile" component={ProfileScreen} />
+
         <Route path="/notfound" component={NotFound} />
       </Switch>
     </BrowserRouter>

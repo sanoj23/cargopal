@@ -7,19 +7,23 @@ class TrackingScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: [
-        { id: 1, item: 'food' },
-        { id: 2, item: 'good' },
-      ],
+      userAuth: {},
     };
   }
 
   componentDidMount() {
     // reset forms
+    // if (!this.props.location.state.user) {
+    //   const user = this.props.location.state.user;
+    //   if (user && user === 'visitor') {
+    //     this.setState({ userAuth: user });
+    //   }
+    // }
   }
 
   componentDidUpdate() {
     // reenter state of the shipment
+    console.log(this.state.userAuth);
   }
 
   requestTracking = (values) => {
@@ -31,7 +35,7 @@ class TrackingScreen extends Component {
 
   render() {
     return (
-      <Screen title="Tracking">
+      <Screen title="Tracking" navbar={`${this.state.userAuth}`}>
         <div
           style={{ borderStyle: 'solid', padding: 20, width: 'auto', left: 10 }}
         >

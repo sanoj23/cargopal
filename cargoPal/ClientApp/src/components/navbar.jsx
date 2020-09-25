@@ -1,15 +1,11 @@
 import React from 'react';
 import { Nav, Navbar, NavDropdown } from 'react-bootstrap';
-import { useHistory } from 'react-router-dom';
 
 import { getUserId } from '../actions/authAction';
 
 export default function Navigationbar(props) {
-  const history = useHistory();
-
   const userType = () => {
     const user = getUserId();
-    if (!user) history.push('/');
     if (user && user.type === 'Client') return true;
   };
 

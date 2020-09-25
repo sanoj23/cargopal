@@ -6,18 +6,7 @@ import Booking from '../../components/booking';
 class BookingScreen extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      user: {
-        firstName: 'will',
-        lastName: 'smith',
-        address: 'home',
-        phone: '123456789',
-      },
-      schedule: {
-        id: 1,
-        destination: 'china',
-      },
-    };
+    this.state = {};
   }
 
   componentDidMount() {
@@ -27,7 +16,7 @@ class BookingScreen extends Component {
   render() {
     return (
       <Screen title="Booking" subtitle="Make your bookings here.">
-        <Booking user={this.state.user} schedule={this.state.schedule} />
+        <Booking schedule={this.state.schedule} />
       </Screen>
     );
   }

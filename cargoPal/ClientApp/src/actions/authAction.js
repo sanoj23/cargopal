@@ -1,14 +1,10 @@
 import axios from 'axios';
 import { userConstants } from '../constants/userConstants';
-// import { history } from '../App';
-// Derive Constants
-// const history = useHistory();
 
 // Get userId of logged in user
 export const getUserId = () => {
   const user = JSON.parse(localStorage.getItem('user'));
   if (localStorage.getItem('user') == null) {
-    // history.push('/');
   } else {
     return user;
   }
@@ -68,7 +64,7 @@ export const logoutUser = () => (dispatch) => {
 //     .catch((err) => dispatch(RegisterFailure(err)));
 // };
 
-// Get user by Id
+// Get user by Id - authenticated
 const getUserByIdSuccess = (payload) => ({
   type: userConstants.USER_BY_ID_SUCCESS,
   payload,
@@ -77,16 +73,17 @@ const getUserByIdFailure = (payload) => ({
   type: userConstants.USER_BY_ID_FAILURE,
   payload,
 });
-export const GetAuthUser = () => (dispatch) => {
+export const getAuthUser = () => (dispatch) => {
   dispatch({ type: userConstants.USER_BY_ID_REQUEST });
-  const userId = getUserId();
+  const { userId } = getUserId();
+
   return axios
     .get(`/api/user/${userId}`)
     .then((res) => {
       dispatch(getUserByIdSuccess(res.data));
     })
     .catch((err) => {
-      dispatch(getUserByIdFailure(err.data));
+      dispatch(getUserByIdFailure(err));
     });
 };
 
