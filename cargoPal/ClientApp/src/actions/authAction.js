@@ -55,10 +55,11 @@ const getUserByIdFailure = (payload) => ({
 });
 export const getAuthUser = () => (dispatch) => {
   dispatch({ type: userConstants.USER_BY_ID_REQUEST });
-  const { userId } = getUserId();
+
+  const user = getUserId();
 
   return axios
-    .get(`/api/user/${userId}`)
+    .get(`/api/user/${user.userId}`)
     .then((res) => {
       dispatch(getUserByIdSuccess(res.data));
     })
