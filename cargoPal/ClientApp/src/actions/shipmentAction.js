@@ -76,7 +76,7 @@ const AddShipmentFailure = (payload) => ({
 export const AddShipment = (shipment) => (dispatch) => {
   dispatch({ type: shipmentsConstants.ADD_SHIPMENTS_REQUEST });
   return axios
-    .get(`api/shipments/`, shipment)
+    .post(`api/shipments/`, shipment)
     .then((res) => {
       dispatch(AddShipmentSuccess(res.data));
     })
@@ -98,7 +98,7 @@ export const UpdateShipment = (shipment) => (dispatch) => {
   dispatch({ type: shipmentsConstants.UPDATE_SHIPMENTS_REQUEST });
   let { shipmentId } = shipment;
   return axios
-    .get(`api/shipments/${shipmentId}`, shipment)
+    .put(`api/shipments/${shipmentId}`, shipment)
     .then((res) => {
       dispatch(UpdateShipmentSuccess(res.data));
     })
@@ -120,7 +120,7 @@ export const DeleteShipment = (shipment) => (dispatch) => {
   dispatch({ type: shipmentsConstants.DELETE_SHIPMENTS_REQUEST });
   let { shipmentId } = shipment;
   return axios
-    .get(`api/shipments/${shipmentId}`)
+    .delete(`api/shipments/${shipmentId}`)
     .then((res) => {
       dispatch(DeleteShipmentSuccess(res.data));
     })
