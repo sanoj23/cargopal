@@ -42,3 +42,24 @@ export const getUserByUserId = (userId) => (dispatch) => {
       dispatch(getUserByIdFailure(error));
     });
 };
+
+// Get user by type - agent/client
+const GetUserByTypeSuccess = (payload) => ({
+  type: userConstants.USER_BY_TYPE_SUCCESS,
+  payload,
+});
+const GetUserByTypeFailure = (payload) => ({
+  type: userConstants.USER_BY_TYPE_FAILURE,
+  payload,
+});
+export const GetUserByType = (type) => (dispatch) => {
+  dispatch({ type: userConstants.USER_BY_TYPE_REQUEST });
+  return axios
+    .get(`api/user/type/${type}`)
+    .then((res) => {
+      dispatch(GetUserByTypeSuccess(res.data));
+    })
+    .catch((error) => {
+      dispatch(GetUserByTypeFailure(error));
+    });
+};

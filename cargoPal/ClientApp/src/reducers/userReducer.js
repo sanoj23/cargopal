@@ -22,6 +22,13 @@ const userReducer = (state = INITIAL_STATE, action) => {
     case userConstants.GET_USER_BY_ID_FAILURE:
       return { ...state, loading: false, error: action.payload };
 
+    case userConstants.USER_BY_TYPE_REQUEST:
+      return { ...state, loading: true };
+    case userConstants.USER_BY_TYPE_SUCCESS:
+      return { ...state, loading: false, data: action.payload };
+    case userConstants.USER_BY_TYPE_FAILURE:
+      return { ...state, loading: false, error: action.payload };
+
     default:
       return state;
   }
