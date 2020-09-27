@@ -45,11 +45,11 @@ namespace CargoPal.Controllers
         }
 
         [HttpGet("user/{userId}")]
-        public IActionResult GetShipmentsByUserId(int userId)
+        public IActionResult GetShipmentsByUser(int userId)
         {
             try
             {
-                var shipments = _service.GetShipmentsById(userId);
+                var shipments = _service.GetShipmentsByUser(userId);
                 return Ok(shipments);
             }
             catch (Exception error)

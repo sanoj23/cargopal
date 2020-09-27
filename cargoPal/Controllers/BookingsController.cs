@@ -16,7 +16,7 @@ namespace CargoPal.Controllers
             this._service = service;
         }
 
-        [HttpGet("getbookings")]
+        [HttpGet("")]
         public IActionResult GetBookings()
         {
             try
@@ -30,7 +30,7 @@ namespace CargoPal.Controllers
             }
         }
 
-        [HttpGet("getbookings/{bookingId}")]
+        [HttpGet("{bookingId}")]
         public IActionResult GetBookingsById(int bookingId)
         {
             try
@@ -44,7 +44,7 @@ namespace CargoPal.Controllers
             }
         }
 
-        [HttpGet("getbookings/shipment/{shipmentId}")]
+        [HttpGet("shipment/{shipmentId}")]
         public IActionResult GetBookingsByShipment(int shipmentId)
         {
             try
@@ -58,7 +58,7 @@ namespace CargoPal.Controllers
             }
         }
 
-        [HttpGet("getbookings/user/{userId}")]
+        [HttpGet("user/{userId}")]
         public IActionResult GetBookingsByUser(int userId)
         {
             try
@@ -74,7 +74,7 @@ namespace CargoPal.Controllers
 
 
 
-        [HttpPost("addbooking")]
+        [HttpPost("")]
         public IActionResult AddBooking([FromBody] Bookings booking)
         {
             try
@@ -90,7 +90,7 @@ namespace CargoPal.Controllers
             }
         }
 
-        [HttpPut("updateBooking/{bookingId}")]
+        [HttpPut("{bookingId}")]
         public IActionResult UpdateBooking(int bookingId, Bookings booking)
         {
             try
@@ -108,7 +108,7 @@ namespace CargoPal.Controllers
             }
         }
 
-        [HttpDelete("deleteBooking/{bookingId}")]
+        [HttpDelete("{bookingId}")]
         public IActionResult DeleteBooking(int bookingId)
         {
             try

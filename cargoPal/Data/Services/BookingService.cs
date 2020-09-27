@@ -25,7 +25,7 @@ namespace CargoPal.Data
             }
             else
             {
-                return _CargoPalContext.Bookings.FirstOrDefault(s => s.BookingId == bookingId);
+                return _CargoPalContext.Bookings.FirstOrDefault(b => b.BookingId == bookingId);
             }
         }
 
@@ -44,14 +44,14 @@ namespace CargoPal.Data
 
         public IEnumerable<Bookings> GetBookingsByUser(int userId)
         {
-            var bookingExists = _CargoPalContext.Bookings.FirstOrDefault(s => s.UserId == userId);
+            var bookingExists = _CargoPalContext.Bookings.FirstOrDefault(b => b.UserId == userId);
             if (bookingExists == null)
             {
                 throw new Exception("Booking Not Found");
             }
             else
             {
-                return _CargoPalContext.Bookings.Where(s => s.UserId == userId).ToList();
+                return _CargoPalContext.Bookings.Where(b => b.UserId == userId).ToList();
             }
         }
         public void AddBooking(Bookings booking)
@@ -72,12 +72,7 @@ namespace CargoPal.Data
             var bookingExists = _CargoPalContext.Bookings.FirstOrDefault(s => s.BookingId == bookingId);
             if (bookingExists != null)
             {
-                // if (booking.Quantity != 00.00) { bookingExists.Quantity = booking.Quantity; }
-                // if (booking.Price != 00.00) { bookingExists.Price = booking.Price; }
-                // // if (booking.DeliveryDate != null) { bookingExists.DeliveryDate = booking.DeliveryDate; }
-                // // if (booking.ValidityPeriod != null) { bookingExists.ValidityPeriod = booking.ValidityPeriod; }
-                // if (booking.BestPrice != 00.00) { bookingExists.BestPrice = booking.BestPrice; }
-                // if (booking.Status != null) { bookingExists.Status = booking.Status; }
+                //    get update booking model and validate
                 _CargoPalContext.SaveChanges();
             }
             else

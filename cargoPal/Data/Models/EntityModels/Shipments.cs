@@ -13,12 +13,10 @@ namespace CargoPal.Data
 
         public int ShipmentId { get; set; }
         public int? UserId { get; set; }
-        
         public string Origin { get; set; }
         public string Destination { get; set; }
         public double Capacity { get; set; }
         public string Status { get; set; }
-        
         public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }
 

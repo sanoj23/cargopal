@@ -64,9 +64,9 @@ CREATE TABLE Shipments
 INSERT INTO Shipments
     (userId, origin, destination,startdate, enddate, capacity, [status] )
 VALUES
-    (1, 'colombo', 'chennai', '01/10/2020', '03/10/2020', 100, 'Shipped' ),
-    (2, 'colombo', 'singapore', '05/10/2020', '08/10/2020', 50, 'In Transit' ),
-    (3, 'colombo', 'malaysia', '01/09/2020', '02/09/2020', 30, 'Arrived' ),
+    (4, 'colombo', 'chennai', '01/10/2020', '03/10/2020', 100, 'Shipped' ),
+    (4, 'colombo', 'singapore', '05/10/2020', '08/10/2020', 50, 'In Transit' ),
+    (4, 'colombo', 'malaysia', '01/09/2020', '02/09/2020', 30, 'Arrived' ),
     (4, 'colombo', 'maldives', '05/11/2020', '08/11/2020', 300, 'Arrived' );
 
 
@@ -91,9 +91,9 @@ INSERT INTO Bookings
     (userId,shipmentId, receiverName, receiverPhone, receiverAddress, item, instructions,packaging , [status])
 VALUES
     (1, 1, 'Eliza Smith', '91-995-5513-746', ' 9/10 Krishna Chaya, Khar Muncipal Market 1 St Road, Khar, Mumbai', 'food', 'fragile', 'Medium', 'Approved'),
-    (2, 2, 'Lee Young', '6585557997', ' 590 Yio Chu Kang Road #03-01, Singapore', 'food', 'fragile', 'Large', 'Approved'),
-    (3, 3, 'Sarah Miller', '601355532', 'E913 2Nd Floor Jalan Bukit Ubi , Kuantan, Malaysia', 'food', 'fragile', 'Small', 'Approved'),
-    (4, 4, 'Lisa Brown', '22355555240', ' 901 Lorong 4 Kampung Bercham, Male main Island', 'food', 'fragile', 'Small', 'Rejected');
+    (1, 1, 'Lee Young', '6585557997', ' 590 Yio Chu Kang Road #03-01, Singapore', 'food', 'fragile', 'Large', 'Approved'),
+    (1, 1, 'Sarah Miller', '601355532', 'E913 2Nd Floor Jalan Bukit Ubi , Kuantan, Malaysia', 'food', 'fragile', 'Small', 'Approved'),
+    (1, 1, 'Lisa Brown', '22355555240', ' 901 Lorong 4 Kampung Bercham, Male main Island', 'food', 'fragile', 'Small', 'Rejected');
 
 PRINT 'Creating a table for Orders...';
 CREATE TABLE Orders

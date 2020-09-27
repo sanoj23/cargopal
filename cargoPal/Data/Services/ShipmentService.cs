@@ -8,38 +8,38 @@ namespace CargoPal.Data
     {
         readonly CargoPalContext _CargoPalContext;
 
-        public ShipmentService(CargoPalContext systemContext)
+        public ShipmentService(CargoPalContext systemsContext)
         {
-            _CargoPalContext = systemContext;
+            _CargoPalContext = systemsContext;
         }
         public IEnumerable<Shipments> GetShipments()
         {
             return _CargoPalContext.Shipments.ToList();
         }
 
-        public Shipments GetShipmentsById(int ShipmentId)
+        public Shipments GetShipmentsById(int shipmentId)
         {
-            var ShipmentExists = _CargoPalContext.Shipments.FirstOrDefault(n => n.ShipmentId == ShipmentId);
-            if (ShipmentExists == null)
+            var shipmentExists = _CargoPalContext.Shipments.FirstOrDefault(n => n.ShipmentId == shipmentId);
+            if (shipmentExists == null)
             {
                 throw new Exception("Shipment Not Found");
             }
             else
             {
-                return _CargoPalContext.Shipments.FirstOrDefault(n => n.ShipmentId == ShipmentId);
+                return _CargoPalContext.Shipments.FirstOrDefault(s => s.ShipmentId == shipmentId);
             }
         }
 
-        public IEnumerable<Shipments> GetShipmentsByUserId(int userId)
+        public IEnumerable<Shipments> GetShipmentsByUser(int userId)
         {
-            var ShipmentExists = _CargoPalContext.Shipments.FirstOrDefault(n => n.UserId == userId);
-            if (ShipmentExists == null)
+            var shipmentExists = _CargoPalContext.Shipments.FirstOrDefault(ship => ship.UserId == userId);
+            if (shipmentExists == null)
             {
                 throw new Exception("Shipment Not Found");
             }
             else
             {
-                return _CargoPalContext.Shipments.Where(n => n.UserId == userId).ToList();
+                return _CargoPalContext.Shipments.Where(s => s.UserId == userId).ToList();
             }
         }
 
@@ -59,14 +59,10 @@ namespace CargoPal.Data
 
         public void UpdateShipment(int ShipmentId, Shipments shipment)
         {
-            var ShipmentExists = _CargoPalContext.Shipments.FirstOrDefault(n => n.ShipmentId == ShipmentId);
-            if (ShipmentExists != null)
+            var shipmentExists = _CargoPalContext.Shipments.FirstOrDefault(n => n.ShipmentId == ShipmentId);
+            if (shipmentExists != null)
             {
-                // if (shipment.Quality != null) { ShipmentExists.Quality = shipment.Quality; }
-                // if (shipment.Quantity != 0.00) { ShipmentExists.Quantity = shipment.Quantity; }
-                // if (shipment.Price != 0.00) { ShipmentExists.Price = shipment.Price; }
-                // if (shipment.PaymentIn != null) { ShipmentExists.PaymentIn = shipment.PaymentIn; }
-                // if (shipment.Status != null) { ShipmentExists.Status = shipment.Status; }
+                // get update shipming model and Validate
                 _CargoPalContext.SaveChanges();
             }
             else
@@ -77,14 +73,14 @@ namespace CargoPal.Data
 
         public void DeleteShipment(int ShipmentId)
         {
-            var ShipmentExists = _CargoPalContext.Shipments.FirstOrDefault(n => n.ShipmentId == ShipmentId);
-            if (ShipmentExists == null)
+            var shipmentExists = _CargoPalContext.Shipments.FirstOrDefault(n => n.ShipmentId == ShipmentId);
+            if (shipmentExists == null)
             {
                 throw new Exception("Shipment Not Found");
             }
             else
             {
-                _CargoPalContext.Shipments.Remove(ShipmentExists);
+                _CargoPalContext.Shipments.Remove(shipmentExists);
                 _CargoPalContext.SaveChanges();
             }
         }
