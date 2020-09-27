@@ -24,7 +24,6 @@ class ShipmentsScreen extends Component {
 
   render() {
     const { shipments } = this.state;
-    console.log(shipments);
     return (
       <Screen
         title="View Availbale Shipments"
