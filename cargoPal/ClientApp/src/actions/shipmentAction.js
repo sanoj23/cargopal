@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { shipmentsConstants } from '../constants/shipmentConstants';
+import { getUserId } from '../actions/authAction';
 
 // Get all shipments
 const GetShipmentSuccess = (payload) => ({
@@ -52,8 +53,10 @@ const GetShipmentByUserFailure = (payload) => ({
   type: shipmentsConstants.SHIPMENTS_BY_USER_FAILURE,
   payload,
 });
-export const GetShipmentByUser = (userId) => (dispatch) => {
+export const GetShipmentByUser = () => (dispatch) => {
   dispatch({ type: shipmentsConstants.SHIPMENTS_BY_USER_REQUEST });
+  const { userId } = getUserId();
+
   return axios
     .get(`api/shipments/user/${userId}`)
     .then((res) => {

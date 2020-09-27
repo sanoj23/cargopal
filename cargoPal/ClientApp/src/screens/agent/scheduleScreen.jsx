@@ -3,57 +3,35 @@ import { Button } from 'react-bootstrap';
 import Schedule from '../../components/schedule';
 import Screen from '../../components/screen';
 
+import { GetShipmentByUser } from '../../actions/shipmentAction';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+
 class ScheduleScreen extends Component {
-  state = {
-    schedules: [
-      {
-        id: 1,
-        capacity: 100,
-        available: 100,
-        destination: 'Sri Lanka',
-        origin: 'China',
-      },
-      {
-        id: 2,
-        capacity: 200,
-        available: 200,
-        destination: 'Sri Lanka',
-        origin: 'India',
-      },
-      {
-        id: 3,
-        capacity: 200,
-        available: 200,
-        destination: 'Sri Lanka',
-        origin: 'India',
-      },
-      {
-        id: 4,
-        capacity: 200,
-        available: 200,
-        destination: 'Sri Lanka',
-        origin: 'India',
-      },
-      {
-        id: 5,
-        capacity: 200,
-        available: 200,
-        destination: 'Sri Lanka',
-        origin: 'India',
-      },
-      {
-        id: 6,
-        capacity: 200,
-        available: 200,
-        destination: 'Sri Lanka',
-        origin: 'India',
-      },
-    ],
-  };
+  constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+    this.state = {
+      schedules: [],
+    };
+  }
 
   componentDidMount() {
-    console.log('Getting all shipments from database');
+    this.props.GetShipmentByUser();
   }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.shipments.data !== this.props.shipments.data) {
+      this.setState({ schedules: this.props.shipments.data });
+    }
+    console.log(this.props.shipments.data);
+  }
+
+  handleClick = () => {
+    console.log('reached');
+    this.props.history.push('/addShipment');
+  };
+
   render() {
     const { schedules } = this.state;
 
@@ -63,26 +41,26 @@ class ScheduleScreen extends Component {
           <Button
             variant="success"
             style={{ margin: 3 }}
-            onClick={() => console.log('add schedule')}
+            onClick={this.handleClick}
           >
             Add New Shipment
           </Button>
         </div>
 
         <div style={{ overflow: 'hidden' }}>
-          {schedules.map(({ id, capacity, available, destination, origin }) => (
-            <Schedule
-              key={id}
-              capacity={capacity}
-              available={available}
-              destination={destination}
-              origin={origin}
-            />
-          ))}
+          {schedules.length > 0 &&
+            schedules.map((schedule) => (
+              <Schedule key={schedule.shipmentId} Schedule={schedule} />
+            ))}
         </div>
       </Screen>
     );
   }
 }
-
-export default ScheduleScreen;
+const mapStateToProps = ({ shipments }) => ({ shipments });
+const mapDispatchToProps = (dispatch) => ({
+  GetShipmentByUser: () => dispatch(GetShipmentByUser()),
+});
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(ScheduleScreen)
+);
