@@ -12,7 +12,7 @@ PRINT 'Creating Database...';
 CREATE DATABASE CargoPal;
 GO
 
-USE CargoPal
+USE CargoPal;
 GO
 
 -- Create a table for Users
@@ -75,12 +75,12 @@ CREATE TABLE Bookings
 (
     bookingId INT IDENTITY(1,1) PRIMARY KEY,
     userId INT FOREIGN KEY REFERENCES Users(userId),
-    shipmentId INT FOREIGN KEY REFERENCES Shipments (shipmentId),
+    shipmentId INT FOREIGN KEY REFERENCES Shipments(shipmentId) ON DELETE CASCADE,
     receiverName VARCHAR (100) NOT NULL,
     receiverPhone VARCHAR (100) NOT NULL,
     receiverAddress VARCHAR (100) NOT NULL,
     item VARCHAR (100) NOT NULL,
-    instructions VARCHAR (100) NOT NULL,
+    instructions VARCHAR (100),
 
     packaging VARCHAR(100) NOT NULL,
     CONSTRAINT packaging_check CHECK (packaging IN ('Small','Medium','Large ')),
@@ -92,25 +92,30 @@ INSERT INTO Bookings
 VALUES
     (1, 1, 'Eliza Smith', '91-995-5513-746', ' 9/10 Krishna Chaya, Khar Muncipal Market 1 St Road, Khar, Mumbai', 'food', 'fragile', 'Medium', 'Approved'),
     (1, 1, 'Lee Young', '6585557997', ' 590 Yio Chu Kang Road #03-01, Singapore', 'food', 'fragile', 'Large', 'Approved'),
-    (1, 1, 'Sarah Miller', '601355532', 'E913 2Nd Floor Jalan Bukit Ubi , Kuantan, Malaysia', 'food', 'fragile', 'Small', 'Approved'),
+    (1, 1, 'Sarah Miller', '601355532', 'E913 2Nd Floor Jalan Bukit Ubi , Kuantan, Malaysia', 'food', '', 'Small', 'Approved'),
+    (1, 1, 'Sarah Miller', '601355532', 'E913 2Nd Floor Jalan Bukit Ubi , Kuantan, Malaysia', 'food', '', 'Small', 'Rejected'),
+    (1, 1, 'Sarah Miller', '601355532', 'E913 2Nd Floor Jalan Bukit Ubi , Kuantan, Malaysia', 'food', 'fragile', 'Small', 'Rejected'),
+    (1, 1, 'Sarah Miller', '601355532', 'E913 2Nd Floor Jalan Bukit Ubi , Kuantan, Malaysia', 'food', 'fragile', 'Small', 'Rejected'),
+    (1, 1, 'Sarah Miller', '601355532', 'E913 2Nd Floor Jalan Bukit Ubi , Kuantan, Malaysia', 'food', 'fragile', 'Small', 'Rejected'),
+    (1, 1, 'Sarah Miller', '601355532', 'E913 2Nd Floor Jalan Bukit Ubi , Kuantan, Malaysia', 'food', 'fragile', 'Small', 'Rejected'),
     (1, 1, 'Lisa Brown', '22355555240', ' 901 Lorong 4 Kampung Bercham, Male main Island', 'food', 'fragile', 'Small', 'Rejected');
 
-PRINT 'Creating a table for Orders...';
-CREATE TABLE Orders
-(
-    orderId INT IDENTITY(1,1) PRIMARY KEY,
-    shipmentId INT FOREIGN KEY REFERENCES Shipments(shipmentId),
-    bookingId INT FOREIGN KEY REFERENCES Bookings(bookingId),
-    [status] VARCHAR(100) NOT NULL,
-    CONSTRAINT deliveryType_check CHECK ([status] IN ('Available','Dropped off','On the way','Arrived ')),
-);
-INSERT INTO Orders
-    (shipmentId, bookingId,[status])
-VALUES
-    (1, 1, 'Dropped off'),
-    (2, 2, 'On the way'),
-    (3, 3, 'Arrived'),
-    (4, 4, 'On the way');
+-- PRINT 'Creating a table for Orders...';
+-- CREATE TABLE Orders
+-- (
+--     orderId INT IDENTITY(1,1) PRIMARY KEY,
+--     shipmentId INT FOREIGN KEY REFERENCES Shipments(shipmentId) ON DELETE CASCADE,
+--     bookingId INT FOREIGN KEY REFERENCES Bookings(bookingId),
+--     [status] VARCHAR(100) NOT NULL,
+--     CONSTRAINT deliveryType_check CHECK ([status] IN ('Available','Dropped off','On the way','Arrived ')),
+-- );
+-- INSERT INTO Orders
+--     (shipmentId, bookingId,[status])
+-- VALUES
+--     (1, 1, 'Dropped off'),
+--     (2, 2, 'On the way'),
+--     (3, 3, 'Arrived'),
+--     (4, 4, 'On the way');
 
 
 

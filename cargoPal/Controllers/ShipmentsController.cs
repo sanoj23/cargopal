@@ -102,7 +102,7 @@ namespace CargoPal.Controllers
             }
             catch (Exception error)
             {
-                return Conflict(error.Message);
+                return Conflict(error);
             }
         }
     }

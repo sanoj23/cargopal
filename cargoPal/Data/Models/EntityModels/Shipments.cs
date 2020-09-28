@@ -7,7 +7,7 @@ namespace CargoPal.Data
     {
         public Shipments()
         {
-            Orders = new HashSet<Orders>();
+            // Orders = new HashSet<Orders>();
             Bookings = new HashSet<Bookings>();
         }
 
@@ -21,7 +21,7 @@ namespace CargoPal.Data
         public DateTime? EndDate { get; set; }
 
         public virtual Users User { get; set; }
-        public virtual ICollection<Orders> Orders { get; set; }
+        // public virtual ICollection<Orders> Orders { get; set; }
         public virtual ICollection<Bookings> Bookings { get; set; }
     }
 }
