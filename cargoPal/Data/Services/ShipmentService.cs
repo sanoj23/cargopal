@@ -74,8 +74,6 @@ namespace CargoPal.Data
 
         public void DeleteShipment(int ShipmentId)
         {
-            // try
-            // {
             var ShipmentExists = _CargoPalContext.Shipments.FirstOrDefault(n => n.ShipmentId == ShipmentId);
             if (ShipmentExists == null)
             {
@@ -86,12 +84,6 @@ namespace CargoPal.Data
                 _CargoPalContext.Shipments.Remove(ShipmentExists);
                 _CargoPalContext.SaveChanges();
             }
-            // }
-            // catch (Exception error)
-            // {
-            //     Console.WriteLine(error.InnerException.Message);
-            // }
-
         }
     }
 }
