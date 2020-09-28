@@ -52,7 +52,7 @@ class ShipmentsScreen extends Component {
           handleReset={this.handleReset}
         />
         <hr />
-        <Container>
+        <Container style={{ overflow: 'hidden' }}>
           <Row>
             {search.length > 0 &&
               search.map((search) => (
