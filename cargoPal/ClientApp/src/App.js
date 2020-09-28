@@ -15,6 +15,7 @@ import OrdersScreen from './screens/customer/OrdersScreen';
 import RequestsScreen from './screens/agent/requestsScreen';
 import NotFound from './components/notFound';
 import ShipmentsScreen from './screens/customer/ShipmentsScreen';
+import MyBookingsScreen from './screens/customer/myBookingsScreen';
 
 export const history = createBrowserHistory();
 
@@ -40,6 +41,9 @@ function App() {
           render={(props) => <BookingScreen {...props} />}
         />
         <Route exact path="/schedule" component={ScheduleScreen} />
+
+        <Route exact path="/mybookings" component={MyBookingsScreen} />
+
         <Route exact path="/orders" component={OrdersScreen} />
         <Route exact path="/requests" component={RequestsScreen} />
         <Route exact path="/profile" component={ProfileScreen} />

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { bookingConstants } from '../constants/bookingConstants';
+import { getUserId } from '../actions/authAction';
 
 // Get all bookings
 const GetBookingSuccess = (payload) => ({
@@ -52,8 +53,9 @@ const GetBookingByUserFailure = (payload) => ({
   type: bookingConstants.BOOKING_BY_USER_FAILURE,
   payload,
 });
-export const GetBookingByUser = (userId) => (dispatch) => {
+export const GetBookingByUser = () => (dispatch) => {
   dispatch({ type: bookingConstants.BOOKING_BY_USER_REQUEST });
+  const { userId } = getUserId();
   return axios
     .get(`api/bookings/user/${userId}`)
     .then((res) => {
@@ -139,6 +141,7 @@ const DeleteBookingFailure = (payload) => ({
 });
 export const DeleteBooking = (bookingId) => (dispatch) => {
   dispatch({ type: bookingConstants.DELETE_BOOKING_REQUEST });
+  console.log(bookingId);
   return axios
     .delete(`api/bookings/${bookingId}`)
     .then((res) => {
