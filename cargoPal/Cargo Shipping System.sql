@@ -94,11 +94,11 @@ VALUES
     (1, 1, 'Lee Young', '6585557997', ' 590 Yio Chu Kang Road #03-01, Singapore', 'food', 'fragile', 'Large', 'Approved'),
     (1, 1, 'Sarah Miller', '601355532', 'E913 2Nd Floor Jalan Bukit Ubi , Kuantan, Malaysia', 'food', '', 'Small', 'Approved'),
     (1, 1, 'Sarah Miller', '601355532', 'E913 2Nd Floor Jalan Bukit Ubi , Kuantan, Malaysia', 'food', '', 'Small', 'Rejected'),
-    (1, 1, 'Sarah Miller', '601355532', 'E913 2Nd Floor Jalan Bukit Ubi , Kuantan, Malaysia', 'food', 'fragile', 'Small', 'Rejected'),
-    (1, 1, 'Sarah Miller', '601355532', 'E913 2Nd Floor Jalan Bukit Ubi , Kuantan, Malaysia', 'food', 'fragile', 'Small', 'Rejected'),
-    (1, 1, 'Sarah Miller', '601355532', 'E913 2Nd Floor Jalan Bukit Ubi , Kuantan, Malaysia', 'food', 'fragile', 'Small', 'Rejected'),
-    (1, 1, 'Sarah Miller', '601355532', 'E913 2Nd Floor Jalan Bukit Ubi , Kuantan, Malaysia', 'food', 'fragile', 'Small', 'Rejected'),
-    (1, 1, 'Lisa Brown', '22355555240', ' 901 Lorong 4 Kampung Bercham, Male main Island', 'food', 'fragile', 'Small', 'Rejected');
+    (1, 2, 'Sarah Miller', '601355532', 'E913 2Nd Floor Jalan Bukit Ubi , Kuantan, Malaysia', 'food', 'fragile', 'Small', 'Rejected'),
+    (1, 2, 'Sarah Miller', '601355532', 'E913 2Nd Floor Jalan Bukit Ubi , Kuantan, Malaysia', 'food', 'fragile', 'Small', 'Rejected'),
+    (1, 3, 'Sarah Miller', '601355532', 'E913 2Nd Floor Jalan Bukit Ubi , Kuantan, Malaysia', 'food', 'fragile', 'Small', 'Rejected'),
+    (1, 3, 'Sarah Miller', '601355532', 'E913 2Nd Floor Jalan Bukit Ubi , Kuantan, Malaysia', 'food', 'fragile', 'Small', 'Rejected'),
+    (1, 3, 'Lisa Brown', '22355555240', ' 901 Lorong 4 Kampung Bercham, Male main Island', 'food', 'fragile', 'Small', 'Rejected');
 
 -- PRINT 'Creating a table for Orders...';
 -- CREATE TABLE Orders

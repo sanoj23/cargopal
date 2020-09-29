@@ -11,7 +11,7 @@ import LandingScreen from './screens/landingScreen';
 import RegisterScreen from './screens/registerScreen';
 import TrackingScreen from './screens/customer/trackingScreen';
 import ScheduleScreen from './screens/agent/scheduleScreen';
-import OrdersScreen from './screens/customer/OrdersScreen';
+import OrdersScreen from './screens/OrdersScreen';
 import RequestsScreen from './screens/agent/requestsScreen';
 import NotFound from './components/notFound';
 import ShipmentsScreen from './screens/customer/ShipmentsScreen';

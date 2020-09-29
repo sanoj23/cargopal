@@ -83,7 +83,7 @@ export const GetBookingByShipment = (shipmentId) => (dispatch) => {
       dispatch(GetBookingByShipmentSuccess(res.data));
     })
     .catch((err) => {
-      dispatch(GetBookingByShipmentFailure(err));
+      dispatch(GetBookingByShipmentFailure(err.response.status));
     });
 };
 
@@ -141,7 +141,6 @@ const DeleteBookingFailure = (payload) => ({
 });
 export const DeleteBooking = (bookingId) => (dispatch) => {
   dispatch({ type: bookingConstants.DELETE_BOOKING_REQUEST });
-  console.log(bookingId);
   return axios
     .delete(`api/bookings/${bookingId}`)
     .then((res) => {
