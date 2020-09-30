@@ -58,13 +58,13 @@ CREATE TABLE Shipments
     enddate DATETIME NOT NULL,
     capacity FLOAT NOT NULL,
     --
-    pricePerkg FLOAT NOT NULL,
+    price FLOAT NOT NULL,
     [status] VARCHAR(100) NOT NULL,
-    CONSTRAINT status_check CHECK ([status] IN ('customs cleared', 'processing', 'boarding..', 'shipped', 'arrived at destination', 'custom cleared at destination', 'ready for pickup')),
+    CONSTRAINT status_check CHECK ([status] IN ('open','customs cleared', 'processing', 'boarding..', 'shipped', 'arrived at destination', 'custom cleared at destination', 'ready for pickup')),
 );
 
 INSERT INTO Shipments
-    (userId, origin, destination,startdate, enddate, capacity, [status], pricePerkg )
+    (userId, origin, destination,startdate, enddate, capacity, [status], price )
 VALUES
     (4, 'colombo', 'chennai', '01/10/2020', '03/10/2020', 100, 'shipped', 1.99 ),
     (4, 'colombo', 'singapore', '05/10/2020', '08/10/2020', 50, 'processing', 2.99 ),
@@ -100,20 +100,20 @@ VALUES
 
 
 
-PRINT 'Creating a table for Orders...';
-CREATE TABLE Orders
-(
-    orderId INT IDENTITY(1,1) PRIMARY KEY,
-    shipmentId INT FOREIGN KEY REFERENCES Shipments(shipmentId),
-    bookingId INT FOREIGN KEY REFERENCES Bookings(bookingId),
-    totalPrice FLOAT NOT NULL,
-    [status] VARCHAR(100) NOT NULL,
-    CONSTRAINT deliveryType_check CHECK ([status] IN ('delivered', 'not delivered')),
-);
-INSERT INTO Orders
-    (shipmentId, bookingId,[status])
-VALUES
-    (1, 1, 'delivered'),
-    (2, 2, 'not delivered'),
-    (3, 3, 'not delivered'),
-    (4, 4, 'not delivered');
+-- PRINT 'Creating a table for Orders...';
+-- CREATE TABLE Orders
+-- (
+--     orderId INT IDENTITY(1,1) PRIMARY KEY,
+--     shipmentId INT FOREIGN KEY REFERENCES Shipments(shipmentId),
+--     bookingId INT FOREIGN KEY REFERENCES Bookings(bookingId),
+--     totalPrice FLOAT NOT NULL,
+--     [status] VARCHAR(100) NOT NULL,
+--     CONSTRAINT deliveryType_check CHECK ([status] IN ('delivered', 'not delivered')),
+-- );
+-- INSERT INTO Orders
+--     (shipmentId, bookingId,[status])
+-- VALUES
+--     (1, 1, 'delivered'),
+--     (2, 2, 'not delivered'),
+--     (3, 3, 'not delivered'),
+--     (4, 4, 'not delivered');
