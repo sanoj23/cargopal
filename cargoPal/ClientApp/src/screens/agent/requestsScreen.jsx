@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import Screen from "../../components/screen";
+import React, { Component } from 'react';
+import Screen from '../../components/screen';
 
 class RequestsScreen extends Component {
   render() {
