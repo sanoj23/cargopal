@@ -19,7 +19,7 @@ namespace CargoPal.Data
         public DateTime? EndDate { get; set; }
         public double Capacity { get; set; }
         public string Status { get; set; }
-        public int Price { get; set; }
+        public double Price { get; set; }
 
         public virtual Users User { get; set; }
         public virtual ICollection<Bookings> Bookings { get; set; }
