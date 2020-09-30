@@ -57,7 +57,6 @@ CREATE TABLE Shipments
     startdate DATETIME NOT NULL,
     enddate DATETIME NOT NULL,
     capacity FLOAT NOT NULL,
-    --
     price FLOAT NOT NULL,
     [status] VARCHAR(100) NOT NULL,
     CONSTRAINT status_check CHECK ([status] IN ('open','customs cleared', 'processing', 'boarding..', 'shipped', 'arrived at destination', 'custom cleared at destination', 'ready for pickup')),
@@ -85,8 +84,6 @@ CREATE TABLE Bookings
     instructions VARCHAR (100) NOT NULL,
     packaging VARCHAR(100) NOT NULL,
     CONSTRAINT packaging_check CHECK (packaging IN ('Small','Medium','Large ')),
-
-    price FLOAT NOT NULL,
     [status] VARCHAR(100) NOT NULL,
     CONSTRAINT paymentType_check CHECK ([status] IN ('Approved','Rejected', 'Delivered', 'Pending')),
 );
