@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-
 namespace CargoPal.Data
 {
     public class ShipmentService : IShipmentService
@@ -74,14 +73,14 @@ namespace CargoPal.Data
 
         public void DeleteShipment(int ShipmentId)
         {
-            var ShipmentExists = _CargoPalContext.Shipments.FirstOrDefault(n => n.ShipmentId == ShipmentId);
-            if (ShipmentExists == null)
+            var shipmentExists = _CargoPalContext.Shipments.FirstOrDefault(n => n.ShipmentId == ShipmentId);
+            if (shipmentExists == null)
             {
                 throw new Exception("Shipment Not Found");
             }
             else
             {
-                _CargoPalContext.Shipments.Remove(ShipmentExists);
+                _CargoPalContext.Shipments.Remove(shipmentExists);
                 _CargoPalContext.SaveChanges();
             }
         }

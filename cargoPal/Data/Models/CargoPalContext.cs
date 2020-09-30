@@ -19,7 +19,7 @@ namespace CargoPal.Data
         }
 
         public virtual DbSet<Shipments> Shipments { get; set; }
-        // public virtual DbSet<Orders> Orders { get; set; }
+        public virtual DbSet<Orders> Orders { get; set; }
         public virtual DbSet<Bookings> Bookings { get; set; }
         public virtual DbSet<Users> Users { get; set; }
 
@@ -45,19 +45,19 @@ namespace CargoPal.Data
                     .HasColumnName("origin")
                     .HasMaxLength(100)
                     .IsUnicode(false);
-
+                
                 entity.Property(e => e.Destination)
                     .IsRequired()
                     .HasColumnName("destination")
                     .HasMaxLength(100)
                     .IsUnicode(false);
-
+                
                 entity.Property(e => e.StartDate)
                     .IsRequired()
                     .HasColumnName("startDate")
                     .HasMaxLength(100)
                     .IsUnicode(false);
-
+                
                 entity.Property(e => e.EndDate)
                     .IsRequired()
                     .HasColumnName("endDate")
@@ -77,29 +77,30 @@ namespace CargoPal.Data
                     .WithMany(p => p.Shipments)
                     .HasForeignKey(d => d.UserId)
                     .HasConstraintName("FK__Shipments__userI__3A81B327");
-
+                
             });
 
-            // modelBuilder.Entity<Orders>(entity =>
-            // {
-            //     entity.HasKey(e => e.OrderId)
-            //         .HasName("PK__Orders__0809335D143FC8DA");
-            //     entity.Property(e => e.OrderId).HasColumnName("orderId");
+            modelBuilder.Entity<Orders>(entity =>
+            {
+                entity.HasKey(e => e.OrderId)
+                    .HasName("PK__Orders__0809335D143FC8DA");
 
-            //     entity.Property(e => e.ShipmentId).HasColumnName("shipmentId");
-            //     entity.HasOne(d => d.Shipment)
-            //         .WithMany(p => p.Orders)
-            //         .HasForeignKey(d => d.ShipmentId)
-            //         .OnDelete(DeleteBehavior.Cascade)
-            //         .HasConstraintName("FK__Orders__shipment__440B1D61");
+                entity.Property(e => e.OrderId).HasColumnName("orderId");
 
-            //     entity.Property(e => e.BookingId).HasColumnName("bookingId");
-            //     entity.HasOne(d => d.Booking)
-            //         .WithMany(p => p.Orders)
-            //         .HasForeignKey(d => d.BookingId)
-            //         .OnDelete(DeleteBehavior.Cascade)
-            //         .HasConstraintName("FK__Orders__bookingI__44FF419A");
-            // });
+                entity.Property(e => e.ShipmentId).HasColumnName("shipmentId");
+
+                entity.Property(e => e.BookingId).HasColumnName("bookingId");
+
+                entity.HasOne(d => d.Shipment)
+                    .WithMany(p => p.Orders)
+                    .HasForeignKey(d => d.ShipmentId)
+                    .HasConstraintName("FK__Orders__shipment__440B1D61");
+
+                entity.HasOne(d => d.Booking)
+                    .WithMany(p => p.Orders)
+                    .HasForeignKey(d => d.BookingId)
+                    .HasConstraintName("FK__Orders__bookingI__44FF419A");
+            });
 
             modelBuilder.Entity<Bookings>(entity =>
             {
@@ -121,12 +122,12 @@ namespace CargoPal.Data
                     .HasForeignKey(d => d.UserId)
                     .HasConstraintName("FK__Bookings__userId__3E52440B");
 
-                entity.Property(e => e.ReceiverName)
+                entity.Property(e=>e.ReceiverName)
                     .IsRequired()
                     .HasColumnName("receiverName")
                     .HasMaxLength(100)
                     .IsUnicode(false);
-
+                
                 entity.Property(e => e.ReceiverPhone)
                     .IsRequired()
                     .HasColumnName("receiverPhone")
@@ -138,18 +139,18 @@ namespace CargoPal.Data
                     .HasColumnName("receiverAddress")
                     .IsUnicode(false);
 
-                entity.Property(e => e.Item)
+                entity.Property(e=>e.Item)
                     .IsRequired()
                     .HasColumnName("item")
                     .HasMaxLength(100)
                     .IsUnicode(false);
-
-                entity.Property(e => e.Instructions)
+                
+                entity.Property(e=>e.Instructions)
                     .IsRequired()
                     .HasColumnName("instructions")
                     .IsUnicode(false);
-
-                entity.Property(e => e.Packaging)
+                
+                entity.Property(e=>e.Packaging)
                     .IsRequired()
                     .HasColumnName("packaging")
                     .IsUnicode(false);
@@ -219,7 +220,7 @@ namespace CargoPal.Data
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
-                //         entity.Property(e => e.UserImage).HasColumnName("userImage");
+        //         entity.Property(e => e.UserImage).HasColumnName("userImage");
             });
 
             OnModelCreatingPartial(modelBuilder);

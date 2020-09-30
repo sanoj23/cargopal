@@ -86,12 +86,19 @@ namespace CargoPal.Data
             var bookingExists = _CargoPalContext.Bookings.FirstOrDefault(n => n.BookingId == bookingId);
             if (bookingExists == null)
             {
-                throw new Exception("Booking Not Found");
+                throw new Exception("Booking Not Found.");
             }
             else
             {
-                _CargoPalContext.Bookings.Remove(bookingExists);
-                _CargoPalContext.SaveChanges();
+                if (bookingExists.Status == "Approved")
+                {
+                    throw new Exception("Cannot Delete Booking once approved.");
+                }
+                else
+                {
+                    _CargoPalContext.Bookings.Remove(bookingExists);
+                    _CargoPalContext.SaveChanges();
+                }
             }
         }
     }

@@ -23,9 +23,9 @@ const bookingReducer = (state = INITIAL_STATE, action) => {
       return { ...state, loading: false, error: action.payload };
 
     case bookingConstants.BOOKING_BY_USER_REQUEST:
-      return { ...state, loading: true, error: null };
+      return { ...state, loading: true };
     case bookingConstants.BOOKING_BY_USER_SUCCESS:
-      return { ...state, loading: false, error: null, data: action.payload };
+      return { ...state, loading: false, data: action.payload };
     case bookingConstants.BOOKING_BY_USER_FAILURE:
       return { ...state, loading: false, error: action.payload };
 

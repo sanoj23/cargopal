@@ -7,7 +7,7 @@ namespace CargoPal.Data
     {
         public Shipments()
         {
-            // Orders = new HashSet<Orders>();
+            Orders = new HashSet<Orders>();
             Bookings = new HashSet<Bookings>();
         }
 
@@ -22,6 +22,10 @@ namespace CargoPal.Data
         public int Price { get; set; }
 
         public virtual Users User { get; set; }
+<<<<<<< HEAD
+=======
+        public virtual ICollection<Orders> Orders { get; set; }
+>>>>>>> parent of 4fe8ce7... Merge branch 'cargo-expo-demo' of https://github.com/ShenukiPerera/cargo-expo-demo into cargo-expo-demo
         public virtual ICollection<Bookings> Bookings { get; set; }
     }
 }
