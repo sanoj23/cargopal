@@ -57,6 +57,7 @@ CREATE TABLE Shipments
     startdate DATETIME NOT NULL,
     enddate DATETIME NOT NULL,
     capacity FLOAT NOT NULL,
+<<<<<<< HEAD
     price FLOAT NOT NULL,
     [status] VARCHAR(100) NOT NULL,
     CONSTRAINT status_check CHECK ([status] IN ('open','customs cleared', 'processing', 'boarding..', 'shipped', 'arrived at destination', 'custom cleared at destination', 'ready for pickup')),
@@ -64,11 +65,19 @@ CREATE TABLE Shipments
 
 INSERT INTO Shipments
     (userId, origin, destination,startdate, enddate, capacity, [status], price )
+=======
+    [status] VARCHAR(100) NOT NULL,
+    CONSTRAINT status_check CHECK ([status] IN ('Shipped','In Transit', 'Arrived')),
+);
+
+INSERT INTO Shipments
+    (userId, origin, destination,startdate, enddate, capacity, [status] )
+>>>>>>> parent of 21346d9... sql script
 VALUES
-    (4, 'colombo', 'chennai', '01/10/2020', '03/10/2020', 100, 'shipped', 1.99 ),
-    (4, 'colombo', 'singapore', '05/10/2020', '08/10/2020', 50, 'processing', 2.99 ),
-    (4, 'colombo', 'malaysia', '01/09/2020', '02/09/2020', 30, 'customs cleared', 3.99 ),
-    (4, 'colombo', 'maldives', '05/11/2020', '08/11/2020', 300, 'ready for pickup', 0.99 );
+    (4, 'colombo', 'chennai', '01/10/2020', '03/10/2020', 100, 'Shipped' ),
+    (4, 'colombo', 'singapore', '05/10/2020', '08/10/2020', 50, 'In Transit' ),
+    (4, 'colombo', 'malaysia', '01/09/2020', '02/09/2020', 30, 'Arrived' ),
+    (4, 'colombo', 'maldives', '05/11/2020', '08/11/2020', 300, 'Arrived' );
 
 
 PRINT 'Creating a table for Bookings...';
@@ -82,10 +91,11 @@ CREATE TABLE Bookings
     receiverAddress VARCHAR (100) NOT NULL,
     item VARCHAR (100) NOT NULL,
     instructions VARCHAR (100) NOT NULL,
+
     packaging VARCHAR(100) NOT NULL,
     CONSTRAINT packaging_check CHECK (packaging IN ('Small','Medium','Large ')),
     [status] VARCHAR(100) NOT NULL,
-    CONSTRAINT paymentType_check CHECK ([status] IN ('Approved','Rejected', 'Delivered', 'Pending')),
+    CONSTRAINT paymentType_check CHECK ([status] IN ('Approved','Rejected')),
 );
 INSERT INTO Bookings
     (userId,shipmentId, receiverName, receiverPhone, receiverAddress, item, instructions,packaging , [status])
@@ -95,6 +105,7 @@ VALUES
     (1, 1, 'Sarah Miller', '601355532', 'E913 2Nd Floor Jalan Bukit Ubi , Kuantan, Malaysia', 'food', 'fragile', 'Small', 'Approved'),
     (1, 1, 'Lisa Brown', '22355555240', ' 901 Lorong 4 Kampung Bercham, Male main Island', 'food', 'fragile', 'Small', 'Rejected');
 
+<<<<<<< HEAD
 
 
 -- PRINT 'Creating a table for Orders...';
@@ -114,3 +125,31 @@ VALUES
 --     (2, 2, 'not delivered'),
 --     (3, 3, 'not delivered'),
 --     (4, 4, 'not delivered');
+=======
+PRINT 'Creating a table for Orders...';
+CREATE TABLE Orders
+(
+    orderId INT IDENTITY(1,1) PRIMARY KEY,
+    shipmentId INT FOREIGN KEY REFERENCES Shipments(shipmentId),
+    bookingId INT FOREIGN KEY REFERENCES Bookings(bookingId),
+    [status] VARCHAR(100) NOT NULL,
+    CONSTRAINT deliveryType_check CHECK ([status] IN ('Available','Dropped off','On the way','Arrived ')),
+);
+INSERT INTO Orders
+    (shipmentId, bookingId,[status])
+VALUES
+    (1, 1, 'Dropped off'),
+    (2, 2, 'On the way'),
+    (3, 3, 'Arrived'),
+    (4, 4, 'On the way');
+
+
+
+
+
+
+
+
+
+
+>>>>>>> parent of 21346d9... sql script
