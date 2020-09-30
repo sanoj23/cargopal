@@ -11,15 +11,12 @@ import LandingScreen from './screens/landingScreen';
 import RegisterScreen from './screens/registerScreen';
 import TrackingScreen from './screens/customer/trackingScreen';
 import ScheduleScreen from './screens/agent/scheduleScreen';
-import OrdersScreen from './screens/customer/OrdersScreen';
+import OrdersScreen from './screens/OrdersScreen';
 import RequestsScreen from './screens/agent/requestsScreen';
 import NotFound from './components/notFound';
 import ShipmentsScreen from './screens/customer/ShipmentsScreen';
-<<<<<<< HEAD
 import MyBookingsScreen from './screens/customer/myBookingsScreen';
 import AddShipmentScreen from './screens/addShipmnetScreen';
-=======
->>>>>>> parent of 4fe8ce7... Merge branch 'cargo-expo-demo' of https://github.com/ShenukiPerera/cargo-expo-demo into cargo-expo-demo
 
 export const history = createBrowserHistory();
 
@@ -45,6 +42,9 @@ function App() {
           render={(props) => <BookingScreen {...props} />}
         />
         <Route exact path="/schedule" component={ScheduleScreen} />
+
+        <Route exact path="/mybookings" component={MyBookingsScreen} />
+
         <Route exact path="/orders" component={OrdersScreen} />
         <Route exact path="/requests" component={RequestsScreen} />
         <Route exact path="/profile" component={ProfileScreen} />

@@ -54,7 +54,7 @@ namespace CargoPal.Controllers
             }
             catch (Exception error)
             {
-                return NotFound(error);
+                return NotFound(error.Message);
             }
         }
 

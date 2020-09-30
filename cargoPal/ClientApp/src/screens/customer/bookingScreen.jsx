@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import Screen from '../../components/screen';
-import Booking from '../../components/booking';
+import BookingForm from '../../components/bookingform';
 
 class BookingScreen extends Component {
   constructor(props) {
@@ -13,10 +13,24 @@ class BookingScreen extends Component {
     // get the current user detials
   }
 
+  // handleSellerBidUpdate = (childData) => {
+  //   const backupUpdate = this.state.sellerBids;
+  //   backupUpdate.forEach((sellerBid) => {
+  //     if (sellerBid.sellerBidId === childData.sellerBidId) {
+  //       sellerBid.status = childData.status;
+  //       sellerBid.bestPrice = childData.bestPrice;
+  //     }
+  //   });
+  //   this.props.UpdateSellerBid(childData);
+  //   if (this.props.sellerBids.hasError) {
+  //     this.setState({ sellerBids: backupUpdate });
+  //   }
+  // };
+
   render() {
     return (
       <Screen title="Booking" subtitle="Make your bookings here.">
-        <Booking schedule={this.state.schedule} />
+        <BookingForm schedule={this.state.schedule} />
       </Screen>
     );
   }
