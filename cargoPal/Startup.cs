@@ -44,7 +44,7 @@ namespace cargoPal
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IShipmentService, ShipmentService>();
             services.AddScoped<IBookingService, BookingService>();
-            // services.AddScoped<IOrderService, OrderService>();
+            services.AddScoped<IOrderService, OrderService>();
 
             services.AddMvc()
             .AddNewtonsoftJson(options =>
