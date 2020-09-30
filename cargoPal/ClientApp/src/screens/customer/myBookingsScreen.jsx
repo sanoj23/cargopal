@@ -23,7 +23,20 @@ class MyBookingsScreen extends Component {
   }
 
   handleDelete = (bookingId) => {
+    const bookingsCopy = this.state.bookings;
     this.props.DeleteBooking(bookingId);
+
+    if (this.props.bookings.hasError) {
+      this.setState({ bookings: bookingsCopy });
+    }
+
+    this.setState({
+      bookings: bookingsCopy.filter(
+        (booking) => booking.bookingId !== bookingId
+      ),
+    });
+    // find an alternative method
+    window.location.reload();
   };
 
   render() {
@@ -33,15 +46,16 @@ class MyBookingsScreen extends Component {
       <Screen title="My Bookings" subtitle="All your bookings">
         <Container>
           <Row>
-            {bookings.map((booking) => (
-              <Col sm={3} key={booking.bookingId}>
-                <Booking
-                  key={booking}
-                  booking={booking}
-                  onRemove={this.handleDelete}
-                />
-              </Col>
-            ))}
+            {Array.isArray(bookings) &&
+              bookings.map((booking) => (
+                <Col sm={3} key={booking.bookingId}>
+                  <Booking
+                    key={booking}
+                    booking={booking}
+                    onRemove={this.handleDelete}
+                  />
+                </Col>
+              ))}
           </Row>
         </Container>
       </Screen>
