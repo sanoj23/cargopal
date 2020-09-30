@@ -23,7 +23,6 @@ class Login extends Component {
   }
 
   requestLogin = (values) => {
-    console.log(values);
     this.props.loginUser(values);
   };
 
