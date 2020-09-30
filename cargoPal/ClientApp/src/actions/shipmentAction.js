@@ -85,6 +85,7 @@ export const AddShipment = (shipment) => (dispatch) => {
     })
     .catch((err) => {
       dispatch(AddShipmentFailure(err));
+      console.log({ err });
     });
 };
 

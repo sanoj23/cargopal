@@ -64,13 +64,13 @@ namespace CargoPal.Controllers
             try
             {
                 if (!ModelState.IsValid) { return BadRequest(); }
-                // update value in capacity available
+
                 _service.AddShipment(shipment);
                 return Ok(shipment);
             }
             catch (Exception error)
             {
-                return Conflict(error.Message);
+                return Conflict(error);
             }
         }
 
