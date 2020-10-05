@@ -1,187 +1,209 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
 import FormInput from './form/formInput';
 
-// import { connect } from 'react-redux';
-// import { getAuthUser } from '../actions/authAction';
+import { connect } from 'react-redux';
+
+import { packaging } from '../constants/general';
+import { getUserId } from '../actions/authAction';
+import { AddBooking } from '../actions/bookingAction';
 
 class BookingForm extends Component {
   constructor(props) {
     super(props);
+    this.requestChange = this.requestChange.bind(this);
+    this.requestBooking = this.requestBooking.bind(this);
 
     this.state = {
-      user: {},
+      booking: {
+        userId: 0,
+        shipmentId: 0,
+        receiverName: '',
+        receiverPhone: '',
+        receiverAddress: '',
+        item: '',
+        instructions: '',
+        packaging: '',
+        status: '',
+      },
+      error: {},
+      packages: [],
     };
   }
 
+  requestBooking = (values) => {
+    this.props.AddBooking(values);
+    if (!this.props.bookings.error) {
+      this.props.alert(true);
+    }
+  };
+
+  requestChange = (event) => {
+    let { boooking } = this.state;
+    this.setState({
+      boooking: { ...boooking, [event.target.name]: event.target.value },
+    });
+  };
+
   componentDidMount() {
-    // get current logge in user details
+    let array = [];
+    packaging.forEach((element) => {
+      array.push(element.size);
+    });
+    this.setState({ packages: array });
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.auth.data !== this.auth.data) {
-      this.setState({ user: this.auth.data });
+    if (prevProps.bookings.data !== this.props.bookings.data) {
+      this.setState({ error: this.props.bookings.error });
     }
   }
 
   render() {
-    const phoneRegex = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
     const validationSchema = Yup.object().shape({
-      item: Yup.string().required().label('Item Name'),
-      //packaging: Yup.string().required().label('Packaging'),
-      instructions: Yup.string().label('Special Instructions'),
-      Name: Yup.string().required().label('Full Name'),
-
-      email: Yup.string().required().email().label('Email'),
-      phone: Yup.string()
-        .required()
-        .min(3)
-        .max(20)
-        .label('Phone')
-        .matches(phoneRegex, 'Phone number is not valid'),
+      receiverName: Yup.string().required().label('Receiver Name'),
+      receiverPhone: Yup.string().required().label('Receiver Phone'),
+      receiverAddress: Yup.string().required().label('Receiver Address'),
+      item: Yup.string().required().label('Item'),
+      instructions: Yup.string().required().label('Instructions'),
+      packaging: Yup.string().required().label('Packaging'),
     });
 
-    const requestBooking = (values) => {
-      console.log(values);
-      // Make API call from here on
-    };
-
     return (
-      <Formik
-        initialValues={{
-          item: '',
-          instructions: '',
-          firstName: '',
-          lastName: '',
-          email: '',
-          phone: '',
-        }}
-        onSubmit={(values) => requestBooking(values)}
-        validationSchema={validationSchema}
-      >
-        {({ handleChange, handleSubmit, errors, setFieldTouched, touched }) => (
-          <Form
-            style={{
-              padding: 50,
-              backgroundColor: 'white',
-              display: 'flex',
-            }}
-          >
-            <div style={{ width: '50%' }}>
-              <h1> Customer Details</h1>
-              <hr style={{ marginBottom: 25 }} />
-
-              <Row>
-                <Col>
-                  <FormInput
-                    autoFocus
-                    id="Name"
-                    name="Name"
-                    type="text"
-                    label="Full Name"
-                    placeholder="Enter receiver's name"
-                    onBlur={() => setFieldTouched('Name')}
-                    onChange={handleChange('Name')}
-                    errors={errors.firstName}
-                    touched={touched.firstName}
-                  />
-                </Col>
-              </Row>
-
-              <FormInput
-                id="address"
-                name="address"
-                type="address"
-                label="Address"
-                placeholder="Enter receiver's address"
-                onBlur={() => setFieldTouched('address')}
-                onChange={handleChange('address')}
-                errors={errors.address}
-                touched={touched.address}
-              />
-
-              <Row>
-                <Col>
-                  <FormInput
-                    id="email"
-                    name="email"
-                    type="email"
-                    label="Email"
-                    placeholder="Enter email"
-                    onBlur={() => setFieldTouched('email')}
-                    onChange={handleChange('email')}
-                    errors={errors.email}
-                    touched={touched.email}
-                  />
-                </Col>
-                <Col>
-                  <FormInput
-                    pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-                    id="phone"
-                    name="phone"
-                    type="tel"
-                    label="Phone"
-                    placeholder="Enter phone number"
-                    onBlur={() => setFieldTouched('phone')}
-                    onChange={handleChange('phone')}
-                    errors={errors.phone}
-                    touched={touched.phone}
-                  />
-                </Col>
-              </Row>
-            </div>
-
-            <div
+      <>
+        <Formik
+          initialValues={{
+            userId: getUserId().userId,
+            shipmentId: this.props.shipmentId,
+            receiverName: '',
+            receiverPhone: '',
+            receiverAddress: '',
+            item: '',
+            instructions: '',
+            packaging: '',
+            status: 'pending',
+          }}
+          onSubmit={(values) => this.requestBooking(values)}
+          onChange={(event) => this.requestChange(event)}
+          validationSchema={validationSchema}
+        >
+          {({
+            handleChange,
+            handleSubmit,
+            errors,
+            setFieldTouched,
+            touched,
+          }) => (
+            <Form
               style={{
-                borderLeft: '2px solid lightGrey',
-                height: 'auto',
-                marginRight: 25,
-                marginLeft: 25,
+                padding: 50,
+                backgroundColor: 'inherit',
               }}
-            ></div>
+            >
+              <Row>
+                <Col>
+                  <h1>Receiver Details</h1>
+                  <hr style={{ marginBottom: 25, backgroundColor: 'white' }} />
+                  <FormInput
+                    id="receiverName"
+                    name="receiverName"
+                    type="text"
+                    label="Receiver Name"
+                    placeholder="Enter receiver name"
+                    onBlur={() => setFieldTouched('receiverName')}
+                    onChange={handleChange('receiverName')}
+                    errors={errors.receiverName}
+                    touched={touched.receiverName}
+                  />
+                  <FormInput
+                    id="receiverPhone"
+                    name="receiverPhone"
+                    type="text"
+                    label="Receiver Phone"
+                    placeholder="Enter receiver phone"
+                    onBlur={() => setFieldTouched('receiverPhone')}
+                    onChange={handleChange('receiverPhone')}
+                    errors={errors.receiverPhone}
+                    touched={touched.receiverPhone}
+                  />
+                  <FormInput
+                    id="receiverAddress"
+                    name="receiverAddress"
+                    type="text"
+                    label="Receiver Address"
+                    placeholder="Enter receiver address"
+                    onBlur={() => setFieldTouched('receiverAddress')}
+                    onChange={handleChange('receiverAddress')}
+                    errors={errors.receiverAddress}
+                    touched={touched.receiverAddress}
+                  />
+                </Col>
 
-            <div style={{ width: '50%' }}>
-              <h1>Booking Form</h1>
-              <hr style={{ marginBottom: 25 }} />
+                <div
+                  style={{ borderLeft: '2px solid grey', height: 'auto' }}
+                ></div>
+                <Col>
+                  <h1>Booking Details</h1>
+                  <hr style={{ marginBottom: 25, backgroundColor: 'white' }} />
+                  <FormInput
+                    id="item"
+                    name="item"
+                    type="text"
+                    label="Item"
+                    placeholder="Enter item(s)"
+                    onBlur={() => setFieldTouched('item')}
+                    onChange={handleChange('item')}
+                    errors={errors.item}
+                    touched={touched.item}
+                  />
+                  <FormInput
+                    id="instructions"
+                    name="instructions"
+                    as="select"
+                    options={['fragile', 'not fragile']}
+                    label="Instructions"
+                    placeholder="Enter instructions"
+                    onBlur={() => setFieldTouched('instructions')}
+                    onChange={handleChange('instructions')}
+                    errors={errors.instructions}
+                    touched={touched.instructions}
+                  />
 
-              <FormInput
-                id="item"
-                name="item"
-                type="item"
-                label="Item"
-                placeholder="Enter Item"
-                onBlur={() => setFieldTouched('item')}
-                onChange={handleChange('item')}
-                errors={errors.item}
-                touched={touched.item}
-              />
+                  <FormInput
+                    id="packaging"
+                    name="packaging"
+                    as="select"
+                    label="Packaging"
+                    options={this.state.packages}
+                    placeholder="Enter packaging"
+                    onBlur={() => setFieldTouched('packaging')}
+                    onChange={handleChange('packaging')}
+                    errors={errors.packaging}
+                    touched={touched.packaging}
+                  />
 
-              <FormInput
-                id="instructions"
-                name="instructions"
-                type="instructions"
-                label="instructions"
-                placeholder="Enter instructions"
-                onBlur={() => setFieldTouched('instructions')}
-                onChange={handleChange('instructions')}
-                errors={errors.instructions}
-                touched={touched.instructions}
-              />
-
-              <Button variant="primary" onClick={handleSubmit}>
-                Book
-              </Button>
-            </div>
-          </Form>
-        )}
-      </Formik>
+                  <Button
+                    variant="dark"
+                    onClick={handleSubmit}
+                    style={{ float: 'right' }}
+                  >
+                    Sign In
+                  </Button>
+                </Col>
+              </Row>
+            </Form>
+          )}
+        </Formik>
+      </>
     );
   }
 }
-// const mapStateToProps = ({ auth }) => ({ auth });
 
-// export default connect(mapStateToProps, getAuthUser)(Booking);
-export default BookingForm;
+const mapStateToProps = ({ bookings }) => ({ bookings });
+export default withRouter(
+  connect(mapStateToProps, { AddBooking })(BookingForm)
+);

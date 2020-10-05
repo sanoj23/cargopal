@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { Redirect } from 'react-router';
 import { Card, Button } from 'react-bootstrap';
 import { getUserByUserId } from '../actions/userAction';
 
@@ -23,6 +24,11 @@ class Shipment extends Component {
       this.setState({ user: this.props.users.data });
     }
   }
+
+  handleClick = () => {
+    console.log('check');
+    return <Redirect to="/booking" shipment={this.state.shipment} />;
+  };
 
   render() {
     const {
@@ -56,7 +62,9 @@ class Shipment extends Component {
 
             <Button
               variant="outline-success"
-              onClick={() => this.props.history.push('/booking')}
+              onClick={() =>
+                this.props.history.push('/booking', this.state.shipment)
+              }
             >
               Book Shipment
             </Button>
