@@ -1,27 +1,30 @@
 import React, { Component } from 'react';
-import { Accordion, Card } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import { Accordion, Card, Table } from 'react-bootstrap';
 
-import OrderBooking from '../orders/orderBooking';
+// to be editted with a new component
+import RequestBooking from '../requests/requestBookings';
+
 import { GetBookingByShipment } from '../../actions/bookingAction';
 
-class OrderShipment extends Component {
+class Request extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      shipment: {},
       bookings: null,
     };
   }
 
   componentDidMount() {
-    this.setState({ bookings: null });
+    this.setState({ shipment: this.props.shipment, bookings: null });
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps.bookings.data !== this.props.bookings.data) {
       this.setState({
         bookings: this.props.bookings.data.filter(
-          (b) => b.status === 'Approved'
+          (b) => b.status === 'pending'
         ),
       });
     }
@@ -35,22 +38,23 @@ class OrderShipment extends Component {
 
   render() {
     const { bookings } = this.state;
+
     const {
       shipmentId,
       origin,
       destination,
       capacity,
       status,
-    } = this.props.shipment;
+    } = this.state.shipment;
+
     const shipment = (
       <div>
         <b>#ID: </b>
         {shipmentId} <b>Origin: </b>
         {origin} <b>Destination: </b>
-        {destination} <b>Capacity:</b> {capacity} <b>Status: </b> {status}
+        {destination} <b>Capacity:</b> {capacity} <b>Status: </b> {status}{' '}
       </div>
     );
-
     return (
       <>
         <Accordion>
@@ -68,10 +72,31 @@ class OrderShipment extends Component {
                 <Card.Body>No Bookings made</Card.Body>
               </Accordion.Collapse>
             ) : (
-              Array.isArray(bookings) &&
-              bookings.map((booking) => (
-                <OrderBooking key={booking.bookingId} booking={booking} />
-              ))
+              <Accordion.Collapse eventKey={shipmentId}>
+                <Card.Body>
+                  <Table striped bordered hover>
+                    <thead>
+                      <tr>
+                        <th>BookingId</th>
+                        <th>Name</th>
+                        <th>Item</th>
+                        <th>Package</th>
+                        <th>Instructions</th>
+                        <th>Accept/Reject</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {Array.isArray(bookings) &&
+                        bookings.map((booking) => (
+                          <RequestBooking
+                            key={booking.bookingId}
+                            booking={booking}
+                          />
+                        ))}
+                    </tbody>
+                  </Table>
+                </Card.Body>
+              </Accordion.Collapse>
             )}
           </Card>
         </Accordion>
@@ -79,8 +104,7 @@ class OrderShipment extends Component {
     );
   }
 }
+
 const mapStateToProps = ({ bookings }) => ({ bookings });
 
-export default connect(mapStateToProps, { GetBookingByShipment })(
-  OrderShipment
-);
+export default connect(mapStateToProps, { GetBookingByShipment })(Request);
