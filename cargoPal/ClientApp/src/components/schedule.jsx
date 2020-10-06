@@ -11,14 +11,6 @@ class Shedule extends Component {
     };
   }
   componentDidMount() {
-    // const {
-    //   origin,
-    //   destination,
-    //   capacity,
-    //   startDate,
-    //   endDate,
-    // } = this.props.Schedule;
-
     this.setState({ schedule: this.props.Schedule });
   }
 
@@ -30,6 +22,11 @@ class Shedule extends Component {
       status: { ...status, [event.target.name]: event.target.value },
     });
     // make call here
+  };
+
+  handleDelete = () => {
+    const shipmentID = this.state.schedule.shipmentId;
+    this.props.onDelete(shipmentID);
   };
 
   render() {
@@ -55,27 +52,37 @@ class Shedule extends Component {
       <div style={{ marginTop: 5, marginBottom: 5 }}>
         <Card style={{ width: '100%', borderRadius: 20 }}>
           <Card.Body>
-            <Card.Title>
-              {origin} - {destination}
-            </Card.Title>
+            <div style={{ display: 'flex' }}>
+              <Card.Title>
+                {origin} - {destination}
+              </Card.Title>
+              <Button
+                variant="danger"
+                style={{ margin: 3, float: 'right', marginRight: 0 }}
+                onClick={this.handleDelete}
+              >
+                Delete
+              </Button>
+            </div>
+
             <hr />
+
             <div>
               <Card.Text>
                 Capacity: <b>{capacity}</b> Available: <b>{capacity}</b>
               </Card.Text>
-
-              <Card.Text style={{ display: 'flex' }}>
-                <div style={{ marginRight: 30 }}>
+              <div style={{ display: 'flex' }}>
+                <Card.Text>
                   Departure: <b>{origin}</b> <br /> On:
                   <b>{new Date(startDate).toLocaleDateString()}</b>
-                </div>
+                </Card.Text>
 
-                <div>
+                <Card.Text style={{ marginLeft: 20 }}>
                   Arrival: <b>{destination}</b> <br />
                   On:
                   <b>{new Date(endDate).toLocaleDateString()}</b>
-                </div>
-              </Card.Text>
+                </Card.Text>
+              </div>
             </div>
 
             <div style={{ float: 'right' }}>
@@ -92,15 +99,9 @@ class Shedule extends Component {
                     onChange={this.handleChange}
                   />
                 </Col>
-                <Col>
-                  <Button
-                    variant="danger"
-                    style={{ margin: 3 }}
-                    onClick={() => console.log('Deleted')}
-                  >
-                    Delete{' '}
-                  </Button>
-                </Col>
+                {/* <Col>
+                  
+                </Col> */}
               </Row>
             </div>
           </Card.Body>

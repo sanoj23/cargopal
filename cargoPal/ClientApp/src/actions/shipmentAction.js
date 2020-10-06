@@ -120,9 +120,8 @@ const DeleteShipmentFailure = (payload) => ({
   type: shipmentsConstants.DELETE_SHIPMENTS_FAILURE,
   payload,
 });
-export const DeleteShipment = (shipment) => (dispatch) => {
+export const DeleteShipment = (shipmentId) => (dispatch) => {
   dispatch({ type: shipmentsConstants.DELETE_SHIPMENTS_REQUEST });
-  let { shipmentId } = shipment;
   return axios
     .delete(`api/shipments/${shipmentId}`)
     .then((res) => {
