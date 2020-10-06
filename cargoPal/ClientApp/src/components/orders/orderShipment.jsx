@@ -19,7 +19,11 @@ class OrderShipment extends Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.bookings.data !== this.props.bookings.data) {
-      this.setState({ bookings: this.props.bookings.data });
+      this.setState({
+        bookings: this.props.bookings.data.filter(
+          (b) => b.status === 'Approved'
+        ),
+      });
     }
   }
 
