@@ -70,6 +70,8 @@ INSERT INTO Shipments
 
 VALUES
     (4, 'colombo', 'chennai', '01/10/2020', '03/10/2020', 100, 'open' , 1.99),
+    (4, 'colombo', 'chennai', '01/10/2020', '03/10/2020', 100, 'open' , 1.99),
+    (4, 'colombo', 'chennai', '01/10/2020', '03/10/2020', 100, 'open' , 1.99),
     (4, 'colombo', 'singapore', '05/10/2020', '08/10/2020', 50, 'customs cleared', 2.99 ),
     (4, 'colombo', 'maldives', '05/11/2020', '08/11/2020', 300, 'processing', 4.99 ),
     (4, 'colombo', 'maldives', '05/11/2020', '08/11/2020', 300, 'boarding', 4.99 ),
@@ -101,8 +103,14 @@ INSERT INTO Bookings
 VALUES
     (1, 1, 'Eliza Smith', '91-995-5513-746', ' 9/10 Krishna Chaya, Khar Muncipal Market 1 St Road, Khar, Mumbai', 'food', 'fragile', 'Medium', 'pending'),
     (1, 1, 'Lee Young', '6585557997', ' 590 Yio Chu Kang Road #03-01, Singapore', 'food', 'fragile', 'Large', 'pending'),
-    (1, 1, 'Sarah Miller', '601355532', 'E913 2Nd Floor Jalan Bukit Ubi , Kuantan, Malaysia', 'food', 'fragile', 'Small', 'pending'),
-    (1, 1, 'Lisa Brown', '22355555240', ' 901 Lorong 4 Kampung Bercham, Male main Island', 'food', 'not fragile', 'Small', 'pending');
+    (1, 1, 'Sarah Miller', '601355532', 'E913 2Nd Floor Jalan Bukit Ubi , Kuantan, Malaysia', 'food', 'fragile', 'Small', 'approved'),
+    (1, 2, 'Eliza Smith', '91-995-5513-746', ' 9/10 Krishna Chaya, Khar Muncipal Market 1 St Road, Khar, Mumbai', 'food', 'fragile', 'Medium', 'approved'),
+    (1, 2, 'Lee Young', '6585557997', ' 590 Yio Chu Kang Road #03-01, Singapore', 'food', 'fragile', 'Large', 'approved'),
+    (1, 2, 'Sarah Miller', '601355532', 'E913 2Nd Floor Jalan Bukit Ubi , Kuantan, Malaysia', 'food', 'fragile', 'Small', 'pending'),
+    (1, 3, 'Eliza Smith', '91-995-5513-746', ' 9/10 Krishna Chaya, Khar Muncipal Market 1 St Road, Khar, Mumbai', 'food', 'fragile', 'Medium', 'pending'),
+    (1, 3, 'Lee Young', '6585557997', ' 590 Yio Chu Kang Road #03-01, Singapore', 'food', 'fragile', 'Large', 'pending'),
+    (1, 3, 'Sarah Miller', '601355532', 'E913 2Nd Floor Jalan Bukit Ubi , Kuantan, Malaysia', 'food', 'fragile', 'Small', 'pending'),
+    (1, 4, 'Lisa Brown', '22355555240', ' 901 Lorong 4 Kampung Bercham, Male main Island', 'food', 'not fragile', 'Small', 'pending');
 
 
 

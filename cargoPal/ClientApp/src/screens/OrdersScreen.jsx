@@ -34,7 +34,6 @@ class OrdersScreen extends Component {
   }
 
   GetAcceptedBookings = (shipmentId) => {
-    console.log('Getting bookings of ', shipmentId);
     this.props.GetBookingByShipment(shipmentId);
     if (this.props.bookings.error === 404) {
       this.setState({ bookings: [] });
@@ -43,7 +42,6 @@ class OrdersScreen extends Component {
 
   render() {
     const { shipments, bookings } = this.state;
-    console.log(bookings);
 
     return (
       <Screen title="View Orders" subtitle="List of approved customer orders.">

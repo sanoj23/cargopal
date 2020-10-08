@@ -63,7 +63,10 @@ namespace CargoPal.Data
             var shipmentExists = _CargoPalContext.Shipments.FirstOrDefault(n => n.ShipmentId == ShipmentId);
             if (shipmentExists != null)
             {
-                // get update shipming model and Validate
+                if (shipment.Status != null)
+                {
+                    shipmentExists.Status = shipment.Status;
+                }
                 _CargoPalContext.SaveChanges();
             }
             else

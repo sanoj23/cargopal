@@ -1,6 +1,7 @@
 import React from 'react';
+import { Button } from 'react-bootstrap';
 
-export default function OrderBooking({ booking }) {
+export default function OrderBooking({ booking, update }) {
   const {
     bookingId,
     receiverName,
@@ -10,6 +11,10 @@ export default function OrderBooking({ booking }) {
     packaging,
     status,
   } = booking;
+
+  const handleClick = (accept) => {
+    update(bookingId, accept);
+  };
 
   return (
     <>
@@ -22,6 +27,24 @@ export default function OrderBooking({ booking }) {
           <td>{instructions}</td>
           <td>{packaging}</td>
           <td>{status}</td>
+          {update ? (
+            <td>
+              <Button
+                onClick={() => handleClick(1)}
+                style={{ marginRight: 2 }}
+                variant="outline-success"
+              >
+                Accept
+              </Button>
+              <Button
+                onClick={() => handleClick(0)}
+                style={{ marginLeft: 2 }}
+                variant="outline-danger"
+              >
+                Reject
+              </Button>
+            </td>
+          ) : null}
         </tr>
       </tbody>
     </>

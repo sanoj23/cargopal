@@ -72,7 +72,10 @@ namespace CargoPal.Data
             var bookingExists = _CargoPalContext.Bookings.FirstOrDefault(s => s.BookingId == bookingId);
             if (bookingExists != null)
             {
-                //    get update booking model and validate
+                if (booking.Status != null)
+                {
+                    bookingExists.Status = booking.Status;
+                }
                 _CargoPalContext.SaveChanges();
             }
             else
