@@ -74,7 +74,7 @@ class RequestsScreen extends Component {
     const { shipments, bookings } = this.state;
 
     return (
-      <Screen title="View Orders" subtitle="List of approved customer orders.">
+      <Screen title="View Requests" subtitle="List of pending customer orders.">
         <div
           style={{
             height: 260,
