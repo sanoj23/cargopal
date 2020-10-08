@@ -17,8 +17,6 @@ export default function Navigationbar(props) {
         {userType() ? (
           <Nav className="mr-auto">
             <Nav.Link href="/home">Home</Nav.Link>
-            <Nav.Link href="/tracking">Tracking</Nav.Link>
-            <Nav.Link href="/booking">Booking</Nav.Link>
             <Nav.Link href="/mybookings">My Bookings</Nav.Link>
             <Nav.Link href="/shipments">Shipments</Nav.Link>
 
