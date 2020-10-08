@@ -46,8 +46,8 @@ class BookingScreen extends Component {
             <Alert show={this.state.show} variant="success">
               <Alert.Heading>Booking Successful</Alert.Heading>
               <p>
-                Your booking has been successfully made. Our agent will get back
-                to you shortly.
+                Your booking was successfully. Our agent will get back to you
+                within 2 to 4 business days.
               </p>
               <hr />
               <div className="d-flex justify-content-end">
