@@ -191,7 +191,7 @@ class BookingForm extends Component {
                     onClick={handleSubmit}
                     style={{ float: 'right' }}
                   >
-                    Sign In
+                    Book
                   </Button>
                 </Col>
               </Row>

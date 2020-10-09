@@ -22,7 +22,7 @@ export default function Booking({ booking, onRemove }) {
             <br />
             Phone: <b>{receiverPhone}</b>
           </Card.Text>
-          {status === 'Approved' ? null : (
+          {status === 'approved' ? null : (
             <Card.Link onClick={() => onRemove(bookingId)}>Remove</Card.Link>
           )}
 
