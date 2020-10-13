@@ -42,7 +42,7 @@ export default function Shipments({ shipment, bookings }) {
             {`End Date: ${new Date(endDate).toLocaleDateString()}`}
           </Card.Text>
           <Button variant="link" onClick={handleClick}>
-            View Bookings
+            View More
           </Button>
         </Card.Body>
       </Card>

@@ -1,114 +1,83 @@
 import React, { Component } from 'react';
-import { Button, Card, Col, Row } from 'react-bootstrap';
-import FormInput from './form/formInput';
+import { Button } from 'react-bootstrap';
 
-class Shedule extends Component {
+class Schedule extends Component {
   constructor(props) {
     super(props);
     this.state = {
       schedule: {},
-      status: '',
     };
   }
+
   componentDidMount() {
-    this.setState({ schedule: this.props.Schedule });
+    let shipment = this.props.schedule;
+    this.setState({ schedule: { ...this.state.schedule, schedule: shipment } });
   }
 
   componentDidUpdate(prevProps) {}
 
-  handleChange = (event) => {
-    let { status } = this.state;
-    this.setState({
-      status: { ...status, [event.target.name]: event.target.value },
-    });
-    // make call here
-  };
-
-  handleDelete = () => {
-    const shipmentID = this.state.schedule.shipmentId;
-    this.props.onDelete(shipmentID);
-  };
+  componentWillUnmount() {
+    this.setState({ schedule: {} });
+  }
 
   render() {
-    const {
-      origin,
-      destination,
-      capacity,
-      startDate,
-      endDate,
-    } = this.state.schedule;
+    const { schedule } = this.state;
+    console.log(this.state.schedule.schedule);
 
-    const statuses = [
-      'Customs Cleared Local',
-      'Processing',
-      'Boarding',
-      'Shipped',
-      'Arrived at Destination',
-      'Customs Cleared Destination',
-      'Ready for Pickup',
-    ];
+    const shipmentData = () => {
+      const {
+        shipmentId,
+        startDate,
+        endDate,
+        origin,
+        destination,
+        price,
+        status,
+        capacity,
+      } = this.props.schedule;
 
-    return (
-      <div style={{ marginTop: 5, marginBottom: 5 }}>
-        <Card style={{ width: '100%', borderRadius: 20 }}>
-          <Card.Body>
-            <div style={{ display: 'flex' }}>
-              <Card.Title>
-                {origin} - {destination}
-              </Card.Title>
-              <Button
-                variant="danger"
-                style={{ margin: 3, float: 'right', marginRight: 0 }}
-                onClick={this.handleDelete}
-              >
-                Delete
-              </Button>
-            </div>
+      return (
+        <>
+          <h2>Schedule For Shipment Id #{shipmentId}</h2>
+          <div>
+            <p>
+              To: <b>{destination}</b> On: <b>{endDate}</b>
+            </p>
+            <p>
+              From: <b>{origin}</b> On: <b>{startDate}</b>
+            </p>
+            <p>
+              Price per Kilo: <b>${price}</b>
+            </p>
+            <p>
+              Status: <b>{status}</b>
+            </p>
+            <p>
+              Capacity: <b>{capacity}</b>
+            </p>
+          </div>
+          <div style={{}}>
+            <Button
+              variant="danger"
+              onClick={() => console.log('deleted')}
+              style={{ marginRight: 10 }}
+            >
+              Delete
+            </Button>
+            <Button
+              variant="warning"
+              onClick={() => console.log('update')}
+              style={{ marginLeft: 10 }}
+            >
+              Update
+            </Button>
+          </div>
+        </>
+      );
+    };
 
-            <hr />
-
-            <div>
-              <Card.Text>
-                Capacity: <b>{capacity}</b> Available: <b>{capacity}</b>
-              </Card.Text>
-              <div style={{ display: 'flex' }}>
-                <Card.Text>
-                  Departure: <b>{origin}</b> <br /> On:
-                  <b>{new Date(startDate).toLocaleDateString()}</b>
-                </Card.Text>
-
-                <Card.Text style={{ marginLeft: 20 }}>
-                  Arrival: <b>{destination}</b> <br />
-                  On:
-                  <b>{new Date(endDate).toLocaleDateString()}</b>
-                </Card.Text>
-              </div>
-            </div>
-
-            <div style={{ float: 'right' }}>
-              <Row>
-                <Col>
-                  <FormInput
-                    id="status"
-                    name="status"
-                    type="text"
-                    label="Status"
-                    placeholder="Status"
-                    as="select"
-                    options={statuses}
-                    onChange={this.handleChange}
-                  />
-                </Col>
-                {/* <Col>
-                  
-                </Col> */}
-              </Row>
-            </div>
-          </Card.Body>
-        </Card>
-      </div>
-    );
+    return <div>{schedule ? shipmentData() : null}</div>;
   }
 }
 
-export default Shedule;
+export default Schedule;
