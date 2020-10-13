@@ -1,8 +1,8 @@
-import React from "react";
-import { Button, Carousel, Jumbotron } from "react-bootstrap";
-import Screen from "../components/screen";
+import React from 'react';
+import { Button, Carousel, Jumbotron } from 'react-bootstrap';
+import Screen from '../components/screen';
 
-import ContactUsForm from "../components/ContactUsForm";
+// import ContactUsForm from '../components/ContactUsForm';
 
 export default function HomeScreen(props) {
   return (
@@ -11,7 +11,7 @@ export default function HomeScreen(props) {
         <Carousel.Item>
           <img
             className="d-block w-100"
-            src={require("../assets/commons/LandingImage.jpg")}
+            src={require('../assets/commons/LandingImage.jpg')}
             alt="First slide"
             height={500}
           />
@@ -23,7 +23,7 @@ export default function HomeScreen(props) {
         <Carousel.Item>
           <img
             className="d-block w-100"
-            src={require("../assets/commons/background.jpeg")}
+            src={require('../assets/commons/background.jpeg')}
             alt="Third slide"
             height={500}
           />
@@ -42,7 +42,7 @@ export default function HomeScreen(props) {
         </p>
       </Jumbotron>
 
-      <ContactUsForm />
+      {/* <ContactUsForm /> */}
 
       {/* <Card border="info">
         <Card.Header textSize="large">Contact Us</Card.Header>
