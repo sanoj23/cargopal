@@ -15,8 +15,8 @@ namespace CargoPal.Data
         public int? UserId { get; set; }
         public string Origin { get; set; }
         public string Destination { get; set; }
-        public DateTime? StartDate { get; set; }
-        public DateTime? EndDate { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
         public double Capacity { get; set; }
         public string Status { get; set; }
         public double Price { get; set; }

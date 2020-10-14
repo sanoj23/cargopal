@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Alert, Button, Form } from 'react-bootstrap';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -7,7 +9,6 @@ import { getUserId } from '../actions/authAction';
 import { AddShipment } from '../actions/shipmentAction';
 
 import Screen from '../components/screen';
-import { Button, Form } from 'react-bootstrap';
 import FormInput from '../components/form/formInput';
 
 class AddShipmentScreen extends Component {
@@ -24,6 +25,9 @@ class AddShipmentScreen extends Component {
         price: 0,
         status: '',
       },
+      status: {},
+      showSuccess: false,
+      showFailure: false,
     };
   }
 
@@ -51,6 +55,16 @@ class AddShipmentScreen extends Component {
   handleSubmit = (values) => {
     console.log(values);
     this.props.AddShipment(values);
+
+    if (this.props.shipments.error) {
+      this.setState({ showFailure: true });
+    } else {
+      this.setState({ showSuccess: true });
+    }
+  };
+
+  handleClose = () => {
+    this.setState({ show: false });
   };
 
   render() {
@@ -64,8 +78,54 @@ class AddShipmentScreen extends Component {
     });
 
     const { userId } = getUserId();
+
+    const alertSuccess = (
+      <>
+        <Alert show={this.state.showSuccess} variant="success">
+          <Alert.Heading>Shipment Created Successfully!</Alert.Heading>
+          <p>Your shipment was created successfully.</p>
+          <hr />
+          <div className="d-flex justify-content-end">
+            <Button
+              onClick={() => {
+                this.setState({ showSuccess: false });
+                this.props.history.push('/schedule');
+              }}
+              variant="outline-success"
+            >
+              Close
+            </Button>
+          </div>
+        </Alert>
+      </>
+    );
+
+    const alertFailure = (
+      <>
+        <Alert show={this.state.showFailure} variant="danger">
+          <Alert.Heading>Shipment Was Not Created Successfully!</Alert.Heading>
+          <p>Your shipment was created successfully. Please try again.</p>
+          <hr />
+          <div className="d-flex justify-content-end">
+            <Button
+              onClick={() => {
+                this.setState({ showFailure: false });
+                window.location.reload();
+              }}
+              variant="outline-success"
+            >
+              Close
+            </Button>
+          </div>
+        </Alert>
+      </>
+    );
+
     return (
       <Screen title="Add Shipment" subtitle="Please fill in the form">
+        {alertSuccess}
+        {alertFailure}
+
         <Formik
           initialValues={{
             userId: userId,
@@ -179,4 +239,7 @@ class AddShipmentScreen extends Component {
 }
 
 const mapStateToProps = ({ shipments }) => ({ shipments });
-export default connect(mapStateToProps, { AddShipment })(AddShipmentScreen);
+
+export default withRouter(
+  connect(mapStateToProps, { AddShipment })(AddShipmentScreen)
+);
