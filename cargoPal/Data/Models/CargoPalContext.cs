@@ -19,7 +19,7 @@ namespace CargoPal.Data
         }
 
         public virtual DbSet<Shipments> Shipments { get; set; }
-        // public virtual DbSet<Orders> Orders { get; set; }
+
         public virtual DbSet<Bookings> Bookings { get; set; }
         public virtual DbSet<Users> Users { get; set; }
 
@@ -79,27 +79,6 @@ namespace CargoPal.Data
                     .HasConstraintName("FK__Shipments__userI__3A81B327");
 
             });
-
-            // modelBuilder.Entity<Orders>(entity =>
-            // {
-            //     entity.HasKey(e => e.OrderId)
-            //         .HasName("PK__Orders__0809335D143FC8DA");
-            //     entity.Property(e => e.OrderId).HasColumnName("orderId");
-
-            //     entity.Property(e => e.ShipmentId).HasColumnName("shipmentId");
-            //     entity.HasOne(d => d.Shipment)
-            //         .WithMany(p => p.Orders)
-            //         .HasForeignKey(d => d.ShipmentId)
-            //         .OnDelete(DeleteBehavior.Cascade)
-            //         .HasConstraintName("FK__Orders__shipment__440B1D61");
-
-            //     entity.Property(e => e.BookingId).HasColumnName("bookingId");
-            //     entity.HasOne(d => d.Booking)
-            //         .WithMany(p => p.Orders)
-            //         .HasForeignKey(d => d.BookingId)
-            //         .OnDelete(DeleteBehavior.Cascade)
-            //         .HasConstraintName("FK__Orders__bookingI__44FF419A");
-            // });
 
             modelBuilder.Entity<Bookings>(entity =>
             {

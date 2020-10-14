@@ -5,10 +5,7 @@ namespace CargoPal.Data
 {
     public partial class Bookings
     {
-        public Bookings()
-        {
-            // Orders = new HashSet<Orders>();
-        }
+        public Bookings() {}
 
         public int BookingId { get; set; }
         public int? UserId { get; set; }
@@ -25,6 +22,5 @@ namespace CargoPal.Data
 
         public virtual Users User { get; set; }
         public virtual Shipments Shipment { get; set; }
-        // public virtual ICollection<Orders> Orders { get; set; }
     }
 }

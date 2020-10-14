@@ -7,7 +7,6 @@ namespace CargoPal.Data
     {
         public Shipments()
         {
-            // Orders = new HashSet<Orders>();
             Bookings = new HashSet<Bookings>();
         }
 
