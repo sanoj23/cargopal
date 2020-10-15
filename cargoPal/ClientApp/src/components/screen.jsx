@@ -1,12 +1,12 @@
 import React from 'react';
 
-import Navigationbar from './navbar';
+import Navigationbar from './navBar/navbar';
 import { Container } from 'react-bootstrap';
 
 export default function Screen({ children, title, subtitle, navbar }) {
   return (
     <div>
-      <Navigationbar userType={navbar} />
+      <Navigationbar />
       <Container
         style={{ backgroundColor: 'white', padding: 15, marginTop: 20 }}
       >
