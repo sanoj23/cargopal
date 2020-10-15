@@ -1,26 +1,26 @@
-import React from "react";
-import { Button, Col, Form, Row } from "react-bootstrap";
-import { Formik } from "formik";
-import * as Yup from "yup";
+import React from 'react';
+import { Button, Col, Form, Row } from 'react-bootstrap';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
 
-import FormInput from "./form/formInput";
+import FormInput from '../form/formInput';
 
 const phoneRegex = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 const validationSchema = Yup.object().shape({
-  name: Yup.string().required().label("Company Name"),
-  address: Yup.string().required().label("Company Address"),
-  email: Yup.string().required().email().label("Email"),
+  name: Yup.string().required().label('Company Name'),
+  address: Yup.string().required().label('Company Address'),
+  email: Yup.string().required().email().label('Email'),
   phone: Yup.string()
     .required()
     .min(3)
     .max(20)
-    .label("Phone")
-    .matches(phoneRegex, "Phone number is not valid"),
-  password: Yup.string().required().min(4).label("Password"),
+    .label('Phone')
+    .matches(phoneRegex, 'Phone number is not valid'),
+  password: Yup.string().required().min(4).label('Password'),
   confirmPassword: Yup.string()
     .required()
-    .oneOf([Yup.ref("password"), null], "Passwords must match")
-    .label("Confirm Passowrd"),
+    .oneOf([Yup.ref('password'), null], 'Passwords must match')
+    .label('Confirm Passowrd'),
 });
 
 const requestRegister = (values) => {
@@ -33,19 +33,19 @@ export default function RegisterAgent() {
     <>
       <Formik
         initialValues={{
-          name: "",
-          address: "",
-          email: "",
-          phone: "",
-          password: "",
-          confirmPassword: "",
-          userType: "agent",
+          name: '',
+          address: '',
+          email: '',
+          phone: '',
+          password: '',
+          confirmPassword: '',
+          userType: 'agent',
         }}
         onSubmit={(values) => requestRegister(values)}
         validationSchema={validationSchema}
       >
         {({ handleChange, handleSubmit, errors, setFieldTouched, touched }) => (
-          <Form style={{ backgroundColor: "inherit", padding: 50, width: 600 }}>
+          <Form style={{ backgroundColor: 'inherit', padding: 50, width: 600 }}>
             <Row>
               <Col>
                 <FormInput
@@ -55,8 +55,8 @@ export default function RegisterAgent() {
                   type="text"
                   label="Company Name"
                   placeholder="Enter company name"
-                  onBlur={() => setFieldTouched("name")}
-                  onChange={handleChange("name")}
+                  onBlur={() => setFieldTouched('name')}
+                  onChange={handleChange('name')}
                   errors={errors.name}
                   touched={touched.name}
                 />
@@ -72,8 +72,8 @@ export default function RegisterAgent() {
                   type="text"
                   label="Company Address"
                   placeholder="Enter company address"
-                  onBlur={() => setFieldTouched("address")}
-                  onChange={handleChange("address")}
+                  onBlur={() => setFieldTouched('address')}
+                  onChange={handleChange('address')}
                   errors={errors.address}
                   touched={touched.address}
                 />
@@ -88,8 +88,8 @@ export default function RegisterAgent() {
                   type="email"
                   label="Email"
                   placeholder="Enter email"
-                  onBlur={() => setFieldTouched("email")}
-                  onChange={handleChange("email")}
+                  onBlur={() => setFieldTouched('email')}
+                  onChange={handleChange('email')}
                   errors={errors.email}
                   touched={touched.email}
                 />
@@ -102,8 +102,8 @@ export default function RegisterAgent() {
                   type="tel"
                   label="Phone"
                   placeholder="Enter phone number"
-                  onBlur={() => setFieldTouched("phone")}
-                  onChange={handleChange("phone")}
+                  onBlur={() => setFieldTouched('phone')}
+                  onChange={handleChange('phone')}
                   errors={errors.phone}
                   touched={touched.phone}
                 />
@@ -116,8 +116,8 @@ export default function RegisterAgent() {
               type="password"
               label="Password"
               placeholder="Enter password"
-              onBlur={() => setFieldTouched("password")}
-              onChange={handleChange("password")}
+              onBlur={() => setFieldTouched('password')}
+              onChange={handleChange('password')}
               errors={errors.password}
               touched={touched.password}
             />
@@ -128,8 +128,8 @@ export default function RegisterAgent() {
               type="password"
               label="Confirm Password"
               placeholder="Re-enter Password"
-              onBlur={() => setFieldTouched("confirmPassword")}
-              onChange={handleChange("confirmPassword")}
+              onBlur={() => setFieldTouched('confirmPassword')}
+              onChange={handleChange('confirmPassword')}
               errors={errors.confirmPassword}
               touched={touched.confirmPassword}
             />
@@ -141,10 +141,10 @@ export default function RegisterAgent() {
             <a
               href="/"
               style={{
-                float: "right",
+                float: 'right',
                 marginTop: 10,
-                color: "white",
-                size: "large",
+                color: 'white',
+                size: 'large',
               }}
             >
               I have an account already

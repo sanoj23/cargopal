@@ -1,6 +1,6 @@
 import React from 'react';
-import RegisterClient from '../components/registerClient';
-import RegisterAgent from '../components/registerAgent';
+import RegisterClient from '../components/registerUser/registerClient';
+import RegisterAgent from '../components/registerUser/registerAgent';
 
 import RegisterAgentImage from '../assets/commons/agentRegister.jpg';
 import RegisterClientImage from '../assets/commons/clientRegister.jpg';
