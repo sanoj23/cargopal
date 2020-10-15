@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Alert, Button } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
 import RegisterClient from '../components/registerUser/registerClient';
 import RegisterAgent from '../components/registerUser/registerAgent';
 
@@ -6,6 +8,9 @@ import RegisterAgentImage from '../assets/commons/agentRegister.jpg';
 import RegisterClientImage from '../assets/commons/clientRegister.jpg';
 
 export default function RegisterScreen(props) {
+  const [alert, setAlert] = useState(false);
+  let history = useHistory();
+
   const userType = props.location.state.user;
   const windowHeight = window.innerHeight;
 
@@ -15,6 +20,29 @@ export default function RegisterScreen(props) {
   } else {
     backgroundImage = RegisterAgentImage;
   }
+
+  const handleClose = () => {
+    setAlert(false);
+    history.push('/');
+  };
+
+  const succcessAlert = (
+    <>
+      <Alert show={alert} variant="success">
+        <Alert.Heading>Registered Successfully</Alert.Heading>
+        <p>
+          You account has been created successfully. Login and start using your
+          account. CargoPal welcomes you.
+        </p>
+        <hr />
+        <div className="d-flex justify-content-end">
+          <Button onClick={handleClose} variant="outline-success">
+            Close
+          </Button>
+        </div>
+      </Alert>
+    </>
+  );
 
   return (
     <div
@@ -29,6 +57,7 @@ export default function RegisterScreen(props) {
         color: 'white',
       }}
     >
+      {succcessAlert}
       <div
         style={{
           display: 'inline-block',
@@ -39,7 +68,7 @@ export default function RegisterScreen(props) {
         <h1>Resgister</h1>
         <hr style={{ backgroundColor: 'white' }} />
         {userType && userType === 'customer' ? (
-          <RegisterClient />
+          <RegisterClient alert={() => setAlert(true)} />
         ) : (
           <RegisterAgent />
         )}

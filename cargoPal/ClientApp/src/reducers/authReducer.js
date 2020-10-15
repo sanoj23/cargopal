@@ -19,11 +19,11 @@ const authReducer = (state = INITIAL_STATE, action) => {
     case userConstants.LOGOUT_USER: //Logout
       return state;
 
-    case userConstants.REGISTER_USER_REQUEST: // Register
+    case userConstants.REGISTER_REQUEST: // Register
       return { ...state, loading: true };
-    case userConstants.REGISTER_USER_SUCCESS:
+    case userConstants.REGISTER_SUCCESS:
       return { ...state, loading: false, data: action.payload };
-    case userConstants.REGISTER_USER_FAILURE:
+    case userConstants.REGISTER_FAILURE:
       return { ...state, loading: false, error: action.payload };
 
     case userConstants.USER_BY_ID_REQUEST: // Get Auth User
