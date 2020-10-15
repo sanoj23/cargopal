@@ -180,7 +180,6 @@ namespace CargoPal.Data
                     .IsUnicode(false);
 
                 entity.Property(e => e.Address)
-                    .IsRequired()
                     .HasColumnName("address")
                     .IsUnicode(false);
 

@@ -25,7 +25,7 @@ CREATE TABLE Users
     companyName VARCHAR(100),
     phone VARCHAR(10) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
-    [address] VARCHAR(MAX) NOT NULL,
+    [address] VARCHAR(MAX),
     [password] VARCHAR(MAX) NOT NULL,
     userType VARCHAR(10) NOT NULL,
     CONSTRAINT userType_check CHECK ([userType] IN ('Client', 'Agent'))
