@@ -123,9 +123,9 @@ namespace CargoPal.Controllers
                 _service.AddUser(user);
                 return Ok(user);
             }
-            catch (Exception resgisterError)
+            catch (Exception error)
             {
-                return BadRequest(resgisterError);
+                return BadRequest(error.Message);
             }
         }
 
