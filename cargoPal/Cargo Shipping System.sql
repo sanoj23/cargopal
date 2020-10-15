@@ -20,8 +20,8 @@ PRINT 'Creating a table for Users...';
 CREATE TABLE Users
 (
     userId INT IDENTITY(1,1) PRIMARY KEY,
-    firstName VARCHAR(100) NOT NULL,
-    lastName VARCHAR(100) NOT NULL,
+    firstName VARCHAR(100),
+    lastName VARCHAR(100),
     companyName VARCHAR(100),
     phone VARCHAR(10) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,

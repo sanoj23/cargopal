@@ -125,7 +125,7 @@ namespace CargoPal.Controllers
             }
             catch (Exception resgisterError)
             {
-                return BadRequest(resgisterError.Message);
+                return BadRequest(resgisterError);
             }
         }
 

@@ -152,13 +152,11 @@ namespace CargoPal.Data
                 entity.Property(e => e.UserId).HasColumnName("userId");
 
                 entity.Property(e => e.FirstName)
-                    .IsRequired()
                     .HasColumnName("firstName")
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
                 entity.Property(e => e.LastName)
-                    .IsRequired()
                     .HasColumnName("lastName")
                     .HasMaxLength(100)
                     .IsUnicode(false);
