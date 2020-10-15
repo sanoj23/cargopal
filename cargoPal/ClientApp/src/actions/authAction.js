@@ -1,10 +1,13 @@
 import axios from 'axios';
 import { userConstants } from '../constants/userConstants';
+import { history } from '../App';
 
 // Get userId of logged in user
 export const getUserId = () => {
   const user = JSON.parse(localStorage.getItem('user'));
   if (localStorage.getItem('user') == null) {
+    // history.push('/');
+    // window.location.reload();
   } else {
     return user;
   }
@@ -65,6 +68,30 @@ export const getAuthUser = () => (dispatch) => {
     })
     .catch((err) => {
       dispatch(getUserByIdFailure(err));
+    });
+};
+
+// Register User
+const resgiterSuccess = (payload) => ({
+  type: userConstants.REGISTER_SUCCESS,
+  payload,
+});
+const registerFailure = (payload) => ({
+  type: userConstants.REGISTER_FAILURE,
+  payload,
+});
+export const RegisterUser = (user) => (dispatch) => {
+  dispatch({ type: userConstants.REGISTER_REQUEST });
+
+  return axios
+    .post('api/user', user)
+    .then((res) => {
+      dispatch(resgiterSuccess(res.data));
+      console.log(res.data);
+    })
+    .catch((err) => {
+      dispatch(registerFailure(err));
+      console.log(err);
     });
 };
 

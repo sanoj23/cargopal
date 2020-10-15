@@ -29,7 +29,7 @@ export default function RegisterScreen(props) {
   const succcessAlert = (
     <>
       <Alert show={alert} variant="success">
-        <Alert.Heading>Registered Successfully</Alert.Heading>
+        <Alert.Heading>You're officially our member now!</Alert.Heading>
         <p>
           You account has been created successfully. Login and start using your
           account. CargoPal welcomes you.
@@ -70,7 +70,7 @@ export default function RegisterScreen(props) {
         {userType && userType === 'customer' ? (
           <RegisterClient alert={() => setAlert(true)} />
         ) : (
-          <RegisterAgent />
+          <RegisterAgent alert={() => setAlert(true)} />
         )}
       </div>
     </div>

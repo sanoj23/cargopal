@@ -31,8 +31,6 @@ class ResgiterClient extends Component {
     }
 
     if (this.state.status) {
-      // display alert message
-      // this.props.history.push('/');
       this.props.alert();
     }
   }
