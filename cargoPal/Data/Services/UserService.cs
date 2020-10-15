@@ -82,8 +82,6 @@ namespace CargoPal.Data
             var passwordHash = HashPassword(user.Password);
             user.Password = passwordHash;
 
-            // user.Status = "active";
-
             _CargoPalContext.Users.Add(user);
             _CargoPalContext.SaveChanges();
         }
