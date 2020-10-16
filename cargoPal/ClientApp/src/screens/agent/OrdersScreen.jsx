@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+
 import { Table } from 'react-bootstrap';
 
-import Screen from '../components/screen';
-import Shipments from '../components/shipments';
-import OrderBooking from '../components/orders/orderBooking';
+import Screen from '../../components/screen';
+import Shipments from '../../components/shipments';
+import OrderBooking from '../../components/orders/orderBooking';
 
-import { GetShipmentByUser } from '../actions/shipmentAction';
-import { GetBookingByShipment } from '../actions/bookingAction';
+import { GetShipmentByUser } from '../../actions/shipmentAction';
+import { GetBookingByShipment } from '../../actions/bookingAction';
+import { getUserId } from '../../actions/authAction';
 
 class OrdersScreen extends Component {
   state = {
@@ -16,7 +19,13 @@ class OrdersScreen extends Component {
   };
 
   componentDidMount() {
-    this.props.GetShipmentByUser();
+    const user = getUserId();
+
+    if (user === null) {
+      this.props.history.push('/');
+    } else {
+      this.props.GetShipmentByUser();
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -105,7 +114,9 @@ class OrdersScreen extends Component {
 
 const mapStateToProps = ({ shipments, bookings }) => ({ shipments, bookings });
 
-export default connect(mapStateToProps, {
-  GetShipmentByUser,
-  GetBookingByShipment,
-})(OrdersScreen);
+export default withRouter(
+  connect(mapStateToProps, {
+    GetShipmentByUser,
+    GetBookingByShipment,
+  })(OrdersScreen)
+);

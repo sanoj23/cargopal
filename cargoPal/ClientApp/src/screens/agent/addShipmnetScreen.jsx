@@ -5,11 +5,11 @@ import { connect } from 'react-redux';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
-import { getUserId } from '../actions/authAction';
-import { AddShipment } from '../actions/shipmentAction';
+import { getUserId } from '../../actions/authAction';
+import { AddShipment } from '../../actions/shipmentAction';
 
-import Screen from '../components/screen';
-import FormInput from '../components/form/formInput';
+import Screen from '../../components/screen';
+import FormInput from '../../components/form/formInput';
 
 class AddShipmentScreen extends Component {
   constructor(props) {

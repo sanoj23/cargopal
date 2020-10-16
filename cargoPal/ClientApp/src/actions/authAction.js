@@ -6,8 +6,7 @@ import { history } from '../App';
 export const getUserId = () => {
   const user = JSON.parse(localStorage.getItem('user'));
   if (localStorage.getItem('user') == null) {
-    // history.push('/');
-    // window.location.reload();
+    return null;
   } else {
     return user;
   }
