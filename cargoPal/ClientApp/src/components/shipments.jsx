@@ -24,6 +24,7 @@ export default function Shipments({ shipment, bookings }) {
           display: 'inline-block',
           margin: 10,
           overflow: 'hidden',
+          borderRadius: 20,
         }}
       >
         <Card.Body>
