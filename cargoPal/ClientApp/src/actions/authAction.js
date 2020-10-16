@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { userConstants } from '../constants/userConstants';
-import { history } from '../App';
 
 // Get userId of logged in user
 export const getUserId = () => {
