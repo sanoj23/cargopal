@@ -5,6 +5,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import Screen from '../../components/screen';
 import Booking from '../../components/booking';
 
+import { getUserId } from '../../actions/authAction';
 import { GetBookingByUser, DeleteBooking } from '../../actions/bookingAction';
 
 class MyBookingsScreen extends Component {
@@ -13,7 +14,13 @@ class MyBookingsScreen extends Component {
   };
 
   componentDidMount() {
-    this.props.GetBookingByUser();
+    const user = getUserId();
+
+    if (user === null) {
+      this.props.history.push('/');
+    } else {
+      this.props.GetBookingByUser();
+    }
   }
 
   componentDidUpdate(prevProps) {

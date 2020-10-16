@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { Row, Col, Container } from 'react-bootstrap';
+
 import Screen from '../../components/screen';
 import Shipment from '../../components/shipment';
+import SearchShipment from '../../components/searchShipments';
 
 import { connect } from 'react-redux';
-
+import { getUserId } from '../../actions/authAction';
 import { GetShipment } from '../../actions/shipmentAction';
-import SearchShipment from '../../components/searchShipments';
 
 class ShipmentsScreen extends Component {
   state = {
@@ -15,7 +16,13 @@ class ShipmentsScreen extends Component {
   };
 
   componentDidMount() {
-    this.props.GetShipment();
+    const user = getUserId();
+
+    if (user === null) {
+      this.props.history.push('/');
+    } else {
+      this.props.GetShipment();
+    }
   }
 
   componentDidUpdate(prevProps) {

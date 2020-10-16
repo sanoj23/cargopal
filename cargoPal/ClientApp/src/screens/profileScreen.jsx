@@ -1,11 +1,26 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+
 import Screen from '../components/screen';
+
+import { getUserId } from '../actions/authAction';
 
 class ProfileScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
+
+  componentDidMount() {
+    const user = getUserId();
+
+    if (user === null) {
+      this.props.history.push('/');
+    } else {
+      // get the user details here
+    }
+  }
+
   render() {
     return (
       <div>
@@ -18,4 +33,4 @@ class ProfileScreen extends Component {
   }
 }
 
-export default ProfileScreen;
+export default withRouter(ProfileScreen);

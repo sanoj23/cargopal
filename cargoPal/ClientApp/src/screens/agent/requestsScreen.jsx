@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Table } from 'react-bootstrap';
+import { withRouter } from 'react-router-dom';
 
 import Screen from '../../components/screen';
 import Shipments from '../../components/shipments';
 import OrderBooking from '../../components/orders/orderBooking';
 
+import { getUserId } from '../../actions/authAction';
 import { GetShipmentByUser } from '../../actions/shipmentAction';
 import {
   GetBookingByShipment,
@@ -19,7 +21,13 @@ class RequestsScreen extends Component {
   };
 
   componentDidMount() {
-    this.props.GetShipmentByUser();
+    const user = getUserId();
+
+    if (user === null) {
+      this.props.history.push('/');
+    } else {
+      this.props.GetShipmentByUser();
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -140,8 +148,10 @@ class RequestsScreen extends Component {
 
 const mapStateToProps = ({ shipments, bookings }) => ({ shipments, bookings });
 
-export default connect(mapStateToProps, {
-  GetShipmentByUser,
-  GetBookingByShipment,
-  UpdateBooking,
-})(RequestsScreen);
+export default withRouter(
+  connect(mapStateToProps, {
+    GetShipmentByUser,
+    GetBookingByShipment,
+    UpdateBooking,
+  })(RequestsScreen)
+);

@@ -1,9 +1,17 @@
-import React from 'react';
-
-import Navigationbar from './navBar/navbar';
+import React, { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 
+import Navigationbar from './navBar/navbar';
+import { getUserId } from '../actions/authAction';
+
 export default function Screen({ children, title, subtitle, navbar }) {
+  const history = useHistory();
+  useEffect(() => {
+    const user = getUserId();
+    if (user === null) history.push('/');
+  });
+
   return (
     <div>
       <Navigationbar />

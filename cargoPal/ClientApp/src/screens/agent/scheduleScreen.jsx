@@ -7,11 +7,11 @@ import Schedule from '../../components/schedule';
 import Screen from '../../components/screen';
 import Shipments from '../../components/shipments';
 
+import { getUserId } from '../../actions/authAction';
 import {
   GetShipmentByUser,
   DeleteShipment,
-  UpdateShipment
-
+  UpdateShipment,
 } from '../../actions/shipmentAction';
 
 class ScheduleScreen extends Component {
@@ -20,23 +20,27 @@ class ScheduleScreen extends Component {
     this.handleClick = this.handleClick.bind(this);
     this.state = {
       schedules: [],
-      shipment: null
+      shipment: null,
     };
   }
 
   componentDidMount() {
-    this.props.GetShipmentByUser();
+    const user = getUserId();
+
+    if (user === null) {
+      this.props.history.push('/');
+    } else {
+      this.props.GetShipmentByUser();
+    }
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps.shipments.data !== this.props.shipments.data) {
       this.setState({ schedules: this.props.shipments.data });
     }
-    // console.log(this.props.shipments.data);
   }
 
   handleClick = () => {
-    console.log('reached');
     this.props.history.push('/addShipment');
   };
 
@@ -78,14 +82,14 @@ class ScheduleScreen extends Component {
   // };
 
   GetShipment = (shipmentId) => {
-    const {schedules} = this.state;
-    const shipment = schedules.find(s => s.shipmentId===shipmentId);
-    if (shipment!==null) {
-      this.setState({shipment: shipment});
-    }else{
-    this.setState({shipment:null})
+    const { schedules } = this.state;
+    const shipment = schedules.find((s) => s.shipmentId === shipmentId);
+    if (shipment !== null) {
+      this.setState({ shipment: shipment });
+    } else {
+      this.setState({ shipment: null });
     }
-  }
+  };
 
   render() {
     const { schedules, shipment } = this.state;
@@ -121,8 +125,13 @@ class ScheduleScreen extends Component {
 
         <hr />
 
-        {shipment ?  <Schedule schedule={shipment}/> : <div><h5>Select a shipment to view more</h5></div>}
-       
+        {shipment ? (
+          <Schedule schedule={shipment} />
+        ) : (
+          <div>
+            <h5>Select a shipment to view more</h5>
+          </div>
+        )}
       </Screen>
     );
   }
@@ -131,7 +140,7 @@ const mapStateToProps = ({ shipments }) => ({ shipments });
 const mapDispatchToProps = (dispatch) => ({
   GetShipmentByUser: () => dispatch(GetShipmentByUser()),
   DeleteShipment: (shipmentId) => dispatch(DeleteShipment(shipmentId)),
-  UpdateShipment: (shipment) => dispatch(UpdateShipment(shipment))
+  UpdateShipment: (shipment) => dispatch(UpdateShipment(shipment)),
 });
 export default withRouter(
   connect(mapStateToProps, mapDispatchToProps)(ScheduleScreen)

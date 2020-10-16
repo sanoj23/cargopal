@@ -9,6 +9,7 @@ import { getUserId } from '../../actions/authAction';
 import { AddShipment } from '../../actions/shipmentAction';
 
 import Screen from '../../components/screen';
+
 import FormInput from '../../components/form/formInput';
 
 class AddShipmentScreen extends Component {
@@ -32,11 +33,15 @@ class AddShipmentScreen extends Component {
   }
 
   componentDidMount() {
-    const { userId } = getUserId();
-    const { shipment } = this.state;
-    this.setState({
-      shipment: { ...shipment, userId: userId, status: 'open' },
-    });
+    const user = getUserId();
+    if (user === null) {
+      this.props.history.push('/');
+    } else {
+      const { shipment } = this.state;
+      this.setState({
+        shipment: { ...shipment, userId: user.userId, status: 'open' },
+      });
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -77,7 +82,13 @@ class AddShipmentScreen extends Component {
       price: Yup.number().required().label('Price'),
     });
 
-    const { userId } = getUserId();
+    let userId;
+    const user = getUserId();
+    if (user !== null) {
+      userId = user.userId;
+    } else {
+      this.props.history.push('/');
+    }
 
     const alertSuccess = (
       <>

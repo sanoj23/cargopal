@@ -1,8 +1,7 @@
 import React from 'react';
+
 import { Button, Carousel, Jumbotron } from 'react-bootstrap';
 import Screen from '../components/screen';
-
-// import ContactUsForm from '../components/ContactUsForm';
 
 export default function HomeScreen(props) {
   return (
@@ -41,43 +40,6 @@ export default function HomeScreen(props) {
           <Button variant="primary">Learn more</Button>
         </p>
       </Jumbotron>
-
-      {/* <ContactUsForm /> */}
-
-      {/* <Card border="info">
-        <Card.Header textSize="large">Contact Us</Card.Header>
-        <Card.Body>
-          <Form>
-            <Form.Group controlId="contactUs.ControlTextarea1">
-              <Form.Label>Your Name</Form.Label>
-              <Form.Control as="textarea" rows="1" />
-            </Form.Group>
-
-            <Form.Group controlId="formBasicEmail">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control type="email" placeholder="Enter email" />
-              <Form.Text className="text-muted">
-                We'll never share your email with anyone else.
-              </Form.Text>
-            </Form.Group>
-
-            <Form.Group controlId="contactUs.ControlTextarea1">
-              <Form.Label>Subject</Form.Label>
-              <Form.Control as="textarea" rows="2" />
-            </Form.Group>
-
-            <Form.Group controlId="contactUsForm.ControlTextarea2">
-              <Form.Label>Message</Form.Label>
-              <Form.Control as="textarea" rows="10" />
-            </Form.Group>
-          </Form>
-          <p>
-            <Button variant="primary" onClick={() => {}}>
-              Send
-            </Button>
-          </p>
-        </Card.Body>
-      </Card> */}
     </Screen>
   );
 }
